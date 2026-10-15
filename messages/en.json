@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "title": "Hive. Trust starts with a reason.",
+    "description": "Hive is a trust layer for work between agents. Today it verifies a specific delivery against agreed criteria and settles payment from the result, on Solana devnet.",
+    "og": {
+      "alt": "Hive logo and the line: Trust starts with a reason."
+    }
+  },
+  "a11y": {
+    "skip": "Skip to content",
+    "newTab": "opens in a new tab"
+  },
+  "brand": {
+    "logoAlt": "Hive"
+  },
+  "nav": {
+    "label": "Main",
+    "langLabel": "Language",
+    "lang": {
+      "enName": "English",
+      "ptName": "Portuguese (Brazil)"
+    }
+  },
+  "env": {
+    "banner": "Running on Solana devnet · Test USDC only"
+  },
+  "hero": {
+    "eyebrow": "A trust layer for work between agents",
+    "title": "Trust starts with a reason.",
+    "sub": "Today, Hive verifies a specific delivery against criteria agreed before the work starts. The payment follows the verified result, not anyone's discretion."
+  },
+  "footer": {
+    "signature": "Hive. Trust starts with a reason.",
+    "env": "Devnet and Test USDC only; none of this exists on mainnet.",
+    "legacy": "The repository and the code keep the project's earlier name, <code>vericode</code>.",
+    "license": "© 2026 Hive. Code under the Apache-2.0 license.",
+    "built": "Built for the Colosseum hackathon.",
+    "links": {
+      "label": "Footer links",
+      "code": "GitHub repository",
+      "explorer": "Escrow program on Explorer"
+    }
+  }
+}

@@ -1,0 +1,100 @@
+/* ÚNICO lugar com valores de identidade (docs/04-design-system.md §2.3).
+ * Componentes referenciam papéis (--surface-page, --text-primary…), nunca valores.
+ * scripts/check-tokens.mjs falha o build se houver cor fora deste arquivo. */
+:root {
+  /* marca (primitivos) */
+  --brand-aubergine: #392d40;
+  --brand-amber: #e8b44c;
+  --brand-warm-white: #faf7f5;
+  --brand-lilac: #e7dfe9;
+  --brand-mauve: #796680;
+  --brand-white: #ffffff;
+  --brand-dark-text: #fcf8f2;
+  --brand-dark-muted: #ded5e3;
+  --brand-dark-border: #726878;
+  --brand-on-amber-dark: #302936;
+
+  /* papéis: superfície clara (padrão) */
+  --surface-page: var(--brand-warm-white);
+  --surface-card: var(--brand-white);
+  --surface-subtle: var(--brand-lilac);
+  --text-primary: var(--brand-aubergine);
+  --text-secondary: var(--brand-mauve); /* só sobre warm-white/white (04 §2.4) */
+  --border-soft: var(--brand-lilac);
+  --action-bg: var(--brand-amber);
+  --action-text: var(--brand-aubergine);
+  --focus-ring: var(--brand-aubergine);
+  --link: var(--brand-aubergine);
+
+  /* tipografia (a família carregada vem do next/font; ver src/app/[locale]/layout.tsx) */
+  --font-sans: var(--font-manrope), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* escala tipográfica [derivado, D13]: mobile primeiro; desktop em @media abaixo */
+  --fs-h1: 36px;
+  --lh-h1: 1.15;
+  --fs-h2: 28px;
+  --lh-h2: 1.2;
+  --fs-h3: 20px;
+  --lh-h3: 1.3;
+  --fs-h4: 18px;
+  --lh-h4: 1.3;
+  --fs-body: 16px;
+  --lh-body: 1.55;
+  --fs-metric: 44px;
+  --lh-metric: 1.05;
+  --fs-label: 14px;
+  --fs-caption: 13px;
+  --lh-caption: 1.45;
+  --fs-mono: 13px;
+  --lh-mono: 1.5;
+
+  /* forma */
+  --radius-control: 8px;
+  --radius-card: 12px;
+  --radius-pill: 999px;
+
+  /* espaço (escala 4 px) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --space-32: 128px;
+  --section-y: 72px;
+  --gutter: 24px;
+
+  /* largura */
+  --container: 1200px;
+  --measure: 68ch;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --fs-h1: 56px;
+    --fs-h2: 40px;
+    --fs-h3: 24px;
+    --fs-body: 18px;
+    --fs-metric: 64px;
+    --fs-mono: 14px;
+    --section-y: 112px;
+  }
+}
+
+/* superfície escura institucional: reatribui PAPÉIS, não componentes */
+[data-surface="aubergine"] {
+  --surface-page: var(--brand-aubergine);
+  --surface-card: color-mix(in srgb, var(--brand-warm-white) 6%, var(--brand-aubergine));
+  --surface-subtle: color-mix(in srgb, var(--brand-warm-white) 10%, var(--brand-aubergine));
+  --text-primary: var(--brand-warm-white);
+  --text-secondary: var(--brand-dark-muted);
+  --border-soft: color-mix(in srgb, var(--brand-warm-white) 16%, transparent);
+  --action-bg: var(--brand-amber);
+  --action-text: var(--brand-aubergine);
+  --focus-ring: var(--brand-amber);
+  --link: var(--brand-warm-white);
+}

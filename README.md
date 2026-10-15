@@ -1,8 +1,27 @@
 # Hive: landing page
 
-Repositório da landing page bilíngue (EN e PT-BR) da **Hive**, a camada de confiança entre agentes. Aqui ficam o contexto, os dados de evidência e os ativos de marca; o código da página ainda não existe.
+Repositório da landing page bilíngue (EN e PT-BR) da **Hive**, a camada de confiança entre agentes. Next.js (App Router) + TypeScript + Tailwind v4 + next-intl.
 
 > **Leia [CLAUDE.md](CLAUDE.md) primeiro.** Ele define a missão, os inegociáveis, a ordem de leitura dos documentos e o protocolo por fases.
+
+## Status
+
+**Fase 0 concluída** (scaffold, tokens, fontes, i18n, `evidence.json` importável, scripts de verificação). **Fase 1 (seções estáticas) ainda não iniciada.**
+
+Decisões fechadas em 2026-10-15: **D1** manter a stack padrão; **D2** a lista de espera é só front-end, sem backend por ora (ver `docs/09-acceptance-and-open-decisions.md`).
+
+## Como rodar
+
+Requer Node 20.9 ou superior.
+
+```bash
+npm install
+npm run dev          # http://localhost:3000 (redireciona para /en ou /pt-br)
+npm run build        # roda os checks e gera as rotas estáticas
+npm run check        # claims, i18n, evidência e tokens
+npm run lint && npm run typecheck
+cp .env.example .env.local   # opcional; todas as variáveis são públicas e podem ficar vazias
+```
 
 ## Mapa das pastas
 
@@ -12,17 +31,15 @@ Repositório da landing page bilíngue (EN e PT-BR) da **Hive**, a camada de con
 | `docs/` | Documentos 01 a 09 (brief, claims, conteúdo, design, visuais, engenharia, referências, fatos, aceite) |
 | `docs/sources/` | Fontes originais somente leitura: PDF de posicionamento e identidade (2026-10-05) e preview do logo provisório |
 | `data/` | `evidence.json` (fonte única de fatos) e `forbidden-terms.json` (termos proibidos) |
-| `public/brand/` | Logos SVG (provisórios, aprovados por ora); nomes e usos em [`MANIFEST.md`](public/brand/MANIFEST.md). `_alt/` guarda alternativas |
-| `public/brand/fonts/` | Manrope e IBM Plex Mono auto-hospedadas (licença OFL) |
+| `messages/` | Dicionários `en.json` e `pt-br.json` (mesmas chaves) |
+| `src/app/[locale]/` | Layout e página por idioma |
+| `src/components/` | `sections/` (header, footer), `ui/`, `diagrams/` |
+| `src/i18n/` | Rotas, navegação e carregamento de mensagens (next-intl) |
+| `src/lib/` | `evidence` (único ponto de acesso aos fatos), `format`, `track` (no-op), `brand`, `theme-color` |
+| `src/styles/` | `tokens.css` (único lugar com valores de identidade) e `globals.css` |
+| `scripts/` | `check-claims`, `check-i18n`, `check-evidence`, `check-tokens` |
+| `public/brand/` | Logos SVG (provisórios, aprovados por ora); nomes e usos em [`MANIFEST.md`](public/brand/MANIFEST.md). `_alt/` guarda alternativas; `fonts/` as fontes auto-hospedadas (OFL) |
 | `public/media/`, `public/og/` | Capturas/pôsteres e imagens OG (vazias por enquanto) |
-| `messages/` | Dicionários `en.json` e `pt-br.json` (a criar na fase 0) |
-| `scripts/` | Scripts de lint de claims, evidência e i18n (a criar na fase 0) |
-| `supabase/migrations/` | SQL proposto da lista de espera; não aplicar sem aprovação |
-| `src/` | Ainda não criada |
-
-## Status
-
-**Fase 0 ainda não iniciada.** Nenhum framework, dependência ou código foi instalado. As decisões D1 (stack) e D2 (backend da lista de espera) em `docs/09-acceptance-and-open-decisions.md` aguardam confirmação.
 
 ## Aviso sobre os dados
 

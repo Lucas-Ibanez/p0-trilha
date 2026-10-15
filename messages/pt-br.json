@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "title": "Hive. Confiança começa com um porquê.",
+    "description": "A Hive é uma camada de confiança para o trabalho entre agentes. Hoje ela verifica uma entrega específica contra critérios combinados e liquida o pagamento a partir do resultado, na devnet da Solana.",
+    "og": {
+      "alt": "Logo da Hive e a frase: Confiança começa com um porquê."
+    }
+  },
+  "a11y": {
+    "skip": "Ir para o conteúdo",
+    "newTab": "abre em nova aba"
+  },
+  "brand": {
+    "logoAlt": "Hive"
+  },
+  "nav": {
+    "label": "Principal",
+    "langLabel": "Idioma",
+    "lang": {
+      "enName": "Inglês",
+      "ptName": "Português (Brasil)"
+    }
+  },
+  "env": {
+    "banner": "Rodando na devnet da Solana · somente Test USDC"
+  },
+  "hero": {
+    "eyebrow": "Uma camada de confiança para o trabalho entre agentes",
+    "title": "Confiança começa com um porquê.",
+    "sub": "Hoje, a Hive verifica uma entrega específica contra critérios combinados antes de o trabalho começar. O pagamento segue o resultado verificado, não a decisão discricionária de alguém."
+  },
+  "footer": {
+    "signature": "Hive. Confiança começa com um porquê.",
+    "env": "Apenas devnet e Test USDC; nada disto existe na mainnet.",
+    "legacy": "O repositório e o código mantêm o nome anterior do projeto, <code>vericode</code>.",
+    "license": "© 2026 Hive. Código sob licença Apache-2.0.",
+    "built": "Construído para o hackathon da Colosseum.",
+    "links": {
+      "label": "Links do rodapé",
+      "code": "Repositório no GitHub",
+      "explorer": "Programa de escrow no Explorer"
+    }
+  }
+}

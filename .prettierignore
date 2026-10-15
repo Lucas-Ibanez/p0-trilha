@@ -1,0 +1,9 @@
+.next
+node_modules
+package-lock.json
+public/brand
+docs/sources
+data
+docs
+CLAUDE.md
+README.md

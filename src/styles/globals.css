@@ -1,0 +1,96 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+/* Tailwind só enxerga papéis. A paleta padrão do Tailwind é apagada de propósito:
+ * qualquer cor nova entra em tokens.css primeiro. */
+@theme inline {
+  --color-*: initial;
+  --color-page: var(--surface-page);
+  --color-card: var(--surface-card);
+  --color-subtle: var(--surface-subtle);
+  --color-primary: var(--text-primary);
+  --color-secondary: var(--text-secondary);
+  --color-soft: var(--border-soft);
+  --color-action: var(--action-bg);
+  --color-on-action: var(--action-text);
+  --color-focus: var(--focus-ring);
+  --color-link: var(--link);
+
+  --text-*: initial;
+  --text-h1: var(--fs-h1);
+  --text-h1--line-height: var(--lh-h1);
+  --text-h2: var(--fs-h2);
+  --text-h2--line-height: var(--lh-h2);
+  --text-h3: var(--fs-h3);
+  --text-h3--line-height: var(--lh-h3);
+  --text-h4: var(--fs-h4);
+  --text-h4--line-height: var(--lh-h4);
+  --text-body: var(--fs-body);
+  --text-body--line-height: var(--lh-body);
+  --text-metric: var(--fs-metric);
+  --text-metric--line-height: var(--lh-metric);
+  --text-label: var(--fs-label);
+  --text-caption: var(--fs-caption);
+  --text-caption--line-height: var(--lh-caption);
+  --text-mono: var(--fs-mono);
+  --text-mono--line-height: var(--lh-mono);
+
+  --breakpoint-*: initial;
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 96rem;
+}
+
+@utility rounded-control {
+  border-radius: var(--radius-control);
+}
+@utility rounded-card {
+  border-radius: var(--radius-card);
+}
+@utility rounded-pill {
+  border-radius: var(--radius-pill);
+}
+@utility container-page {
+  width: 100%;
+  max-width: calc(var(--container) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+@utility measure {
+  max-width: var(--measure);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--surface-page);
+  color: var(--text-primary);
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  background: var(--surface-page);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

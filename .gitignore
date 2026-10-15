@@ -20,3 +20,7 @@ test-results
 # sistema e logs
 .DS_Store
 *.log
+
+# next
+next-env.d.ts
+*.tsbuildinfo
