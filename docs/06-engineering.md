@@ -33,7 +33,7 @@ Alternativa aceitável: Astro com i18n nativo e ilhas, se o responsável preferi
 
 ### 1.3 Stack instalada na fase 0 (D1 decidido em 2026-10-15)
 
-Versões fixas (`--save-exact`). Não instaladas ainda, por falta de necessidade: **zod** (fase 3, formulário), **Playwright** e **Vitest** (testes, a partir da fase 1), `motion` (só se justificar).
+Versões fixas (`--save-exact`). Não instaladas ainda, por falta de necessidade: **zod** (a validação do formulário é uma função tipada em `src/lib/waitlist.ts`; zod só se justifica quando houver backend para compartilhar o schema), **Playwright** e **Vitest** (testes, a partir da fase 1), `motion` (só se justificar).
 
 | Pacote | Versão | Nota |
 |---|---|---|
@@ -106,6 +106,8 @@ Ressalvas conhecidas:
 ## 5. Lista de espera
 
 > **D2 (2026-10-15): sem backend por ora.** Implementar só o front-end (formulário, validação no cliente, estados, acessibilidade) com uma função de envio isolada em `src/lib/waitlist.ts` que **não envia nada**; trocar só essa função quando houver backend. O formulário mostra um aviso visível de que é uma prévia e o cadastro ainda não é gravado; a interface nunca afirma que algo foi salvo nem promete contato. As subseções 5.2 a 5.5 descrevem o backend **suspenso** e servem de referência futura; 5.1 vale para o front-end.
+>
+> **Implementado (fase 3):** `src/components/sections/waitlist-form.tsx` (estados ocioso, enviando, sucesso de prévia, erro de campo com resumo focável e `aria-invalid`/`aria-describedby`, erro genérico) e `src/lib/waitlist.ts` (`validateWaitlist`, `submitWaitlist` que descarta o payload). **Degradação sem JS:** o formulário é inerte (`method="dialog"` fora de `<dialog>` não navega nem coloca o e-mail na URL) e um `<noscript>` avisa; não há POST sem backend. O vídeo da demo segue `§7` (`src/lib/demo.ts`, `video-slot.tsx`): YouTube vira `youtube-nocookie.com`, `.mp4/.webm` vira `<video preload="none">`, qualquer outro HTTPS vira link externo; tudo só depois do clique.
 
 ### 5.1 Requisitos funcionais
 
