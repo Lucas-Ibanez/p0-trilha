@@ -114,6 +114,7 @@ Cada item traz a **recomendação padrão** para destravar o trabalho. Se o resp
 | **D14** | Declarações de **Planejado**: outros meios de pagamento; pilotos comparando zkVM × CI assinado × revisão humana | Manter só se o time confirmar que aceita dizê-las publicamente | Henrique + Lucas |
 | **D15** | Páginas pós-lançamento `/proof` e `/brand` | Adiar; manter o detalhe no README | Todos |
 | **D16** | Rodapé: "Construído para o hackathon da Colosseum" e link do GitHub | Manter (são fatos) | Todos |
+| **D17** | Orçamento de JS inicial (≤ 120 KB gzip, `06` §8) | **Medido ~144 KB** com Next: o framework sozinho tem ~121 KB. Opções: (a) aceitar ~144 KB (CDN com Brotli deve reduzir ~10–15 %) e rebaixar a meta para ≤ 150 KB; (b) migrar para Astro (`06` §1.2, menos JS, mas refaz a fase 0). Padrão aplicado: (a), sem fechar a decisão. | Lucas |
 
 ## 5. Pendências de ativos (não bloqueiam a fase 0)
 

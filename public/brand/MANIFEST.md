@@ -18,7 +18,7 @@ Os SVGs **não foram editados** (conteúdo, geometria e cores intactos); só for
 | `logo/hive-horizontal-berinjela.svg` | `hive-horizontal-two-tone.svg` | horizontal | two-tone | claro | O nome original enganava: asas em âmbar, corpo da abelha e wordmark em berinjela. Não é mono berinjela. Sobre berinjela, só as asas aparecem. |
 | `logo/hive-wordmark-berinjela.svg` | `hive-wordmark-aubergine.svg` | wordmark | aubergine | claro | Wordmark rastreado do PDF (como na prancha). Sobre berinjela fica invisível. |
 | `logo/hive-wordmark-branco.svg` | `hive-wordmark-warm-white.svg` | wordmark | warm-white | berinjela | Mesmo desenho do anterior em `#FAF7F5`. |
-| `symbol/hive-symbol-ambar.svg` | `hive-symbol-amber.svg` | symbol | amber | berinjela | Só a abelha, uma cor. Candidato a base do favicon (âmbar sobre berinjela), que ainda não existe. |
+| `symbol/hive-symbol-ambar.svg` | `hive-symbol-amber.svg` | symbol | amber | berinjela | Só a abelha, uma cor. Base do favicon provisório (abaixo). |
 | `symbol/hive-symbol-branco.svg` | `hive-symbol-warm-white.svg` | symbol | warm-white | berinjela | Só a abelha em `#FAF7F5`. |
 | `symbol/hive-symbol.svg` | `hive-symbol-two-tone.svg` | symbol | two-tone | claro | O nome original (sem sufixo) não dizia a cor: asas âmbar, corpo berinjela. |
 
@@ -33,7 +33,8 @@ Os SVGs **não foram editados** (conteúdo, geometria e cores intactos); só for
 | Caminho | Conteúdo | Observações |
 |---|---|---|
 | `fonts/` | Manrope (variável) e IBM Plex Mono 400/500, WOFF2 `latin` + `latin-ext`, `fonts.css`, licenças OFL | Veio de uma pasta `fonts/` na raiz; decidido mantê-las aqui, servidas por `public/brand/fonts/`. O `README.md` dela ainda cita `brand/MANIFEST.md`, `DESIGN.md` e `worker/static/fonts/` (do repositório do MVP); esses caminhos não existem aqui. Na fase 0, se o framework escolhido pedir um pipeline de fontes próprio, copiar os arquivos daqui sem alterá-los. |
-| `app-icons/` | Vazia (`.gitkeep`) | App icon e apple-touch ainda não existem (berinjela + âmbar, sem a palavra "hive"). |
+| `hive-favicon-amber.svg` | **Provisório, gerado** | Quadrado berinjela com o símbolo âmbar copiado de `hive-symbol-amber.svg` (nenhum caminho redesenhado). Gerado por `npm run assets:generate`. `TODO(brand)`: o favicon definitivo ainda não existe (D10). |
+| `app-icons/` | **Provisório, gerado** | `favicon-32.png`, `apple-touch-icon.png` (180), `icon-512.png`, a partir do favicon acima (berinjela + âmbar, sem a palavra "hive"). `public/favicon.ico` e `public/og/og-{en,pt-br}.png` saem do mesmo script. `TODO(brand)`: ícones e OG definitivos. |
 | `mascot/` | Vazia (`.gitkeep`) | Mascote desligado na landing até haver arquivo aprovado (D12). |
 | `_other/` | Não criada | Não havia PDF, PNG ou outro arquivo de marca a mover para cá. O PDF de identidade e o PNG de preview ficam em `docs/sources/`, fora de `public/`, para não serem publicados no site. |
 
@@ -42,6 +43,5 @@ Os SVGs **não foram editados** (conteúdo, geometria e cores intactos); só for
 - `hive-horizontal-white`, `hive-wordmark-amber`: opcionais, não previstas como obrigatórias.
 - **`hive-vertical-*`** (hero/capa institucional): não existe.
 - **`hive-symbol-reduced-*`**: não existe versão específica para tamanhos pequenos. Os arquivos `symbol` são o símbolo isolado, que o design system chama de "Reduzida". Decidir se basta.
-- **`hive-favicon-*`**: não existe (`TODO(brand)`). Usar provisório e registrar.
-- **`hive-app-icon-*`**: não existe.
+- **`hive-favicon-*` e `hive-app-icon-*` definitivos**: não existem (`TODO(brand)`); os provisórios gerados estão acima.
 - `mono`, `white` (`#FFFFFF`): não existem.

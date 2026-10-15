@@ -45,7 +45,13 @@ Versões fixas (`--save-exact`). Não instaladas ainda, por falta de necessidade
 | eslint, eslint-config-next | 10.12.0, 16.4.1 | |
 | prettier | 3.9.10 | Ignora `docs/`, `CLAUDE.md`, `README.md`, `data/` e `public/brand/` |
 
+Ferramentas de teste e medição (fase 4, só dev): `@playwright/test` 1.64.1 e `@axe-core/playwright` 4.14.0, usando o Edge ou o Chrome já instalados (`PW_CHANNEL`; nenhum navegador é baixado). Lighthouse roda via `npx lighthouse@13.5.0` sem entrar no `package.json`. Vitest **não** foi instalado: os testes de unidade usam o `node --test` embutido (`npm run test:unit`).
+
 Ressalvas conhecidas:
+
+- **JS inicial acima de 120 KB.** Medido: ~144 KB gzip por rota; só `react-dom` (71 KB) e o runtime do Next (50 KB) já somam ~121 KB. O código da página soma ~23 KB. A meta de §8 não é alcançável com Next App Router; ver `09` (decisão sobre o orçamento). Para reduzir: o cliente não carrega mais `next-intl` nem `next/image` (strings entram por props, rastreio por `data-track`).
+- **CSP com `'unsafe-inline'` em `script-src`.** As páginas são estáticas (SSG): não há nonce por requisição, e o Next injeta scripts inline de hidratação. Todo o resto é fechado (ver `next.config.ts`; só vale em produção, o dev precisa de `eval`).
+- `experimental.inlineCss` está ligado (CSS no `<head>`): tirou ~0,3 s do LCP simulado.
 
 - `npm audit` acusa 5 vulnerabilidades **altas, só em ferramenta de lint (dev)**, na cadeia `eslint-config-next` → `braces` (ReDoS). `npm audit --omit=dev` dá 0. Não afetam o site publicado; reavaliar ao atualizar o `eslint-config-next`.
 - Fontes: `next/font/local` com **apenas o subconjunto `latin`** (cobre EN e PT-BR). Os arquivos `latin-ext` continuam em `public/brand/fonts/` sem uso. O glifo `₃` (usado em rótulos como `P₃`) não está no `latin`: se a fase 1 exibir esses rótulos, validar a fonte de reserva ou incluir `latin-ext`.
@@ -231,6 +237,9 @@ Táticas: SSG; fontes subset auto-hospedadas e pré-carga só do peso do hero; i
 | `check-evidence` | Valida `evidence.json` e URLs de Explorer | `prebuild` e CI |
 | `check-content` | Orçamento de conteúdo de `01-brief.md` §6 (H2 ≤ 8 palavras e FAQ de 6 falham; parágrafos > 35 e respostas > 45 só avisam) | `prebuild` e CI |
 | `check-tokens` | Nenhuma cor, função de cor ou utilitário de paleta fora de `tokens.css`; `theme-color` igual a `--brand-aubergine` | `prebuild` e CI |
+| `test:unit` | `node --test`: validação da lista de espera e leitura das URLs de vídeo | CI |
+| `test:e2e` | Playwright contra o build (`npm run build` antes): SEO/OG/JSON-LD/headers/404, i18n, layout em 6 larguras, abas por teclado, movimento reduzido, sem JS, formulário, demo e **axe** (WCAG 2.2 AA) nas duas rotas. `demo-env.spec.ts` só roda com as URLs de vídeo definidas | CI |
+| `assets:generate` | Regera OG, favicon e ícones provisórios a partir dos SVGs da marca | manual |
 | `typecheck`, `lint` | TS e ESLint | CI |
 | `test:e2e` | Playwright: carrega `/en` e `/pt-br`, troca de idioma, envia a lista (modo teste), navega por teclado, axe | CI |
 | `lighthouse` | Metas de §8 | Antes do deploy |
