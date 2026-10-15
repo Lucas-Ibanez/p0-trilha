@@ -1,6 +1,5 @@
 "use client";
 
-import { useLocale, useTranslations } from "next-intl";
 import { useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import type { Locale } from "@/i18n/routing";
@@ -38,9 +37,32 @@ const errorClass = "text-label mt-1 font-semibold";
  * nada. O aviso de prévia é visível e a interface nunca afirma que algo foi gravado.
  * Sem JS o formulário não faz nada (method="dialog" fora de <dialog> é inerte), e o <noscript> avisa.
  */
-export function WaitlistForm() {
-  const t = useTranslations("join");
-  const locale = useLocale() as Locale;
+export type WaitlistLabels = {
+  preview: {
+    badge: string;
+    notice: string;
+    successTitle: string;
+    successBody: string;
+    reset: string;
+  };
+  noscript: string;
+  email: string;
+  company: string;
+  segment: { label: string; sh: string; jp: string; ot: string };
+  usecase: { label: string; hint: string };
+  submit: string;
+  submitting: string;
+  error: { summary: string; generic: string; email: string; segment: string; consent: string };
+};
+
+type Props = {
+  labels: WaitlistLabels;
+  /** Texto de consentimento já renderizado no servidor (marcação rica do next-intl). */
+  consent: React.ReactNode;
+  locale: Locale;
+};
+
+export function WaitlistForm({ labels, consent, locale }: Props) {
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Partial<Record<FieldError, true>>>({});
   const summaryRef = useRef<HTMLDivElement>(null);
@@ -49,7 +71,7 @@ export function WaitlistForm() {
 
   const errorSummary = (Object.keys(errors) as FieldError[]).map((field) => ({
     field,
-    message: t(`error.${field}`),
+    message: labels.error[field],
   }));
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -101,14 +123,14 @@ export function WaitlistForm() {
         role="status"
         className="rounded-card border-primary bg-subtle border-2 p-6"
       >
-        <h3 className="text-h3 font-semibold">{t("preview.successTitle")}</h3>
-        <p className="mt-2">{t("preview.successBody")}</p>
+        <h3 className="text-h3 font-semibold">{labels.preview.successTitle}</h3>
+        <p className="mt-2">{labels.preview.successBody}</p>
         <button
           type="button"
           onClick={() => setStatus("idle")}
           className="rounded-control border-primary mt-4 min-h-11 border-2 px-4 font-semibold"
         >
-          {t("preview.reset")}
+          {labels.preview.reset}
         </button>
       </div>
     );
@@ -121,13 +143,13 @@ export function WaitlistForm() {
     <form method="dialog" noValidate onSubmit={onSubmit} className="space-y-6">
       {preview ? (
         <div className="rounded-card border-primary border-2 p-4">
-          <Badge>{t("preview.badge")}</Badge>
-          <p className="mt-2">{t("preview.notice")}</p>
+          <Badge>{labels.preview.badge}</Badge>
+          <p className="mt-2">{labels.preview.notice}</p>
         </div>
       ) : null}
 
       <noscript>
-        <p className="font-semibold">{t("noscript")}</p>
+        <p className="font-semibold">{labels.noscript}</p>
       </noscript>
 
       <div
@@ -138,10 +160,10 @@ export function WaitlistForm() {
       >
         {showErrors ? (
           status === "error" ? (
-            <p className="font-semibold">{t("error.generic")}</p>
+            <p className="font-semibold">{labels.error.generic}</p>
           ) : (
             <>
-              <p className="font-semibold">{t("error.summary")}</p>
+              <p className="font-semibold">{labels.error.summary}</p>
               <ul className="mt-2 list-disc pl-5">
                 {errorSummary.map(({ field, message }) => (
                   <li key={field}>
@@ -169,7 +191,7 @@ export function WaitlistForm() {
 
       <div>
         <label htmlFor="waitlist-email" className={labelClass}>
-          {t("email.label")}
+          {labels.email}
         </label>
         <input
           id="waitlist-email"
@@ -184,14 +206,14 @@ export function WaitlistForm() {
         />
         {errors.email ? (
           <p id="waitlist-email-error" className={errorClass}>
-            {t("error.email")}
+            {labels.error.email}
           </p>
         ) : null}
       </div>
 
       <div>
         <label htmlFor="waitlist-company" className={labelClass}>
-          {t("company.label")}
+          {labels.company}
         </label>
         <input
           id="waitlist-company"
@@ -207,7 +229,7 @@ export function WaitlistForm() {
         id="waitlist-segment"
         aria-describedby={errors.segment ? "waitlist-segment-error" : undefined}
       >
-        <legend className={labelClass}>{t("segment.label")}</legend>
+        <legend className={labelClass}>{labels.segment.label}</legend>
         <div className="mt-2 space-y-2">
           {segments.map((segment) => (
             <label
@@ -220,20 +242,20 @@ export function WaitlistForm() {
                 value={segment}
                 className="size-5 shrink-0 accent-[var(--text-primary)]"
               />
-              <span>{t(`segment.${segmentKey[segment]}`)}</span>
+              <span>{labels.segment[segmentKey[segment]]}</span>
             </label>
           ))}
         </div>
         {errors.segment ? (
           <p id="waitlist-segment-error" className={errorClass}>
-            {t("error.segment")}
+            {labels.error.segment}
           </p>
         ) : null}
       </fieldset>
 
       <div>
         <label htmlFor="waitlist-usecase" className={labelClass}>
-          {t("usecase.label")}
+          {labels.usecase.label}
         </label>
         <textarea
           id="waitlist-usecase"
@@ -244,7 +266,7 @@ export function WaitlistForm() {
           className={`${fieldClass} mt-2`}
         />
         <p id="waitlist-usecase-hint" className={hintClass}>
-          {t("usecase.hint", { max: USE_CASE_MAX })}
+          {labels.usecase.hint}
         </p>
       </div>
 
@@ -259,15 +281,13 @@ export function WaitlistForm() {
             className="mt-1 size-5 shrink-0 accent-[var(--text-primary)]"
           />
           <span>
-            {/* Sem link: a política de privacidade ainda não existe (D9). Vira <Link> quando houver. */}
-            {t.rich("consent", {
-              policy: (chunks) => <span className="font-semibold">{chunks}</span>,
-            })}
+            {/* Sem link: a política de privacidade ainda não existe (D9). Vira <a> quando houver. */}
+            {consent}
           </span>
         </label>
         {errors.consent ? (
           <p id="waitlist-consent-error" className={errorClass}>
-            {t("error.consent")}
+            {labels.error.consent}
           </p>
         ) : null}
       </div>
@@ -277,11 +297,11 @@ export function WaitlistForm() {
         disabled={submitting}
         className="bg-action text-on-action rounded-control min-h-12 w-full px-6 font-semibold transition-opacity hover:opacity-90 disabled:opacity-60 sm:w-auto"
       >
-        {submitting ? t("submitting") : t("submit")}
+        {submitting ? labels.submitting : labels.submit}
       </button>
 
       <p role="status" aria-live="polite" className="sr-only">
-        {submitting ? t("submitting") : ""}
+        {submitting ? labels.submitting : ""}
       </p>
     </form>
   );

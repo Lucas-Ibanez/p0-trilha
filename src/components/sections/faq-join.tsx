@@ -1,9 +1,11 @@
-import { getTranslations } from "next-intl/server";
-import { WaitlistForm } from "@/components/sections/waitlist-form";
+import { getLocale, getTranslations } from "next-intl/server";
+import { WaitlistForm, type WaitlistLabels } from "@/components/sections/waitlist-form";
 import { ButtonLink } from "@/components/ui/button-link";
 import { Section, SectionTitle } from "@/components/ui/section";
 import { getConstants } from "@/lib/evidence";
+import type { Locale } from "@/i18n/routing";
 import { richTags } from "@/lib/rich";
+import { USE_CASE_MAX } from "@/lib/waitlist";
 
 const questions = ["mainnet", "decides", "correct", "ci", "proof", "rails"] as const; // claims-allow: mainnet (id de pergunta, não texto)
 
@@ -11,6 +13,37 @@ export async function FaqJoin() {
   const t = await getTranslations("faq");
   const tJoin = await getTranslations("join");
   const { provingSeconds } = getConstants();
+  const locale = (await getLocale()) as Locale;
+
+  /* O formulário é cliente: recebe só as strings de que precisa, sem o runtime do next-intl. */
+  const labels: WaitlistLabels = {
+    preview: {
+      badge: tJoin("preview.badge"),
+      notice: tJoin("preview.notice"),
+      successTitle: tJoin("preview.successTitle"),
+      successBody: tJoin("preview.successBody"),
+      reset: tJoin("preview.reset"),
+    },
+    noscript: tJoin("noscript"),
+    email: tJoin("email.label"),
+    company: tJoin("company.label"),
+    segment: {
+      label: tJoin("segment.label"),
+      sh: tJoin("segment.sh"),
+      jp: tJoin("segment.jp"),
+      ot: tJoin("segment.ot"),
+    },
+    usecase: { label: tJoin("usecase.label"), hint: tJoin("usecase.hint", { max: USE_CASE_MAX }) },
+    submit: tJoin("submit"),
+    submitting: tJoin("submitting"),
+    error: {
+      summary: tJoin("error.summary"),
+      generic: tJoin("error.generic"),
+      email: tJoin("error.email"),
+      segment: tJoin("error.segment"),
+      consent: tJoin("error.consent"),
+    },
+  };
 
   return (
     <Section id="join" labelledBy="join-title">
@@ -45,7 +78,13 @@ export async function FaqJoin() {
           </h2>
           <p className="measure mt-4">{tJoin("body")}</p>
           <div className="mt-6">
-            <WaitlistForm />
+            <WaitlistForm
+              labels={labels}
+              locale={locale}
+              consent={tJoin.rich("consent", {
+                policy: (chunks) => <span className="font-semibold">{chunks}</span>,
+              })}
+            />
           </div>
           <div className="mt-6">
             <ButtonLink href="#demo" variant="secondary" trackEvent={{ name: "cta_demo_click" }}>

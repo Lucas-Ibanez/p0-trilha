@@ -1,8 +1,6 @@
 "use client";
 
-import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { Link } from "@/i18n/navigation";
 import {
   LOCALE_COOKIE,
   LOCALE_COOKIE_MAX_AGE,
@@ -12,10 +10,18 @@ import {
 } from "@/i18n/routing";
 import { track } from "@/lib/track";
 
-/** Troca de idioma preservando a âncora (`#proof`) da URL atual. */
-export function LanguageSwitch() {
-  const t = useTranslations("nav");
-  const current = useLocale() as Locale;
+type Props = {
+  current: Locale;
+  label: string;
+  /** Nome de cada idioma, já traduzido (ex.: "English", "Portuguese (Brazil)"). */
+  names: Record<Locale, string>;
+};
+
+/**
+ * Troca de idioma preservando a âncora (`#proof`) da URL atual. Navegação comum (as duas rotas
+ * são estáticas), sem o runtime de navegação do next-intl no navegador.
+ */
+export function LanguageSwitch({ current, label, names }: Props) {
   const [hash, setHash] = useState("");
 
   useEffect(() => {
@@ -25,24 +31,19 @@ export function LanguageSwitch() {
     return () => window.removeEventListener("hashchange", read);
   }, []);
 
-  const names: Record<Locale, string> = {
-    en: t("lang.enName"),
-    "pt-br": t("lang.ptName"),
-  };
-
   return (
-    <nav aria-label={t("langLabel")}>
+    <nav aria-label={label}>
       <ul className="flex items-center gap-1 text-label font-semibold">
         {routing.locales.map((locale) => {
           const active = locale === current;
+          const lang = locale === "pt-br" ? "pt-BR" : locale;
           return (
             <li key={locale}>
-              <Link
-                href={`/${hash}`}
-                locale={locale}
-                lang={locale === "pt-br" ? "pt-BR" : locale}
-                hrefLang={locale === "pt-br" ? "pt-BR" : locale}
-                aria-label={names[locale]}
+              <a
+                href={`/${locale}${hash}`}
+                lang={lang}
+                hrefLang={lang}
+                aria-label={`${localeCode[locale]}, ${names[locale]}`}
                 aria-current={active ? "true" : undefined}
                 onClick={() => {
                   /* A escolha manual vale por 1 ano e vence a detecção por Accept-Language. */
@@ -55,7 +56,7 @@ export function LanguageSwitch() {
                 }
               >
                 {localeCode[locale]}
-              </Link>
+              </a>
             </li>
           );
         })}

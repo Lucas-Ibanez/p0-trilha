@@ -6,7 +6,7 @@ Repositório da landing page bilíngue (EN e PT-BR) da **Hive**, a camada de con
 
 ## Status
 
-**Fases 0 a 3 concluídas** (scaffold, seções em EN e PT-BR, visuais de assinatura, formulário da lista de espera e player de demo). A lista de espera é **só front-end e não grava nada** (D2). **Fase 4 (SEO, OG, acessibilidade e performance) ainda não iniciada.**
+**Fases 0 a 4 concluídas** (scaffold, seções em EN e PT-BR, visuais de assinatura, lista de espera e demo, SEO/OG, headers de segurança, testes e medição). A lista de espera é **só front-end e não grava nada** (D2). **Fase 5 (revisão adversarial de claims e de design) ainda não iniciada.** Pendências de ativos: favicon, ícones, OG e SVGs são provisórios (`TODO(brand)`).
 
 Decisões fechadas em 2026-10-15: **D1** manter a stack padrão; **D2** a lista de espera é só front-end, sem backend por ora (ver `docs/09-acceptance-and-open-decisions.md`).
 
@@ -20,6 +20,9 @@ npm run dev          # http://localhost:3000 (redireciona para /en ou /pt-br)
 npm run build        # roda os checks e gera as rotas estáticas
 npm run check        # claims, i18n, conteúdo, evidência e tokens
 npm run lint && npm run typecheck
+npm run test:unit    # node --test (lista de espera, URLs de vídeo)
+npm run test:e2e     # Playwright + axe contra o build (rode `npm run build` antes)
+npm run assets:generate   # regera OG, favicon e ícones provisórios
 cp .env.example .env.local   # opcional; todas as variáveis são públicas e podem ficar vazias
 ```
 
@@ -37,7 +40,8 @@ cp .env.example .env.local   # opcional; todas as variáveis são públicas e po
 | `src/i18n/` | Rotas, navegação e carregamento de mensagens (next-intl) |
 | `src/lib/` | `evidence` (único ponto de acesso aos fatos), `format`, `track` (no-op), `brand`, `theme-color` |
 | `src/styles/` | `tokens.css` (único lugar com valores de identidade) e `globals.css` |
-| `scripts/` | `check-claims`, `check-i18n`, `check-content`, `check-evidence`, `check-tokens` |
+| `scripts/` | `check-claims`, `check-i18n`, `check-content`, `check-evidence`, `check-tokens`, `generate-brand-assets` |
+| `e2e/` | Testes Playwright (SEO, i18n, layout, interação, formulário, demo, axe) |
 | `public/brand/` | Logos SVG (provisórios, aprovados por ora); nomes e usos em [`MANIFEST.md`](public/brand/MANIFEST.md). `_alt/` guarda alternativas; `fonts/` as fontes auto-hospedadas (OFL) |
 | `public/media/`, `public/og/` | Capturas/pôsteres e imagens OG (vazias por enquanto) |
 

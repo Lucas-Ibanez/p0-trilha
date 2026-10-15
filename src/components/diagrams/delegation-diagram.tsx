@@ -74,7 +74,10 @@ export async function DelegationDiagram() {
                 </dd>
               </div>
             ) : (
-              <div className="dd-card text-caption text-secondary">{tOutcome("verifierNo")}</div>
+              <div className="dd-card">
+                <dt className="text-caption text-secondary">{t("fig.evidence")}</dt>
+                <dd className="text-caption mt-1">{tOutcome("verifierNo")}</dd>
+              </div>
             )}
 
             <div className="dd-result">

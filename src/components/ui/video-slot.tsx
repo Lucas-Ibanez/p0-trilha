@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import { logo } from "@/lib/brand";
 import type { VideoSource } from "@/lib/demo";
@@ -25,13 +24,14 @@ function Poster() {
   return (
     <div className="rounded-control bg-subtle flex aspect-video items-center justify-center">
       {/* Pôster provisório: ainda não há captura real da interface (TODO(content)). */}
-      <Image
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
         src={logo.symbol.onAubergineWarmWhite}
         alt=""
         aria-hidden="true"
         width={SYMBOL_WIDTH}
         height={Math.round(SYMBOL_WIDTH / logo.symbol.ratio)}
-        unoptimized
+        loading="lazy"
       />
     </div>
   );

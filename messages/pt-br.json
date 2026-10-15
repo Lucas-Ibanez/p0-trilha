@@ -293,5 +293,10 @@
       "code": "Repositório no GitHub",
       "explorer": "Programa de escrow no Explorer"
     }
+  },
+  "notFound": {
+    "title": "Esta página não existe",
+    "body": "O endereço pode estar errado ou a página pode ter mudado de lugar.",
+    "back": "Voltar para a página inicial"
   }
 }

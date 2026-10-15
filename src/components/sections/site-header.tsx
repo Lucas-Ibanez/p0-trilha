@@ -1,9 +1,8 @@
-import Image from "next/image";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { ButtonLink } from "@/components/ui/button-link";
 import { LanguageSwitch } from "@/components/ui/language-switch";
 import { MobileMenu } from "@/components/ui/mobile-menu";
-import { Link } from "@/i18n/navigation";
+import type { Locale } from "@/i18n/routing";
 import { logo } from "@/lib/brand";
 
 const LOGO_WIDTH = 104;
@@ -19,6 +18,7 @@ const sections = [
 
 export async function SiteHeader() {
   const t = await getTranslations();
+  const locale = (await getLocale()) as Locale;
 
   const links = (
     <ul className="flex flex-col gap-1 lg:flex-row lg:items-center lg:gap-6">
@@ -47,16 +47,16 @@ export async function SiteHeader() {
         {t("env.banner")}
       </p>
       <div className="container-page flex items-center gap-2 py-2 sm:gap-4">
-        <Link href="/" className="inline-flex shrink-0">
-          <Image
+        <a href={`/${locale}`} className="inline-flex shrink-0">
+          {/* <img> simples: SVG já otimizado e com dimensões; evita o runtime do next/image no cliente. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src={logo.horizontal.onAubergineWarmWhite}
             alt={t("brand.logoAlt")}
             width={LOGO_WIDTH}
             height={Math.round(LOGO_WIDTH / logo.horizontal.ratio)}
-            priority
-            unoptimized
           />
-        </Link>
+        </a>
         <nav aria-label={t("nav.label")} className="ml-4 hidden lg:block">
           {links}
         </nav>
@@ -71,7 +71,11 @@ export async function SiteHeader() {
               {t("nav.cta")}
             </ButtonLink>
           </div>
-          <LanguageSwitch />
+          <LanguageSwitch
+            current={locale}
+            label={t("nav.langLabel")}
+            names={{ en: t("nav.lang.enName"), "pt-br": t("nav.lang.ptName") }}
+          />
           <MobileMenu label={t("nav.menu")}>
             <nav aria-label={t("nav.label")}>
               {links}

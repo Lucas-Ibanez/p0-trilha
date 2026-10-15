@@ -1,14 +1,12 @@
-"use client";
-
-import { track, type TrackEvent } from "@/lib/track";
+import type { TrackEvent } from "@/lib/track";
 
 type Props = {
   href: string;
   variant?: "primary" | "secondary";
   size?: "md" | "sm";
   className?: string;
-  /** Evento de analytics disparado no clique (docs/01 §5.3); no-op até a decisão D8. */
-  trackEvent?: TrackEvent;
+  /** Evento de analytics no clique (docs/01 §5.3); só `cta_*`. Lido pelo ClickTracker; no-op até a D8. */
+  trackEvent?: Extract<TrackEvent, { name: "cta_demo_click" | "cta_waitlist_click" }>;
   children: React.ReactNode;
 } & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "className" | "children">;
 
@@ -31,17 +29,13 @@ export function ButtonLink({
   className = "",
   trackEvent,
   children,
-  onClick,
   ...rest
 }: Props) {
   return (
     <a
       href={href}
       className={`${base} ${sizes[size]} ${variants[variant]} ${className}`.trim()}
-      onClick={(event) => {
-        if (trackEvent) track(trackEvent);
-        onClick?.(event);
-      }}
+      {...(trackEvent ? { "data-track": trackEvent.name } : {})}
       {...rest}
     >
       {children}

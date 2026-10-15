@@ -64,7 +64,6 @@ export function JournalCards({
           <li
             key={card.name}
             tabIndex={0}
-            role="group"
             aria-label={card.name}
             onMouseEnter={() => setActive(index)}
             onMouseLeave={() => setActive(null)}
@@ -75,7 +74,7 @@ export function JournalCards({
             }`}
           >
             <p className="font-mono text-caption text-secondary">{card.startsAt}</p>
-            <p className="font-mono text-label font-medium">{card.name}</p>
+            <p className="font-mono text-label">{card.name}</p>
             {card.verdictLabel ? (
               <p className="font-semibold">{card.verdictLabel}</p>
             ) : card.display ? (

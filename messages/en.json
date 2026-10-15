@@ -293,5 +293,10 @@
       "code": "GitHub repository",
       "explorer": "Escrow program on Explorer"
     }
+  },
+  "notFound": {
+    "title": "This page does not exist",
+    "body": "The address may be wrong or the page may have moved.",
+    "back": "Back to the home page"
   }
 }
