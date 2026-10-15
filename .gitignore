@@ -1,0 +1,22 @@
+# dependencies
+node_modules
+
+# build output
+.next
+out
+dist
+.turbo
+.vercel
+
+# env (valores nunca vão para o repositório)
+.env*
+!.env.example
+
+# testes e relatórios
+coverage
+playwright-report
+test-results
+
+# sistema e logs
+.DS_Store
+*.log
