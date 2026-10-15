@@ -1,0 +1,450 @@
+{
+  "_comment": "Fonte da lista de proibidos para scripts/check-claims.mjs. Espelha docs/02-claims-and-voice.md §4. Padrões são regex (flag i). 'allowKeys' = chaves de dicionário onde o termo pode aparecer NEGADO ou EXPLICADO. Qualquer ocorrência fora disso falha o build. É lista de bloqueio + revisão humana; não substitui o checklist de 02 §8.",
+  "rules": [
+    {
+      "id": "code-correct",
+      "severity": "error",
+      "reason": "A prova não atesta qualidade do software",
+      "en": [
+        "code is correct",
+        "software is correct",
+        "correct code",
+        "bug[- ]free"
+      ],
+      "pt-br": [
+        "código está correto",
+        "software está correto",
+        "código correto",
+        "livre de bugs"
+      ],
+      "allowKeys": [
+        "faq.correct.q"
+      ]
+    },
+    {
+      "id": "trustless",
+      "severity": "error",
+      "reason": "Há confiança residual (harness, escopo, operador)",
+      "en": [
+        "trustless",
+        "no one needs to trust",
+        "nobody needs to trust"
+      ],
+      "pt-br": [
+        "trustless",
+        "ninguém precisa confiar",
+        "sem necessidade de confiança"
+      ],
+      "allowKeys": []
+    },
+    {
+      "id": "any-repo",
+      "severity": "error",
+      "reason": "A v1 verifica um artefato restrito",
+      "en": [
+        "any repo(sitory)?",
+        "any codebase",
+        "arbitrary code",
+        "whole codebase"
+      ],
+      "pt-br": [
+        "qualquer repositório",
+        "qualquer base de código",
+        "código arbitrário",
+        "base de código inteira"
+      ],
+      "allowKeys": [
+        "faq.correct.a"
+      ]
+    },
+    {
+      "id": "zk-onchain-bare",
+      "severity": "warn",
+      "reason": "'ZK on-chain' só com a frase 1",
+      "en": [
+        "zk on-chain",
+        "on-chain zk"
+      ],
+      "pt-br": [
+        "zk on-chain",
+        "zk on chain"
+      ],
+      "allowKeys": []
+    },
+    {
+      "id": "audited",
+      "severity": "error",
+      "reason": "Não houve auditoria independente",
+      "en": [
+        "audited",
+        "security audit"
+      ],
+      "pt-br": [
+        "auditado",
+        "auditoria de segurança"
+      ],
+      "allowKeys": []
+    },
+    {
+      "id": "private",
+      "severity": "error",
+      "reason": "O provador conhece os inputs",
+      "en": [
+        "private(ly)?\\b",
+        "total privacy",
+        "fully private",
+        "confidential"
+      ],
+      "pt-br": [
+        "privado",
+        "privacidade total",
+        "totalmente privad",
+        "confidencial"
+      ],
+      "allowKeys": [
+        "footer.links.privacy",
+        "join.consent"
+      ]
+    },
+    {
+      "id": "new-machine",
+      "severity": "error",
+      "reason": "Foi clone limpo, não máquina nova",
+      "en": [
+        "new machine",
+        "fresh machine"
+      ],
+      "pt-br": [
+        "máquina nova"
+      ],
+      "allowKeys": [
+        "limits.repro"
+      ]
+    },
+    {
+      "id": "verifier-router",
+      "severity": "error",
+      "reason": "A verificação é por CPI direta",
+      "en": [
+        "verifier router"
+      ],
+      "pt-br": [
+        "verifier router"
+      ],
+      "allowKeys": []
+    },
+    {
+      "id": "own-crypto",
+      "severity": "error",
+      "reason": "Usamos RISC Zero e risc0-solana",
+      "en": [
+        "proprietary cryptograph",
+        "our own cryptograph"
+      ],
+      "pt-br": [
+        "criptografia própria",
+        "tecnologia criptográfica própria"
+      ],
+      "allowKeys": []
+    },
+    {
+      "id": "mainnet",
+      "severity": "warn",
+      "reason": "Só pode aparecer negado/explicado",
+      "en": [
+        "mainnet"
+      ],
+      "pt-br": [
+        "mainnet"
+      ],
+      "allowKeys": [
+        "faq.mainnet.q",
+        "faq.mainnet.a",
+        "footer.env"
+      ]
+    },
+    {
+      "id": "real-money",
+      "severity": "error",
+      "reason": "Somente Test USDC",
+      "en": [
+        "real money",
+        "(?<!Test )\\bUSDC\\b",
+        "\\$\\s?\\d"
+      ],
+      "pt-br": [
+        "dinheiro real",
+        "(?<!Test )\\bUSDC\\b",
+        "R\\$\\s?\\d",
+        "US\\$\\s?\\d"
+      ],
+      "allowKeys": [
+        "faq.mainnet.a"
+      ]
+    },
+    {
+      "id": "live-prod",
+      "severity": "error",
+      "reason": "Roda em devnet; não está em produção",
+      "en": [
+        "in production",
+        "go live",
+        "now live",
+        "launched"
+      ],
+      "pt-br": [
+        "em produção",
+        "no ar em produção",
+        "lançado"
+      ],
+      "allowKeys": [
+        "demo.cta"
+      ]
+    },
+    {
+      "id": "marketplace-reputation",
+      "severity": "error",
+      "reason": "Marketplace, reputação e score não existem",
+      "en": [
+        "marketplace",
+        "reputation",
+        "trust score",
+        "agent ranking",
+        "leaderboard"
+      ],
+      "pt-br": [
+        "marketplace",
+        "reputação",
+        "score de confiança",
+        "ranking de agentes"
+      ],
+      "allowKeys": []
+    },
+    {
+      "id": "trusted-agent",
+      "severity": "error",
+      "reason": "Confiança é contextual, não qualidade geral do agente",
+      "en": [
+        "trusted agent",
+        "verified agent",
+        "certified agent",
+        "trustworthy agent"
+      ],
+      "pt-br": [
+        "agente confiável",
+        "agente verificado",
+        "agente certificado"
+      ],
+      "allowKeys": []
+    },
+    {
+      "id": "sybil",
+      "severity": "error",
+      "reason": "Sem garantia anti-Sybil",
+      "en": [
+        "sybil[- ]proof",
+        "tamper[- ]proof"
+      ],
+      "pt-br": [
+        "à prova de sybil",
+        "à prova de manipulação"
+      ],
+      "allowKeys": []
+    },
+    {
+      "id": "exclusivity",
+      "severity": "error",
+      "reason": "Sem base para exclusividade",
+      "en": [
+        "the first\\b(?! proof)",
+        "the only\\b",
+        "no competitors",
+        "first-of-its-kind",
+        "category-defining",
+        "world's first"
+      ],
+      "pt-br": [
+        "o primeiro\\b",
+        "o único\\b",
+        "sem concorrentes",
+        "pioneir",
+        "inédito"
+      ],
+      "allowKeys": []
+    },
+    {
+      "id": "market-size",
+      "severity": "error",
+      "reason": "Denominadores e WTP não medidos",
+      "en": [
+        "\\bTAM\\b",
+        "\\bSAM\\b",
+        "\\bSOM\\b",
+        "billion[- ]dollar market",
+        "trillion"
+      ],
+      "pt-br": [
+        "\\bTAM\\b",
+        "\\bSAM\\b",
+        "\\bSOM\\b",
+        "mercado de bilhões",
+        "trilh"
+      ],
+      "allowKeys": []
+    },
+    {
+      "id": "traction",
+      "severity": "error",
+      "reason": "Não há clientes, pilotos nem receita",
+      "en": [
+        "trusted by",
+        "used by",
+        "our customers",
+        "testimonial",
+        "backed by",
+        "partnered with",
+        "endorsed by",
+        "pilot customers"
+      ],
+      "pt-br": [
+        "usado por",
+        "nossos clientes",
+        "depoimento",
+        "apoiado por",
+        "em parceria com",
+        "endossado por",
+        "clientes-piloto"
+      ],
+      "allowKeys": []
+    },
+    {
+      "id": "unmeasured-gain",
+      "severity": "error",
+      "reason": "Ganhos não medidos",
+      "en": [
+        "\\d+x faster",
+        "faster than CI",
+        "cheaper than",
+        "saves? \\d+%",
+        "reduces? (cost|time) by"
+      ],
+      "pt-br": [
+        "\\d+x mais rápido",
+        "mais rápido que CI",
+        "mais barato que",
+        "economiza \\d+%",
+        "reduz (custo|tempo) em"
+      ],
+      "allowKeys": []
+    },
+    {
+      "id": "verdict-words",
+      "severity": "error",
+      "reason": "Veredito é 'critérios atendidos/não atendidos'",
+      "en": [
+        "\\bapproved\\b",
+        "\\brejected\\b(?! without)",
+        "\\bsecure\\b",
+        "\\bsafe\\b",
+        "\\bguaranteed?\\b",
+        "\\bcertified\\b"
+      ],
+      "pt-br": [
+        "\\baprovad",
+        "\\brejeitad(?!a sem)",
+        "\\bseguro\\b",
+        "\\bconfiável\\b",
+        "\\bgarantid",
+        "\\bcertificad"
+      ],
+      "allowKeys": [
+        "proof.n2",
+        "how.s3.body"
+      ]
+    },
+    {
+      "id": "hive-decides",
+      "severity": "error",
+      "reason": "Quem libera/devolve é o programa, a partir do resultado verificado",
+      "en": [
+        "hive decides",
+        "hive approves",
+        "ai decides",
+        "the platform decides"
+      ],
+      "pt-br": [
+        "a hive decide",
+        "a hive aprova",
+        "a ia decide",
+        "a plataforma decide"
+      ],
+      "allowKeys": []
+    },
+    {
+      "id": "monotonic-trust",
+      "severity": "error",
+      "reason": "Uma interação pode evidenciar falha e reduzir confiança",
+      "en": [
+        "every verified interaction strengthens",
+        "trust always grows",
+        "more jobs,? more trust"
+      ],
+      "pt-br": [
+        "toda interação verificada fortalece",
+        "a confiança sempre cresce",
+        "mais jobs,? mais confiança"
+      ],
+      "allowKeys": []
+    },
+    {
+      "id": "rejected-taglines",
+      "severity": "error",
+      "reason": "Exploradas e não adotadas",
+      "en": [
+        "agents act\\. hive decides",
+        "lives between action and consequence"
+      ],
+      "pt-br": [
+        "agentes agem\\. a hive decide",
+        "vive entre a ação e a consequência"
+      ],
+      "allowKeys": []
+    },
+    {
+      "id": "metaphor-overreach",
+      "severity": "warn",
+      "reason": "Metáfora contida: mel/rainha/pólen/ferrão não têm significado atribuído",
+      "en": [
+        "honey",
+        "queen",
+        "pollen",
+        "stinger",
+        "sting"
+      ],
+      "pt-br": [
+        "\\bmel\\b",
+        "rainha",
+        "pólen",
+        "ferrão"
+      ],
+      "allowKeys": []
+    }
+  ],
+  "invariantTerms": [
+    "devnet",
+    "Test USDC",
+    "Groth16",
+    "RISC Zero",
+    "Solana",
+    "Explorer",
+    "PASS",
+    "FAIL",
+    "CPI",
+    "escrow",
+    "vault",
+    "receipt",
+    "journal",
+    "job",
+    "Hive"
+  ]
+}

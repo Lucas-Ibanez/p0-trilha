@@ -1,0 +1,290 @@
+{
+  "_comment": "Fonte única dos fatos numéricos e endereços da landing. NUNCA digitar hash/assinatura à mão em componentes: importe deste arquivo. Origem: hive-mvp-estado-2026-10-07.md (commit faad06c). Verifique no repositório antes de publicar se algo mudou depois de 2026-10-07.",
+  "meta": {
+    "cluster": "devnet",
+    "token": "Test USDC",
+    "tokenDecimals": 6,
+    "recordedAt": "2026-10-07",
+    "sourceCommit": "faad06c",
+    "repoUrl": "https://github.com/Lucas-Ibanez/colosseum-hackathon-sparta",
+    "license": "Apache-2.0",
+    "legacyName": "vericode"
+  },
+  "programs": {
+    "escrow": {
+      "name": "vericode_escrow",
+      "address": "GZqbL2TbeDVHcNRosngaRfCwzV9YJT6iEbckYr8uwkCH",
+      "upgradeAuthority": "none",
+      "finalizationTx": {
+        "signature": "4AsofYxry7vjdpo2CQxSKSg9MdczuCB4GnRCLzz6ZeVFffPkWdedFBuBQDw58audRHJLcAQ1sGrN5G3t2CoW7eYH",
+        "explorerUrl": "https://explorer.solana.com/tx/4AsofYxry7vjdpo2CQxSKSg9MdczuCB4GnRCLzz6ZeVFffPkWdedFBuBQDw58audRHJLcAQ1sGrN5G3t2CoW7eYH?cluster=devnet"
+      }
+    },
+    "groth16Verifier": {
+      "name": "risc0-solana v3.0.0 (commit ee415935)",
+      "address": "THq1qFYQoh7zgcjXoMXduDBqiZRCPeg3PvvMbrVQUge",
+      "upgradeAuthority": "None"
+    },
+    "testUsdcMint": {
+      "address": "9TE2VPFmgrNxT22yS3sEZyRcMxLgJkwzgAoquWRXwV2F",
+      "decimals": 6,
+      "freezeAuthority": null
+    }
+  },
+  "constants": {
+    "imageId": "4da06f90da75ec8980c943ce017d69c48370fddbf3aa27689d375d78fac0fb1a",
+    "journalBytes": 165,
+    "verifierComputeUnits": 99541,
+    "settlementTotalComputeUnitsPass": 122156,
+    "deadlineSlotsMin": 1560,
+    "deadlineSlotsMax": 9000,
+    "provingSeconds": {
+      "composite": "7–9",
+      "groth16Compression": "90–180"
+    },
+    "provingNote": "Medido em WSL com 7,6 GiB de RAM; prover exige Docker x86.",
+    "runOn": "2026-10-07",
+    "newTransactionsInRun": 10,
+    "fullCycleDuration": "11 min 16 s"
+  },
+  "journalFields": [
+    {
+      "offset": 0,
+      "name": "schema_version",
+      "type": "u32",
+      "gloss": {
+        "en": "Journal format version",
+        "pt-br": "Versão do formato do journal"
+      }
+    },
+    {
+      "offset": 4,
+      "name": "job_id",
+      "type": "bytes32",
+      "gloss": {
+        "en": "Which job this proof belongs to",
+        "pt-br": "A qual job esta prova pertence"
+      }
+    },
+    {
+      "offset": 36,
+      "name": "spec_hash",
+      "type": "bytes32",
+      "gloss": {
+        "en": "The acceptance criteria agreed up front",
+        "pt-br": "Os critérios de aceite combinados antes"
+      }
+    },
+    {
+      "offset": 68,
+      "name": "harness_hash",
+      "type": "bytes32",
+      "gloss": {
+        "en": "The fixed evaluator that was run",
+        "pt-br": "O avaliador fixo que foi executado"
+      }
+    },
+    {
+      "offset": 100,
+      "name": "artifact_hash",
+      "type": "bytes32",
+      "gloss": {
+        "en": "The exact artifact that was evaluated",
+        "pt-br": "O artefato exato que foi avaliado"
+      }
+    },
+    {
+      "offset": 132,
+      "name": "image_id",
+      "type": "bytes32",
+      "gloss": {
+        "en": "The admitted program that ran the evaluation",
+        "pt-br": "O programa admitido que rodou a avaliação"
+      }
+    },
+    {
+      "offset": 164,
+      "name": "verdict",
+      "type": "u8",
+      "gloss": {
+        "en": "Criteria met (PASS) or not met (FAIL)",
+        "pt-br": "Critérios atendidos (PASS) ou não atendidos (FAIL)"
+      }
+    }
+  ],
+  "journalExamplePass": {
+    "_note": "Valores truncados como exibidos no site anterior. Os valores completos (exceto image_id) devem ser obtidos no repositório (docs/d11-ui-results.md ou `vericode job show`). Nunca inventar o restante.",
+    "jobId": {
+      "display": "26df9ef4…b3ff3618",
+      "full": null
+    },
+    "specHash": {
+      "display": "af642b56…c49fb778",
+      "full": null
+    },
+    "harnessHash": {
+      "display": "01124025…b0996b50",
+      "full": null
+    },
+    "artifactHash": {
+      "display": "225384a7…5852ea73",
+      "full": null
+    },
+    "imageId": {
+      "display": "4da06f90…fac0fb1a",
+      "full": "4da06f90da75ec8980c943ce017d69c48370fddbf3aa27689d375d78fac0fb1a"
+    },
+    "verdict": "PASS"
+  },
+  "outcomes": [
+    {
+      "id": "released",
+      "state": "Released",
+      "verdict": "PASS",
+      "requiresProof": true,
+      "headline": {
+        "en": "Criteria met",
+        "pt-br": "Critérios atendidos"
+      },
+      "result": {
+        "en": "1 Test USDC goes to the executor.",
+        "pt-br": "1 Test USDC vai para o executor."
+      },
+      "instructions": [
+        "deliver",
+        "release"
+      ],
+      "verifierInvoked": true,
+      "verifierComputeUnits": 99541,
+      "job": "P₃ 26df9ef4…",
+      "tx": {
+        "signature": "2gB9djwM3WpApHLXYf5riF974mTK5W4UW7HCv1xJamLPu3NEwnPcCY4oT6zAwvbMkaKRcATf1LCQPyXP8rmpj3o",
+        "explorerUrl": "https://explorer.solana.com/tx/2gB9djwM3WpApHLXYf5riF974mTK5W4UW7HCv1xJamLPu3NEwnPcCY4oT6zAwvbMkaKRcATf1LCQPyXP8rmpj3o?cluster=devnet"
+      }
+    },
+    {
+      "id": "refundedOnFail",
+      "state": "RefundedOnFail",
+      "verdict": "FAIL",
+      "requiresProof": true,
+      "headline": {
+        "en": "Criteria not met",
+        "pt-br": "Critérios não atendidos"
+      },
+      "result": {
+        "en": "A verified result, not an error: 1 Test USDC returns to the buyer.",
+        "pt-br": "Um resultado verificado, não um erro: 1 Test USDC volta ao comprador."
+      },
+      "instructions": [
+        "deliver",
+        "refund_on_fail"
+      ],
+      "verifierInvoked": true,
+      "verifierComputeUnits": 99541,
+      "job": "F₃ 7395a76d…",
+      "tx": {
+        "signature": "4jcugMyXqhAttG7cjcjWZnMiyZe3SosHC2cgphQ6rf48n5KfrWZ4TRfzR1ZioP5NwYE2qeo2zUDEcD4rJQDTCmSJ",
+        "explorerUrl": "https://explorer.solana.com/tx/4jcugMyXqhAttG7cjcjWZnMiyZe3SosHC2cgphQ6rf48n5KfrWZ4TRfzR1ZioP5NwYE2qeo2zUDEcD4rJQDTCmSJ?cluster=devnet"
+      }
+    },
+    {
+      "id": "refundedOnTimeout",
+      "state": "RefundedOnTimeout",
+      "verdict": null,
+      "requiresProof": false,
+      "headline": {
+        "en": "Deadline passed without settlement",
+        "pt-br": "Prazo vencido sem liquidação"
+      },
+      "result": {
+        "en": "1 Test USDC returns to the buyer by an objective condition. No proof needed.",
+        "pt-br": "1 Test USDC volta ao comprador por uma condição objetiva. Sem prova."
+      },
+      "instructions": [
+        "refund_on_timeout"
+      ],
+      "verifierInvoked": false,
+      "job": "T₃ 2c38ca66…",
+      "tx": {
+        "signature": "5oTbFiTXjkv8aBgTQPrKSqTShfNgVqSePZuP5x57GXxfEi6mTPMLfXFCWpnZSQzgcXbyqSjBHSJy65dEy5aAKVzi",
+        "explorerUrl": "https://explorer.solana.com/tx/5oTbFiTXjkv8aBgTQPrKSqTShfNgVqSePZuP5x57GXxfEi6mTPMLfXFCWpnZSQzgcXbyqSjBHSJy65dEy5aAKVzi?cluster=devnet"
+      }
+    }
+  ],
+  "rejections": [
+    {
+      "id": "tamperedProof",
+      "code": 6003,
+      "name": "PairingError",
+      "rejectedBy": "Groth16 verifier",
+      "title": {
+        "en": "Tampered proof",
+        "pt-br": "Prova adulterada"
+      },
+      "tx": {
+        "signature": "kTQdVojxjzJULzS97Jo5HBFRcroqnYVMaK9Crtx2LmyAY1pUhnBgh7v1Xs686wY3gvvxGz3aiN9URWhNgepRg39",
+        "explorerUrl": "https://explorer.solana.com/tx/kTQdVojxjzJULzS97Jo5HBFRcroqnYVMaK9Crtx2LmyAY1pUhnBgh7v1Xs686wY3gvvxGz3aiN9URWhNgepRg39?cluster=devnet"
+      }
+    },
+    {
+      "id": "otherJobReceipt",
+      "code": 6014,
+      "name": "JournalJobIdMismatch",
+      "rejectedBy": "vericode_escrow",
+      "title": {
+        "en": "Journal from another job",
+        "pt-br": "Journal de outro job"
+      },
+      "tx": {
+        "signature": "5CBFajsaFvYreCJkQwiPuR8rHWtpBKCULoVAeysUJGRwTDfF2CXYzeFkuit6azjBjqQkoif8TbYwxByv8Ckmo4en",
+        "explorerUrl": "https://explorer.solana.com/tx/5CBFajsaFvYreCJkQwiPuR8rHWtpBKCULoVAeysUJGRwTDfF2CXYzeFkuit6azjBjqQkoif8TbYwxByv8Ckmo4en?cluster=devnet"
+      }
+    },
+    {
+      "id": "refundTooEarly",
+      "code": 6021,
+      "name": "DeadlineNotReached",
+      "rejectedBy": "vericode_escrow",
+      "title": {
+        "en": "Refund before the deadline",
+        "pt-br": "Reembolso antes do prazo"
+      },
+      "tx": {
+        "signature": "4jDL97DGJRLQhB2m2NKK9kof85EFHSQMyPDPMmdhQ9mm6nkRKcbFF9HCuXcEiooWKKWomBCuhhTd2KbpYFAGiRHF",
+        "explorerUrl": "https://explorer.solana.com/tx/4jDL97DGJRLQhB2m2NKK9kof85EFHSQMyPDPMmdhQ9mm6nkRKcbFF9HCuXcEiooWKKWomBCuhhTd2KbpYFAGiRHF?cluster=devnet"
+      }
+    },
+    {
+      "id": "secondSettlement",
+      "code": 6007,
+      "name": "AlreadyReleased",
+      "rejectedBy": "vericode_escrow",
+      "title": {
+        "en": "Second settlement",
+        "pt-br": "Segunda liquidação"
+      },
+      "tx": {
+        "signature": "j2pmqFWuTSe4H6isKyEFX3cBYmufEANP9Ue1p74tTUawXbiPSQ4KqckPW6WX3gnoAWsXE5XBdeVHEevpLa852ky",
+        "explorerUrl": "https://explorer.solana.com/tx/j2pmqFWuTSe4H6isKyEFX3cBYmufEANP9Ue1p74tTUawXbiPSQ4KqckPW6WX3gnoAWsXE5XBdeVHEevpLa852ky?cluster=devnet"
+      }
+    }
+  ],
+  "rejectionNote": {
+    "en": "Rejected without moving funds. The job state was not changed.",
+    "pt-br": "Rejeitada sem mover fundos. O estado do job não foi alterado."
+  },
+  "fundingTxs": {
+    "U1": {
+      "signature": "8AJzbbKfaeKSpjRxzX2wTu1R4DxpujLgT7z2ZRsUHjeUGDMka8bAkyriXZJ7ZuCNTfY3zYzq3rQWr1P4yoABDNo",
+      "explorerUrl": "https://explorer.solana.com/tx/8AJzbbKfaeKSpjRxzX2wTu1R4DxpujLgT7z2ZRsUHjeUGDMka8bAkyriXZJ7ZuCNTfY3zYzq3rQWr1P4yoABDNo?cluster=devnet"
+    },
+    "U3": {
+      "signature": "5vWoxx2mBra2iP5TfBX9FeYUjt5fujMde7m7saWHpo1kGEksZbrwVy66L9X6DqMLqDDNbk6BR5P6UjXqtZK5gzT6",
+      "explorerUrl": "https://explorer.solana.com/tx/5vWoxx2mBra2iP5TfBX9FeYUjt5fujMde7m7saWHpo1kGEksZbrwVy66L9X6DqMLqDDNbk6BR5P6UjXqtZK5gzT6?cluster=devnet"
+    },
+    "U8": {
+      "signature": "2jjiYDAoCQTrF93LvTAFB3RHTB3ab86k2BZmRXnFv3FmgK2ps2Kf1U2vs4MeFMMo7iqDQ77TSqz9hjigaQMrFQbW",
+      "explorerUrl": "https://explorer.solana.com/tx/2jjiYDAoCQTrF93LvTAFB3RHTB3ab86k2BZmRXnFv3FmgK2ps2Kf1U2vs4MeFMMo7iqDQ77TSqz9hjigaQMrFQbW?cluster=devnet"
+    }
+  }
+}
