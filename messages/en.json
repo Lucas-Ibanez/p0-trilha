@@ -126,8 +126,8 @@
   },
   "demo": {
     "title": "See it run on devnet",
-    "body": "One continuous take through the Hive interface, with real transactions. Every cut and every speed-up is labeled on screen.",
-    "technical": "Technical demo",
+    "body": "A demo of Hive running on Solana devnet, and the pitch video.",
+    "technical": "Demo",
     "pitch": "Pitch",
     "full": "Full take, uncut",
     "play": "Play",
@@ -240,7 +240,7 @@
     },
     "rails": {
       "q": "Do I need crypto to use it?",
-      "a": "Today, settlement runs on Solana devnet with a test token. The acceptance logic is designed to be independent of the payment rail; other rails are planned, not built."
+      "a": "Today, settlement runs on Solana devnet with a test token. No other payment rail is built. The acceptance logic is designed to be independent of the payment rail."
     }
   },
   "join": {
@@ -278,7 +278,9 @@
       "notice": "This form is a preview: it doesn't send or store anything yet, and the waitlist isn't open.",
       "successTitle": "Thanks. This was a preview.",
       "successBody": "Nothing was sent or stored. We'll announce when the waitlist opens.",
-      "reset": "Start over"
+      "reset": "Start over",
+      "consent": "I understand this is a preview and nothing is sent or stored. See the <policy>privacy policy</policy>.",
+      "consentError": "Check the box to continue."
     },
     "noscript": "This form needs JavaScript to run, and it is only a preview for now."
   },
@@ -291,12 +293,48 @@
     "links": {
       "label": "Footer links",
       "code": "GitHub repository",
-      "explorer": "Escrow program on Explorer"
+      "explorer": "Escrow program on Explorer",
+      "privacy": "Privacy"
     }
   },
   "notFound": {
     "title": "This page does not exist",
     "body": "The address may be wrong or the page may have moved.",
     "back": "Back to the home page"
+  },
+  "privacy": {
+    "title": "Privacy",
+    "description": "What data the Hive landing page collects today: nothing is stored on our servers.",
+    "draft": "Draft text, pending legal review.",
+    "updated": "Last updated: {date}",
+    "back": "Back to the home page",
+    "s1": {
+      "title": "What this site stores today",
+      "body": "Nothing on our servers. There are no accounts, no analytics and no advertising or tracking cookies, and no third-party scripts load when you open a page."
+    },
+    "s2": {
+      "title": "Language preference",
+      "body": "If you pick a language with the EN | PT switch, your browser keeps one cookie, <code>hive_lang</code>, for one year, so the site opens in that language next time. It holds only the language code."
+    },
+    "s3": {
+      "title": "Waitlist form",
+      "body": "The waitlist form is a preview: it checks what you type in your browser and sends nothing, so no email or other detail is stored. Before the waitlist opens, this page will say who is responsible for the data, why it is used, how long it is kept and how to ask for deletion."
+    },
+    "s4": {
+      "title": "Videos",
+      "body": "The demo and pitch videos are hosted on YouTube. Nothing from YouTube loads until you press Play. Then the video loads from youtube-nocookie.com, and YouTube's own terms and privacy policy apply."
+    },
+    "s5": {
+      "title": "Server logs",
+      "body": "Like any web host, the provider that serves this site processes technical request logs, such as IP address and browser, to deliver it. This site adds no tracking on top of that."
+    },
+    "s6": {
+      "title": "External links",
+      "body": "Links to Solana Explorer and GitHub open other sites, which have their own policies."
+    },
+    "s7": {
+      "title": "Contact",
+      "body": "A channel for privacy requests will be published here before the waitlist opens."
+    }
   }
 }

@@ -3,30 +3,34 @@ import { ButtonLink } from "@/components/ui/button-link";
 import { Section, SectionTitle } from "@/components/ui/section";
 import { VideoSlot } from "@/components/ui/video-slot";
 import { parseVideoUrl } from "@/lib/demo";
+import { demoVideoUrls } from "@/lib/demo-videos";
 
-/* URLs vêm do ambiente (docs/06 §7). Sem URL → estado "em breve", nunca um player falso.
- * Cada variável precisa ser lida por extenso para o Next embutir o valor no build. */
-const slots = [
-  { id: "technical", url: process.env.NEXT_PUBLIC_DEMO_TECHNICAL_URL },
-  { id: "pitch", url: process.env.NEXT_PUBLIC_DEMO_PITCH_URL },
-  { id: "full", url: process.env.NEXT_PUBLIC_DEMO_FULL_URL },
-] as const;
+/* URLs: src/lib/demo-videos.ts (D6). Slot sem URL não é mostrado quando há ao menos um vídeo;
+ * sem nenhum vídeo, os três aparecem como "em breve". Nunca um player falso. */
+const slotIds = ["technical", "pitch", "full"] as const;
 
 export async function Demo() {
   const t = await getTranslations("demo");
   const tA11y = await getTranslations("a11y");
+  const tNav = await getTranslations("nav");
+
+  const parsed = slotIds.map((id) => ({ id, source: parseVideoUrl(demoVideoUrls[id]) }));
+  const live = parsed.filter((slot) => slot.source !== null);
+  const slots = live.length > 0 ? live : parsed;
 
   return (
     <Section id="demo" labelledBy="demo-title" surface="aubergine">
       <SectionTitle id="demo-title">{t("title")}</SectionTitle>
       <p className="measure text-body text-secondary mt-6">{t("body")}</p>
 
-      <ul className="mt-12 grid gap-6 md:grid-cols-3">
-        {slots.map(({ id, url }) => (
+      <ul
+        className={`mt-12 grid gap-6 md:grid-cols-2 ${slots.length === 3 ? "lg:grid-cols-3" : ""}`}
+      >
+        {slots.map(({ id, source }) => (
           <li key={id} className="rounded-card border-soft bg-card border p-4">
             <VideoSlot
               title={t(id)}
-              source={parseVideoUrl(url)}
+              source={source}
               labels={{
                 soon: t("soon"),
                 lang: t("lang"),
@@ -41,7 +45,7 @@ export async function Demo() {
 
       <div className="mt-8">
         <ButtonLink href="#join" variant="secondary" trackEvent={{ name: "cta_waitlist_click" }}>
-          {t("cta")}
+          {live.length > 0 ? tNav("cta") : t("cta")}
         </ButtonLink>
       </div>
     </Section>

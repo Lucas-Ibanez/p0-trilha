@@ -78,7 +78,8 @@ test("headers de segurança e CSP", async ({ request }) => {
   expect(csp).toContain("default-src 'self'");
   expect(csp).toContain("frame-ancestors 'none'");
   expect(csp).toContain("object-src 'none'");
-  expect(csp).toContain("frame-src 'none'"); // sem URL de vídeo no ambiente de teste
+  // Vídeos oficiais do YouTube (D6): só o domínio sem cookies e só em frame-src.
+  expect(csp).toContain("frame-src https://www.youtube-nocookie.com");
   expect(csp).not.toMatch(/unsafe-eval/);
   expect(headers["referrer-policy"]).toBe("strict-origin-when-cross-origin");
   expect(headers["x-content-type-options"]).toBe("nosniff");
@@ -97,6 +98,55 @@ test("robots.txt e sitemap.xml", async ({ request }) => {
   expect(sitemap).toMatch(/<loc>https?:\/\/[^<]+\/pt-br<\/loc>/);
   expect(sitemap).toContain('hreflang="pt-BR"');
   expect(sitemap).toContain('hreflang="x-default"');
+  expect(sitemap).toMatch(/<loc>https?:\/\/[^<]+\/en\/privacy<\/loc>/);
+  expect(sitemap).toMatch(/<loc>https?:\/\/[^<]+\/pt-br\/privacidade<\/loc>/);
+});
+
+test.describe("política de privacidade (D9)", () => {
+  for (const [path, locale, title] of [
+    ["/en/privacy", "en", "Privacy"],
+    ["/pt-br/privacidade", "pt-BR", "Privacidade"],
+  ] as const) {
+    test(`${path}: rascunho visível, hreflang cruzado e sem coleta prometida`, async ({ page }) => {
+      const problems = collectConsole(page);
+      const response = await page.goto(path);
+      expect(response?.status()).toBe(200);
+      await expect(page.locator("html")).toHaveAttribute("lang", locale);
+      await expect(page.locator("h1")).toHaveText(title);
+      await expect(page.locator("main")).toContainText(
+        locale === "en" ? "pending legal review" : "pendente de revisão jurídica",
+      );
+      await expect(page.locator("h2")).toHaveCount(7);
+      const alternates = await page
+        .locator('link[rel="alternate"][hreflang]')
+        .evaluateAll((links) =>
+          links.map(
+            (l) => `${l.getAttribute("hreflang")}=${new URL((l as HTMLLinkElement).href).pathname}`,
+          ),
+        );
+      expect(alternates.sort()).toEqual([
+        "en=/en/privacy",
+        "pt-BR=/pt-br/privacidade",
+        "x-default=/en/privacy",
+      ]);
+      expect(problems).toEqual([]);
+    });
+  }
+
+  test("o slug de um idioma não existe no outro", async ({ request }) => {
+    expect((await request.get("/en/privacidade")).status()).toBe(404);
+    expect((await request.get("/pt-br/privacy")).status()).toBe(404);
+  });
+
+  test("rodapé e consentimento do formulário apontam para a política do idioma", async ({
+    page,
+  }) => {
+    await page.goto("/pt-br");
+    await expect(page.locator("footer a[href='/pt-br/privacidade']")).toHaveCount(1);
+    const consent = page.locator("#join form a[href='/pt-br/privacidade']");
+    await expect(consent).toHaveAttribute("target", "_blank");
+    await expect(consent).toHaveAttribute("rel", /noopener/);
+  });
 });
 
 test("404 localizado dentro do layout", async ({ page }) => {

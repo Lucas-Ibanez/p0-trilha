@@ -14,8 +14,8 @@ export function MobileMenu({ label, children }: Props) {
   return (
     <details ref={ref} className="lg:hidden">
       <summary className="rounded-control border-soft text-label inline-flex min-h-11 cursor-pointer list-none items-center gap-2 border px-3 font-semibold">
-        {label}
-        <span aria-hidden="true">▾</span>
+        <span className="sr-only sm:not-sr-only">{label}</span>
+        <span aria-hidden="true">☰</span>
       </summary>
       <div
         className="bg-page border-soft absolute inset-x-0 top-full border-b"

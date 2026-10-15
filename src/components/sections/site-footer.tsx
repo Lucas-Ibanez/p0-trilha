@@ -1,9 +1,11 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { ExternalLink } from "@/components/ui/external-link";
+import { privacyPath, type Locale } from "@/i18n/routing";
 import { getMeta, getPrograms } from "@/lib/evidence";
 
 export async function SiteFooter() {
   const t = await getTranslations("footer");
+  const locale = (await getLocale()) as Locale;
   const { repoUrl } = getMeta();
   const { escrow } = getPrograms();
 
@@ -21,6 +23,11 @@ export async function SiteFooter() {
         </div>
         <nav aria-label={t("links.label")}>
           <ul className="space-y-2">
+            <li>
+              <a href={privacyPath[locale]} className="underline underline-offset-4">
+                {t("links.privacy")}
+              </a>
+            </li>
             <li>
               <ExternalLink href={repoUrl} className="underline underline-offset-4">
                 {t("links.code")}

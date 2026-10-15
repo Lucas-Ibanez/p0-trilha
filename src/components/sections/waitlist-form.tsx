@@ -280,10 +280,7 @@ export function WaitlistForm({ labels, consent, locale }: Props) {
             aria-describedby={errors.consent ? "waitlist-consent-error" : undefined}
             className="mt-1 size-5 shrink-0 accent-[var(--text-primary)]"
           />
-          <span>
-            {/* Sem link: a política de privacidade ainda não existe (D9). Vira <a> quando houver. */}
-            {consent}
-          </span>
+          <span>{consent}</span>
         </label>
         {errors.consent ? (
           <p id="waitlist-consent-error" className={errorClass}>

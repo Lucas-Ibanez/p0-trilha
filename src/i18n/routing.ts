@@ -20,6 +20,12 @@ export function isLocale(value: string): value is Locale {
   return (routing.locales as readonly string[]).includes(value);
 }
 
+/** Política de privacidade: o slug muda por idioma (docs/03 §1). */
+export const privacyPath: Record<Locale, string> = {
+  en: "/en/privacy",
+  "pt-br": "/pt-br/privacidade",
+};
+
 /** Valor do atributo `lang` do HTML (BCP 47) para cada rota. */
 export const htmlLang: Record<Locale, string> = {
   en: "en",

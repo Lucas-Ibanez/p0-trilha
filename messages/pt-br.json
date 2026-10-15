@@ -126,8 +126,8 @@
   },
   "demo": {
     "title": "Veja rodar na devnet",
-    "body": "Uma tomada contínua pela interface da Hive, com transações reais. Todo corte e toda aceleração são indicados na tela.",
-    "technical": "Demo técnica",
+    "body": "Uma demo da Hive rodando na devnet da Solana e o vídeo de pitch.",
+    "technical": "Demo",
     "pitch": "Pitch",
     "full": "Tomada completa, sem cortes",
     "play": "Reproduzir",
@@ -240,7 +240,7 @@
     },
     "rails": {
       "q": "Preciso de cripto para usar?",
-      "a": "Hoje, a liquidação roda na devnet da Solana com um token de teste. A lógica de aceite foi desenhada para ser independente do meio de pagamento; outros meios são planejados, não construídos."
+      "a": "Hoje, a liquidação roda na devnet da Solana com um token de teste. Nenhum outro meio de pagamento foi construído. A lógica de aceite foi desenhada para ser independente do meio de pagamento."
     }
   },
   "join": {
@@ -278,7 +278,9 @@
       "notice": "Este formulário é uma prévia: ainda não envia nem armazena nada, e a lista de espera não está aberta.",
       "successTitle": "Obrigado. Isto foi uma prévia.",
       "successBody": "Nada foi enviado nem armazenado. Avisaremos quando a lista de espera abrir.",
-      "reset": "Recomeçar"
+      "reset": "Recomeçar",
+      "consent": "Entendo que isto é uma prévia e que nada é enviado nem armazenado. Veja a <policy>política de privacidade</policy>.",
+      "consentError": "Marque a caixa para continuar."
     },
     "noscript": "Este formulário precisa de JavaScript para funcionar e, por enquanto, é só uma prévia."
   },
@@ -291,12 +293,48 @@
     "links": {
       "label": "Links do rodapé",
       "code": "Repositório no GitHub",
-      "explorer": "Programa de escrow no Explorer"
+      "explorer": "Programa de escrow no Explorer",
+      "privacy": "Privacidade"
     }
   },
   "notFound": {
     "title": "Esta página não existe",
     "body": "O endereço pode estar errado ou a página pode ter mudado de lugar.",
     "back": "Voltar para a página inicial"
+  },
+  "privacy": {
+    "title": "Privacidade",
+    "description": "Quais dados a landing page da Hive coleta hoje: nada é armazenado em nossos servidores.",
+    "draft": "Texto em rascunho, pendente de revisão jurídica.",
+    "updated": "Última atualização: {date}",
+    "back": "Voltar para a página inicial",
+    "s1": {
+      "title": "O que este site armazena hoje",
+      "body": "Nada em nossos servidores. Não há contas, análise de uso nem cookies de publicidade ou de rastreamento, e nenhum script de terceiros carrega quando você abre uma página."
+    },
+    "s2": {
+      "title": "Preferência de idioma",
+      "body": "Se você escolher um idioma no seletor EN | PT, o navegador guarda um cookie, <code>hive_lang</code>, por um ano, para o site abrir nesse idioma da próxima vez. Ele guarda só o código do idioma."
+    },
+    "s3": {
+      "title": "Formulário da lista de espera",
+      "body": "O formulário da lista de espera é uma prévia: confere o que você digita no seu navegador e não envia nada, então nenhum e-mail ou outro dado é armazenado. Antes de a lista de espera abrir, esta página dirá quem é responsável pelos dados, para que são usados, por quanto tempo ficam guardados e como pedir a exclusão."
+    },
+    "s4": {
+      "title": "Vídeos",
+      "body": "Os vídeos de demo e de pitch estão hospedados no YouTube. Nada do YouTube carrega até você apertar Reproduzir. Depois disso o vídeo carrega de youtube-nocookie.com, e valem os termos e a política de privacidade do próprio YouTube."
+    },
+    "s5": {
+      "title": "Registros do servidor",
+      "body": "Como qualquer hospedagem, o provedor que serve este site processa registros técnicos de requisição, como endereço IP e navegador, para entregá-lo. Este site não acrescenta rastreamento além disso."
+    },
+    "s6": {
+      "title": "Links externos",
+      "body": "Links para o Solana Explorer e o GitHub abrem outros sites, que têm as próprias políticas."
+    },
+    "s7": {
+      "title": "Contato",
+      "body": "Um canal para pedidos sobre privacidade será publicado aqui antes de a lista de espera abrir."
+    }
   }
 }

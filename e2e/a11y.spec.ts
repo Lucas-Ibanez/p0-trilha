@@ -12,6 +12,14 @@ async function audit(page: Page, context: string) {
   expect(summary, context).toEqual([]);
 }
 
+for (const route of ["/en/privacy", "/pt-br/privacidade"]) {
+  test(`${route}: axe sem violações`, async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto(route);
+    await audit(page, route);
+  });
+}
+
 for (const route of routes) {
   test.describe(route, () => {
     test("axe: nenhuma violação (desktop e mobile, estado inicial)", async ({ page }) => {

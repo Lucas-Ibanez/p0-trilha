@@ -5,7 +5,8 @@ import { MobileMenu } from "@/components/ui/mobile-menu";
 import type { Locale } from "@/i18n/routing";
 import { logo } from "@/lib/brand";
 
-const LOGO_WIDTH = 104;
+/* Mínimo da assinatura horizontal: 128 px (docs/04 §5). */
+const LOGO_WIDTH = 128;
 
 const sections = [
   { id: "how", key: "how" },
@@ -46,7 +47,7 @@ export async function SiteHeader() {
       <p className="border-soft text-caption text-secondary border-b px-4 py-1.5 text-center">
         {t("env.banner")}
       </p>
-      <div className="container-page flex items-center gap-2 py-2 sm:gap-4">
+      <div className="container-page flex items-center gap-2 py-3 sm:gap-4">
         <a href={`/${locale}`} className="inline-flex shrink-0">
           {/* <img> simples: SVG já otimizado e com dimensões; evita o runtime do next/image no cliente. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}

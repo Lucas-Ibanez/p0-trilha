@@ -3,17 +3,19 @@ import { WaitlistForm, type WaitlistLabels } from "@/components/sections/waitlis
 import { ButtonLink } from "@/components/ui/button-link";
 import { Section, SectionTitle } from "@/components/ui/section";
 import { getConstants } from "@/lib/evidence";
-import type { Locale } from "@/i18n/routing";
+import { privacyPath, type Locale } from "@/i18n/routing";
 import { richTags } from "@/lib/rich";
-import { USE_CASE_MAX } from "@/lib/waitlist";
+import { USE_CASE_MAX, WAITLIST_MODE } from "@/lib/waitlist";
 
 const questions = ["mainnet", "decides", "correct", "ci", "proof", "rails"] as const; // claims-allow: mainnet (id de pergunta, não texto)
 
 export async function FaqJoin() {
   const t = await getTranslations("faq");
   const tJoin = await getTranslations("join");
+  const tA11y = await getTranslations("a11y");
   const { provingSeconds } = getConstants();
   const locale = (await getLocale()) as Locale;
+  const preview = WAITLIST_MODE === "preview";
 
   /* O formulário é cliente: recebe só as strings de que precisa, sem o runtime do next-intl. */
   const labels: WaitlistLabels = {
@@ -41,7 +43,8 @@ export async function FaqJoin() {
       generic: tJoin("error.generic"),
       email: tJoin("error.email"),
       segment: tJoin("error.segment"),
-      consent: tJoin("error.consent"),
+      // Em prévia nada é armazenado: o consentimento do texto final seria uma afirmação falsa.
+      consent: preview ? tJoin("preview.consentError") : tJoin("error.consent"),
     },
   };
 
@@ -81,8 +84,18 @@ export async function FaqJoin() {
             <WaitlistForm
               labels={labels}
               locale={locale}
-              consent={tJoin.rich("consent", {
-                policy: (chunks) => <span className="font-semibold">{chunks}</span>,
+              consent={tJoin.rich(preview ? "preview.consent" : "consent", {
+                policy: (chunks) => (
+                  <a
+                    href={privacyPath[locale]}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold underline underline-offset-4"
+                  >
+                    {chunks}
+                    <span className="sr-only"> ({tA11y("newTab")})</span>
+                  </a>
+                ),
               })}
             />
           </div>

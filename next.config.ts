@@ -1,17 +1,14 @@
 import createNextIntlPlugin from "next-intl/plugin";
 import type { NextConfig } from "next";
 import { parseVideoUrl } from "./src/lib/demo";
+import { demoVideoUrls } from "./src/lib/demo-videos";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 /* Domínios de vídeo permitidos vêm das mesmas variáveis que alimentam a demo (docs/06 §7 e §10):
  * sem URL, nada de terceiros; com YouTube, só youtube-nocookie.com em frame-src; arquivos de vídeo
  * só da origem declarada em media-src. */
-const demoSources = [
-  process.env.NEXT_PUBLIC_DEMO_TECHNICAL_URL,
-  process.env.NEXT_PUBLIC_DEMO_PITCH_URL,
-  process.env.NEXT_PUBLIC_DEMO_FULL_URL,
-]
+const demoSources = Object.values(demoVideoUrls)
   .map(parseVideoUrl)
   .filter((source) => source !== null);
 

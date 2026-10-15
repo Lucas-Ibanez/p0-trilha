@@ -58,17 +58,44 @@ for (const route of routes) {
   });
 }
 
-test("demo sem URL: 3 slots 'em breve', nenhum player e nenhuma requisição a terceiros", async ({
+test("demo (D6): dois vídeos oficiais, terceiro slot oculto, nada de terceiros antes do clique", async ({
   page,
 }) => {
   const external: string[] = [];
+  const cspViolations: string[] = [];
   page.on("request", (request) => {
     if (!request.url().startsWith("http://localhost")) external.push(request.url());
+  });
+  page.on("console", (message) => {
+    if (/Content Security Policy|Refused to/i.test(message.text()))
+      cspViolations.push(message.text());
   });
   await page.goto("/en");
   await page.waitForLoadState("networkidle");
   await expect(page.locator("#demo iframe, #demo video")).toHaveCount(0);
-  await expect(page.locator("#demo li").filter({ hasText: "Video coming soon" })).toHaveCount(3);
-  await expect(page.locator("#demo button")).toHaveCount(0);
+  const slots = page.locator("#demo ul > li");
+  await expect(slots).toHaveCount(2);
+  await expect(slots.nth(0)).toContainText("Demo");
+  await expect(slots.nth(1)).toContainText("Pitch");
+  await expect(page.locator("#demo")).not.toContainText(/coming soon|em breve/i);
+  // Com vídeo no ar, o CTA da seção é a lista de espera (não "avise-me quando estiver no ar").
+  await expect(
+    page.locator("#demo").getByRole("link", { name: "Join the waitlist" }),
+  ).toBeVisible();
   expect(external).toEqual([]);
+
+  // O botão carrega o player só ao clicar; o embed aponta para os vídeos oficiais, sem cookies.
+  await slots.nth(0).getByRole("button", { name: /Play/ }).click();
+  await expect(slots.nth(0).locator("iframe")).toHaveAttribute(
+    "src",
+    /youtube-nocookie\.com\/embed\/AmIFw_lY8Ck\?autoplay=1/,
+  );
+  await slots.nth(1).getByRole("button", { name: /Play/ }).click();
+  await expect(slots.nth(1).locator("iframe")).toHaveAttribute(
+    "src",
+    /youtube-nocookie\.com\/embed\/1nEBPdJG-8o\?autoplay=1/,
+  );
+  // A CSP deixa os embeds carregarem: nenhuma violação registrada.
+  await page.waitForTimeout(1500);
+  expect(cspViolations).toEqual([]);
 });
