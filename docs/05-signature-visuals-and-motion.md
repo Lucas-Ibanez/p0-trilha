@@ -2,6 +2,15 @@
 
 > Aqui está a parte que dá "cara de startup" à página **sem trair a marca**. São quatro peças. Todas usam **dados reais** de `data/evidence.json`, respeitam `02-claims-and-voice.md` e funcionam **sem animação** (estado final estático).
 
+> **Ajustes feitos na fase 2 (2026-10-15), para o responsável de marca/produto conferir:**
+> - **Peça A só no hero.** Na seção Como funciona entrou um *stepper* (abas verticais, "Passo n de 4") com as figuras montadas de `evidence.json`; o diagrama não se repete lá. O controle dos 3 desfechos fica **sempre visível** no hero (o doc previa só em hover/foco, o que esconderia o controle no toque).
+> - **Rótulo da tarefa** do diagrama é "Tarefa: saída = 2 × entrada" (a regra v1 real), não "Bugfix · regression test", para não sugerir um alcance que o MVP não tem.
+> - **Animação do hero** em CSS puro, uma vez (sem loop, sem JS), só com `prefers-reduced-motion: no-preference`. O estado base é o frame final (t ≈ 6 s); o ponto de evento só existe durante a animação.
+> - **Destaque do journal:** o trecho da barra fica aubergine e os outros lilás (não âmbar), porque âmbar sobre claro não tem contraste (`04` §2.4). Cada cartão é focável (`tabindex=0`, `role=group`) para o destaque funcionar por teclado.
+> - **Colmeia:** 5 células e 4 conexões (uma com Trust Halo parcial, uma tracejada, duas simples). No mobile (< 768 px) vira a versão simplificada de 3 células. As legendas têm só os dois estados do doc. As conexões se desenham uma vez ao entrar na viewport.
+> - **Sem JS:** tudo continua legível: as abas viram painéis empilhados, cada um com o seu título.
+> - **Revelação ao rolar:** opacidade + 12 px, 240 ms, uma vez, só para seções abaixo da dobra (`RevealObserver`); desligada com `prefers-reduced-motion`.
+
 ## 0. Princípios
 
 1. **O visual é a evidência.** Em vez de ilustrar "confiança" com símbolos genéricos, a página mostra o que a Hive de fato produz: uma delegação, um journal, um desfecho.
