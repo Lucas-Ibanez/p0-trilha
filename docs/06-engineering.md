@@ -227,6 +227,8 @@ Táticas: SSG; fontes subset auto-hospedadas e pré-carga só do peso do hero; i
 | `check-claims` | Procura termos proibidos (`02-…` §4) nos dicionários e componentes; só passa com `allowlist` por chave | `prebuild` e CI |
 | `check-i18n` | Chaves iguais; sem vazios; sem string literal visível fora de dicionário (heurística) | `prebuild` e CI |
 | `check-evidence` | Valida `evidence.json` e URLs de Explorer | `prebuild` e CI |
+| `check-content` | Orçamento de conteúdo de `01-brief.md` §6 (H2 ≤ 8 palavras e FAQ de 6 falham; parágrafos > 35 e respostas > 45 só avisam) | `prebuild` e CI |
+| `check-tokens` | Nenhuma cor, função de cor ou utilitário de paleta fora de `tokens.css`; `theme-color` igual a `--brand-aubergine` | `prebuild` e CI |
 | `typecheck`, `lint` | TS e ESLint | CI |
 | `test:e2e` | Playwright: carrega `/en` e `/pt-br`, troca de idioma, envia a lista (modo teste), navega por teclado, axe | CI |
 | `lighthouse` | Metas de §8 | Antes do deploy |

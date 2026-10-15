@@ -164,7 +164,7 @@ Regras: pesos Regular/Medium/SemiBold na maior parte; **evitar pesos muito gross
 - **Seta** indica direção de delegação (quem contratou quem). **Tracejado** indica "ainda sem evidência", sempre com legenda.
 - Cápsula (`--radius-pill`) só para chips de estado e filtros.
 - Sem sombras, sem brilho, sem relevo, sem textura, sem degradê **na logo e nos símbolos**. Para cartões, elevação por **borda suave**, não sombra.
-- Ritmo vertical: seções com `96–128 px` (desktop) / `64–80 px` (mobile). Container `1200 px`, grade de 12 colunas, gutter 24 px.
+- Ritmo vertical: seções com `96–128 px` (desktop) / `64–80 px` (mobile). Container `1200 px`, grade de 12 colunas, gutter 24 px (**16 px abaixo de 640 px**, para o cabeçalho caber em 360 px; fase 1).
 - Breakpoints de teste: **360, 390, 768, 1024, 1280, 1536**.
 
 ## 5. Logo [marca]

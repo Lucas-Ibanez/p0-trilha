@@ -3,6 +3,15 @@
 > **Status dos textos: proposta para revisão** do responsável de marca/produto. A estrutura e as regras são firmes; as palavras podem ser ajustadas, desde que respeitem `02-claims-and-voice.md` e mantenham **EN e PT-BR no mesmo nível de afirmação**.
 >
 > Cada bloco traz uma **chave de dicionário** sugerida (`hero.title`). Implemente como `messages/en.json` e `messages/pt-br.json` com chaves idênticas.
+>
+> **Ajustes feitos na fase 1 (2026-10-15), para o responsável de marca/produto conferir:**
+> - `limits.title` em PT-BR passou a **"O que a prova mostra e não mostra"** (8 palavras; a versão anterior tinha 10 e estourava o limite de H2 de `01-brief.md` §6).
+> - Números dentro de textos vêm de `evidence.json` por placeholder, não digitados: a data em `proof.body` e os tempos de prova em `faq.proof.a`, que agora diz "cerca de 7–9 segundos … e 90–180 segundos para a compressão" (em vez de "1,5–3 minutos"; mesmo dado, em segundos como no `evidence.json`).
+> - `how.s{n}.caption` virou uma legenda única `how.caption`; as quatro figuras são fragmentos montados com dados reais e dizem "não é captura de tela" (não há capturas reais ainda: `TODO(content)`).
+> - Chaves novas, com texto EN e PT-BR escritos nesta fase: `hero.fig.*`, `how.fig.*`, `how.step`, `outcome.*`, `proof.claimLink`, `proof.journal.*`, `proof.outcomes.title`, `proof.rejections.*`, `common.*`, `nav.menu`, `decision.table.caption` e `decision.table.rowHeader`.
+> - `proof.rejections.title` e `proof.rejections.by` evitam a palavra "rejeitado/rejected" (a lista de proibidos de `02-…` §4.4 a barra fora de `proof.n2`): "Quatro tentativas que não passaram", "Barrada por".
+> - Termos invariantes acrescentados em `data/forbidden-terms.json`: `Demo`, `FAQ`, `Pitch`.
+> - **Orçamento de conteúdo:** `check:content` avisa que `decision.body`, `limits.shows.body`, `limits.notshows.body` (EN e PT-BR) e `hive.body` (PT-BR) passam de 35 palavras. Os textos de `docs/03` foram mantidos; cabe ao responsável cortar ou aprovar a exceção.
 
 ## 1. Mapa do site
 
