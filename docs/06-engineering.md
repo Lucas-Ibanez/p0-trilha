@@ -49,7 +49,7 @@ Ferramentas de teste e medição (fase 4, só dev): `@playwright/test` 1.64.1 e 
 
 Ressalvas conhecidas:
 
-- **JS inicial acima de 120 KB.** Medido: ~144 KB gzip por rota; só `react-dom` (71 KB) e o runtime do Next (50 KB) já somam ~121 KB. O código da página soma ~23 KB. A meta de §8 não é alcançável com Next App Router; ver `09` (decisão sobre o orçamento). Para reduzir: o cliente não carrega mais `next-intl` nem `next/image` (strings entram por props, rastreio por `data-track`).
+- **JS inicial acima de 120 KB.** Medido: ~144 KB gzip por rota; só `react-dom` (71 KB) e o runtime do Next (50 KB) já somam ~121 KB. O código da página soma ~23 KB. A meta original de §8 não é alcançável com Next App Router; **D17 rebaixou-a para 150 KB** (ver `09`). Para reduzir: o cliente não carrega mais `next-intl` nem `next/image` (strings entram por props, rastreio por `data-track`).
 - **CSP com `'unsafe-inline'` em `script-src`.** As páginas são estáticas (SSG): não há nonce por requisição, e o Next injeta scripts inline de hidratação. Todo o resto é fechado (ver `next.config.ts`; só vale em produção, o dev precisa de `eval`).
 - `experimental.inlineCss` está ligado (CSS no `<head>`): tirou ~0,3 s do LCP simulado.
 
@@ -187,8 +187,8 @@ Segredos: fora do repositório e **fora de prompts**. Se for necessário aplicar
 
 ## 7. Vídeo da demo
 
-- Três slots: **técnica** (~3 min), **pitch** (~3 min), **tomada completa** (~13 min). URLs vêm de variáveis de ambiente.
-- **Sem URL → estado "em breve"** (`demo.soon`): pôster + link para a lista de espera. **Nunca** um player vazio ou falso.
+- Três slots previstos: **técnica** (hoje o vídeo "Demo"), **pitch** e **tomada completa** (ainda inexistente). As URLs vêm de `src/lib/demo-videos.ts` (D6: padrões oficiais do YouTube), com override por `NEXT_PUBLIC_DEMO_*_URL`; valor vazio desliga o slot. Slot sem URL **não aparece** quando há ao menos um vídeo.
+- **Nenhum vídeo configurado → estado "em breve"** (`demo.soon`): pôster + link para a lista de espera. **Nunca** um player vazio ou falso.
 - **Com URL:** componente *click-to-load* (mostra o pôster; só carrega o iframe/`<video>` ao clicar), para não carregar JS/cookies de terceiros no primeiro load. Se for YouTube, usar o domínio `youtube-nocookie.com`. Se for arquivo próprio, `<video preload="none" controls playsinline>` com legendas `.vtt` (EN; PT-BR se existir).
 - O vídeo é **em inglês**; a página PT-BR exibe `demo.lang` ("Vídeo em inglês") até haver versão/legendas em PT-BR.
 - Pôster e miniaturas em AVIF/WebP com dimensões declaradas.
@@ -198,10 +198,10 @@ Segredos: fora do repositório e **fora de prompts**. Se for necessário aplicar
 | Métrica (mobile, 4G rápida simulada) | Meta |
 |---|---|
 | Lighthouse Performance / Accessibility / Best Practices / SEO | **≥ 95** cada |
-| LCP | **≤ 2,5 s** |
+| LCP (lab, mediana de 3 execuções) | **≤ 2,6 s** (D17; medido 2,50 s) |
 | CLS | **≤ 0,05** |
 | INP | **≤ 200 ms** |
-| JS inicial (gzip) | **≤ 120 KB** na rota |
+| JS inicial (gzip) | **≤ 150 KB** na rota (D17; era 120 KB, inalcançável com Next: o framework tem ~121 KB) |
 | Peso total da primeira dobra | **≤ 500 KB**, excluindo vídeo |
 
 Táticas: SSG; fontes subset auto-hospedadas e pré-carga só do peso do hero; imagens AVIF/WebP com `width/height`, `loading="lazy"` abaixo da dobra e `fetchpriority="high"` só na imagem do LCP; componentes interativos hidratados sob demanda; sem bibliotecas de animação pesadas; sem webfonts de terceiros.

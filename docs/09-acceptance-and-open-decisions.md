@@ -57,7 +57,7 @@ A landing só está pronta quando **todos** os itens abaixo passam, com **comand
 
 ### 1.7 Performance, a11y, SEO (`06-…`)
 
-- [ ] Lighthouse mobile **≥ 95** em Performance, Accessibility, Best Practices e SEO, nas duas rotas. LCP ≤ 2,5 s, CLS ≤ 0,05, INP ≤ 200 ms, JS inicial ≤ 120 KB gzip.
+- [ ] Lighthouse mobile **≥ 95** em Performance, Accessibility, Best Practices e SEO, nas duas rotas. LCP ≤ 2,6 s (lab, D17), CLS ≤ 0,05, INP ≤ 200 ms, JS inicial ≤ 150 KB gzip (D17).
 - [ ] axe (Playwright) sem violações sérias/críticas nas duas rotas; teste manual de teclado e de leitor de tela em amostra.
 - [ ] OG por idioma e `theme-color` corretos; JSON-LD sem dados falsos.
 - [ ] Headers de segurança e CSP aplicados; `npm audit` sem críticos.
@@ -101,20 +101,27 @@ Cada item traz a **recomendação padrão** para destravar o trabalho. Se o resp
 | **D2** | Backend da lista de espera e quem recebe os cadastros | Supabase (acesso só pelo servidor, RLS sem políticas), exportação manual no início | Lucas |
 | | ↳ **DECIDIDO em 2026-10-15** | **Sem backend por ora.** A lista de espera é só front-end e não grava nada. Fica suspenso: Supabase, `POST /api/waitlist`, rate limit, honeypot e migrations (o desenho de `06-engineering.md` §5 permanece como referência para quando houver backend). **Condição de honestidade:** enquanto não houver backend, a interface não pode afirmar que o cadastro foi gravado nem prometer contato; o formulário traz aviso visível de que é uma prévia. A página não vai a produção com o formulário nesse modo sem nova decisão do responsável. | Lucas |
 | **D3** | Idioma padrão e detecção; slug do PT | EN como padrão; detectar `Accept-Language`; rota `/pt-br` | Leonardo |
+| | ↳ **DECIDIDO em 2026-10-15** | EN é o padrão; `/` redireciona por `Accept-Language` (`pt*` → `/pt-br`, o resto → `/en`); a escolha manual persiste no cookie `hive_lang` (1 ano); rota `/pt-br` (política de privacidade em `/pt-br/privacidade`). Já implementado e coberto por teste. | Decidido pela equipe técnica, a confirmar com Leonardo |
 | **D4** | Usar o slogan **sem** o prefixo "Hive." no H1 do hero | Sim (o logo aparece ao lado); redação completa no rodapé e no `<title>` | Leonardo |
+| | ↳ **DECIDIDO em 2026-10-15** | Sim: o H1 usa o slogan **sem** o prefixo "Hive." (o logo aparece ao lado); a redação completa fica no `<title>`, na meta description, no OG e no rodapé. | idem |
 | **D5** | Hierarquia de CTAs (âmbar no hero) | Hero: **Assistir à demo** âmbar, lista de espera em contorno; seção final: lista de espera âmbar | Leonardo + Henrique |
+| | ↳ **DECIDIDO em 2026-10-15** | Hero: **Assistir à demo** âmbar e lista de espera em contorno. Navegação e seção Demo: contorno. Seção final: **o envio da lista de espera** é o único âmbar. No máximo um botão âmbar por viewport (teste e2e). | idem |
 | **D6** | Vídeos: hospedagem, legendas, versão PT-BR, data de publicação | Slots por env; "em breve" até existir; vídeo em inglês | Lucas |
+| | ↳ **DECIDIDO em 2026-10-15** | Hospedagem no **YouTube**, embed `youtube-nocookie.com` só após o clique. **Demo:** `https://www.youtube.com/watch?v=AmIFw_lY8Ck` (título no YouTube: "Hive - Colosseum Hackathon"). **Pitch:** `https://www.youtube.com/watch?v=1nEBPdJG-8o` ("Hive - Colosseum's Pitch"). A tomada completa não existe: o slot fica oculto (sem "em breve" solto). Vídeo em inglês nas duas rotas (selo "Video in English"/"Vídeo em inglês"; **a confirmar**). Sem legendas `.vtt` (`TODO(content)`), sem versão PT-BR, sem data de publicação exibida. O texto da seção deixou de prometer "uma tomada contínua com cortes indicados", porque o conteúdo dos vídeos não foi verificado. URLs em `src/lib/demo-videos.ts`, com override por `NEXT_PUBLIC_DEMO_*_URL`. | Lucas |
 | **D7** | Bloco de equipe | Opcional e compacto (3 nomes e papéis, sem fotos) | Todos |
 | **D8** | Analytics, anti-bot e scripts de terceiros | `track()` no-op; sem terceiros; rate limit + honeypot; Turnstile só se houver abuso | Lucas |
 | **D9** | Textos legais: política de privacidade, controlador, canal de exclusão, retenção, base legal | Consentimento explícito; **texto exige revisão jurídica**; página mínima no lançamento | Henrique (revisão jurídica externa) |
+| | ↳ **DECIDIDO em 2026-10-15 (parcial)** | Política **mínima, em rascunho visível** ("pendente de revisão jurídica") em `/en/privacy` e `/pt-br/privacidade`, descrevendo só o que o site faz hoje: nada armazenado em servidor, cookie `hive_lang`, YouTube só após o clique, registros técnicos do host. Em prévia, o consentimento do formulário diz que **nada é enviado nem armazenado**. **Antes de abrir a lista de espera de verdade:** revisão jurídica externa (Henrique), definir controlador, base legal, finalidade, retenção e canal de exclusão (`TODO(legal)`), e voltar ao `join.consent` original. | Henrique |
 | **D10** | Domínio, favicon definitivo, imagens OG, press kit | Provisórios agora; registrar `TODO(brand)` | Leonardo |
 | **D11** | Cores de status (verde/vermelho) | **Não usar**; rótulo + ícone + forma em tons da marca | Leonardo |
 | **D12** | Mascote na landing | **Desligado** até haver arquivo aprovado | Leonardo |
 | **D13** | Escala tipográfica de marketing (H2 40/28, corpo 18/16…) e ausência de alternador de tema na v1 | Aprovar a extensão e registrá-la no documento de marca; uma só aparência completa | Leonardo |
 | **D14** | Declarações de **Planejado**: outros meios de pagamento; pilotos comparando zkVM × CI assinado × revisão humana | Manter só se o time confirmar que aceita dizê-las publicamente | Henrique + Lucas |
+| | ↳ **DECIDIDO em 2026-10-15** | **Mantidos** como Planejado: (1) avaliadores determinísticos para tarefas reais e delimitadas; (2) pilotos que comparam evidência zkVM com CI assinado e revisão humana. Ambos estão no roadmap citável de `08-facts.md` §8. **Removido:** "outros meios de pagamento são planejados" (era `faq.rails.a`), que `08` §8 classifica como Visão; agora a FAQ diz que nenhum outro meio de pagamento foi construído. Pedir a Henrique e Lucas a confirmação final de que aceitam dizer o item (2) publicamente. | Henrique + Lucas |
 | **D15** | Páginas pós-lançamento `/proof` e `/brand` | Adiar; manter o detalhe no README | Todos |
 | **D16** | Rodapé: "Construído para o hackathon da Colosseum" e link do GitHub | Manter (são fatos) | Todos |
-| **D17** | Orçamento de JS inicial (≤ 120 KB gzip, `06` §8) | **Medido ~144 KB** com Next: o framework sozinho tem ~121 KB. Opções: (a) aceitar ~144 KB (CDN com Brotli deve reduzir ~10–15 %) e rebaixar a meta para ≤ 150 KB; (b) migrar para Astro (`06` §1.2, menos JS, mas refaz a fase 0). Padrão aplicado: (a), sem fechar a decisão. | Lucas |
+| **D17** | Orçamento de JS inicial (≤ 120 KB gzip, `06` §8) | **Medido ~144 KB** com Next: o framework sozinho tem ~121 KB. Opções: (a) aceitar e rebaixar a meta; (b) migrar para Astro (`06` §1.2). | Lucas |
+| | ↳ **DECIDIDO em 2026-10-15: opção (a)** | Manter Next (D1) e **rebaixar a meta para ≤ 150 KB gzip** de JS inicial. O LCP de laboratório passa a ser **≤ 2,6 s** (mediana de 3 execuções); hoje 2,50 s (EN 2,36–2,51; PT 2,50). Motivo: migrar para Astro refaria as fases 0 a 4 e a D1 por um ganho que o visitante não perceberia (Lighthouse Performance 97–98, FCP 1,0 s, TBT ≤ 70 ms), e o framework custa ~121 KB gzip em qualquer página Next. **Reabrir** se os dados de campo (após o deploy) mostrarem LCP real acima de 2,5 s em mobile. | Lucas |
 
 ## 5. Pendências de ativos (não bloqueiam a fase 0)
 
@@ -123,9 +130,9 @@ Cada item traz a **recomendação padrão** para destravar o trabalho. Se o resp
 | Logos SVG (horizontal, vertical, reduzida, wordmark, variantes) | **Salvos; ainda a organizar** em `public/brand/` | Leonardo |
 | Capturas reais da interface Hive (lista, novo job, compromissos × journal, verificação, liquidação, rejeição) | A exportar (AVIF/WebP) | Lucas |
 | Hashes completos (`job_id`, `spec_hash`, `harness_hash`, `artifact_hash`) | Só truncados em `evidence.json`; completos no repositório | Lucas |
-| Vídeos (técnico, pitch, tomada completa) e pôsteres | Não publicados | Lucas |
+| Vídeos | **Demo e Pitch publicados no YouTube** (D6); tomada completa não existe; legendas e pôsteres reais pendentes | Lucas |
 | Favicon / app icon / OG | Pendentes | Leonardo |
-| Textos de privacidade | Pendentes | Henrique |
+| Textos de privacidade | **Rascunho mínimo publicado** (D9); revisão jurídica e dados do controlador pendentes | Henrique |
 
 ## 6. Relatório padrão de cada fase
 

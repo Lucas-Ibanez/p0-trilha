@@ -6,7 +6,7 @@ Repositório da landing page bilíngue (EN e PT-BR) da **Hive**, a camada de con
 
 ## Status
 
-**Fases 0 a 4 concluídas** (scaffold, seções em EN e PT-BR, visuais de assinatura, lista de espera e demo, SEO/OG, headers de segurança, testes e medição). A lista de espera é **só front-end e não grava nada** (D2). **Fase 5 (revisão adversarial de claims e de design) ainda não iniciada.** Pendências de ativos: favicon, ícones, OG e SVGs são provisórios (`TODO(brand)`).
+**Fases 0 a 5 concluídas** (scaffold, seções em EN e PT-BR, visuais de assinatura, lista de espera e demo, SEO/OG, segurança, testes, medição e revisão adversarial: ver [`docs/10-revisao-fase-5.md`](docs/10-revisao-fase-5.md)). A lista de espera é **só front-end e não grava nada** (D2): **antes de abri-la de verdade faltam o backend (D2) e a revisão jurídica da privacidade (D9)**. Favicon, ícones, OG e SVGs são provisórios (`TODO(brand)`).
 
 Decisões fechadas em 2026-10-15: **D1** manter a stack padrão; **D2** a lista de espera é só front-end, sem backend por ora (ver `docs/09-acceptance-and-open-decisions.md`).
 
@@ -31,7 +31,7 @@ cp .env.example .env.local   # opcional; todas as variáveis são públicas e po
 | Pasta | Conteúdo |
 |---|---|
 | `CLAUDE.md` | Ponto de entrada: regras e protocolo de trabalho |
-| `docs/` | Documentos 01 a 09 (brief, claims, conteúdo, design, visuais, engenharia, referências, fatos, aceite) |
+| `docs/` | Documentos 01 a 10 (brief, claims, conteúdo, design, visuais, engenharia, referências, fatos, aceite, revisão da fase 5) |
 | `docs/sources/` | Fontes originais somente leitura: PDF de posicionamento e identidade (2026-10-05) e preview do logo provisório |
 | `data/` | `evidence.json` (fonte única de fatos) e `forbidden-terms.json` (termos proibidos) |
 | `messages/` | Dicionários `en.json` e `pt-br.json` (mesmas chaves) |

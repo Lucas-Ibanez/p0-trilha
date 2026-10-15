@@ -36,6 +36,7 @@ O produto de hoje é um escrow em Solana devnet condicionado a uma prova RISC Ze
 | 7 | `docs/06-engineering.md` | Stack, i18n, lista de espera, performance, a11y, SEO. |
 | 8 | `docs/07-references.md` | O que aprendemos de Bido, Modal, Pluto, Nox, Linear. Inspiração, não molde. |
 | 9 | `docs/09-acceptance-and-open-decisions.md` | Critérios de aceite e decisões que dependem de um humano. |
+| 10 | `docs/10-revisao-fase-5.md` | Resultado da revisão adversarial (fase 5): achados, correções e pendências humanas. |
 
 Precedência: **claims > conteúdo > fatos > design > engenharia**. Se algo conflitar sobre **o que um elemento significa ou promete**, vence o documento mais acima. Se conflitar sobre **como parece**, vence `04-design-system.md`.
 
