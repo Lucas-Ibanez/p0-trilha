@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { WaitlistForm } from "@/components/sections/waitlist-form";
 import { ButtonLink } from "@/components/ui/button-link";
 import { Section, SectionTitle } from "@/components/ui/section";
 import { getConstants } from "@/lib/evidence";
@@ -37,14 +38,17 @@ export async function FaqJoin() {
           </div>
         </div>
 
-        {/* Fase 3: o formulário da lista de espera entra aqui (sem backend, D2). */}
+        {/* Lista de espera só front-end (D2): ver src/lib/waitlist.ts. */}
         <div className="lg:col-span-5">
           <h2 id="join-title" className="text-h2 font-semibold">
             {tJoin("title")}
           </h2>
           <p className="measure mt-4">{tJoin("body")}</p>
           <div className="mt-6">
-            <ButtonLink href="#demo" variant="secondary">
+            <WaitlistForm />
+          </div>
+          <div className="mt-6">
+            <ButtonLink href="#demo" variant="secondary" trackEvent={{ name: "cta_demo_click" }}>
               {tJoin("watch")}
             </ButtonLink>
           </div>

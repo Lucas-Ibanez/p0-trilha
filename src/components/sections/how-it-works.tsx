@@ -40,7 +40,7 @@ export async function HowItWorks() {
           <Mono>{slots}</Mono>
         </FigureRow>
         <FigureRow label={t("fig.funding")}>
-          <ExplorerLink href={funding.U3?.txUrl ?? ""} />
+          <ExplorerLink href={funding.U3?.txUrl ?? ""} explorerId="funding" />
         </FigureRow>
       </dl>
     ),

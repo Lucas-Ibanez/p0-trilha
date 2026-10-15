@@ -133,7 +133,8 @@
     "play": "Reproduzir",
     "soon": "Vídeo em breve",
     "lang": "Vídeo em inglês",
-    "cta": "Avise-me quando estiver no ar"
+    "cta": "Avise-me quando estiver no ar",
+    "playAria": "Reproduzir {title}"
   },
   "proof": {
     "title": "Confira você mesmo: abra as transações.",
@@ -245,7 +246,41 @@
   "join": {
     "title": "Entre na lista de espera",
     "body": "Conte como é o seu fluxo de trabalho. Escrevemos para você quando o acesso antecipado abrir.",
-    "watch": "Ou assista primeiro à demo"
+    "watch": "Ou assista primeiro à demo",
+    "email": {
+      "label": "E-mail de trabalho"
+    },
+    "company": {
+      "label": "Empresa (opcional)"
+    },
+    "segment": {
+      "label": "Você é",
+      "sh": "Uma software house AI-native",
+      "jp": "Uma plataforma de jobs ou agentes",
+      "ot": "Outro perfil"
+    },
+    "usecase": {
+      "label": "O que você delegaria primeiro? (opcional)",
+      "hint": "Uma tarefa que você descreveria em uma frase. Máximo de {max} caracteres."
+    },
+    "consent": "Concordo que a Hive armazene meus dados para entrar em contato sobre o acesso antecipado. Veja a <policy>política de privacidade</policy>.",
+    "submit": "Entrar na lista de espera",
+    "submitting": "Enviando…",
+    "error": {
+      "summary": "Corrija o que segue:",
+      "generic": "Não conseguimos salvar. Tente novamente em instantes.",
+      "email": "Informe um e-mail válido.",
+      "segment": "Escolha a opção que mais combina com você.",
+      "consent": "Precisamos do seu consentimento para armazenar seus dados."
+    },
+    "preview": {
+      "badge": "Prévia",
+      "notice": "Este formulário é uma prévia: ainda não envia nem armazena nada, e a lista de espera não está aberta.",
+      "successTitle": "Obrigado. Isto foi uma prévia.",
+      "successBody": "Nada foi enviado nem armazenado. Avisaremos quando a lista de espera abrir.",
+      "reset": "Recomeçar"
+    },
+    "noscript": "Este formulário precisa de JavaScript para funcionar e, por enquanto, é só uma prévia."
   },
   "footer": {
     "signature": "Hive. Confiança começa com um porquê.",

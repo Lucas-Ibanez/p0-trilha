@@ -1,8 +1,14 @@
+"use client";
+
+import { track, type TrackEvent } from "@/lib/track";
+
 type Props = {
   href: string;
   variant?: "primary" | "secondary";
   size?: "md" | "sm";
   className?: string;
+  /** Evento de analytics disparado no clique (docs/01 §5.3); no-op até a decisão D8. */
+  trackEvent?: TrackEvent;
   children: React.ReactNode;
 } & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "className" | "children">;
 
@@ -23,13 +29,19 @@ export function ButtonLink({
   variant = "primary",
   size = "md",
   className = "",
+  trackEvent,
   children,
+  onClick,
   ...rest
 }: Props) {
   return (
     <a
       href={href}
       className={`${base} ${sizes[size]} ${variants[variant]} ${className}`.trim()}
+      onClick={(event) => {
+        if (trackEvent) track(trackEvent);
+        onClick?.(event);
+      }}
       {...rest}
     >
       {children}

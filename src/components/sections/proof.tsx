@@ -66,7 +66,7 @@ export async function Proof() {
                     })
                   : tOutcome("verifierNo")}
               </p>
-              <ExplorerLink href={outcome.txUrl} />
+              <ExplorerLink href={outcome.txUrl} explorerId={outcome.id} />
             </dd>
           </div>
         </dl>
@@ -126,7 +126,7 @@ export async function Proof() {
         {/* Frase 1 (docs/02 §3): junto da verificação on-chain e do link de uma liquidação real. */}
         <p className="measure border-primary text-body mt-8 border-l-4 pl-4 font-semibold">
           {t("claim")}{" "}
-          <ExplorerLink href={released.txUrl} className="font-semibold">
+          <ExplorerLink href={released.txUrl} explorerId={released.id} className="font-semibold">
             {t("claimLink")}
           </ExplorerLink>
         </p>
@@ -161,7 +161,7 @@ export async function Proof() {
                 </div>
               </dl>
               <p className="mt-4">
-                <ExplorerLink href={rejection.txUrl} />
+                <ExplorerLink href={rejection.txUrl} explorerId={rejection.id} />
               </p>
             </li>
           ))}

@@ -133,7 +133,8 @@
     "play": "Play",
     "soon": "Video coming soon",
     "lang": "Video in English",
-    "cta": "Get notified when it's live"
+    "cta": "Get notified when it's live",
+    "playAria": "Play {title}"
   },
   "proof": {
     "title": "Don't take our word. Open the transactions.",
@@ -245,7 +246,41 @@
   "join": {
     "title": "Join the waitlist",
     "body": "Tell us about your workflow. We'll write to you as early access opens.",
-    "watch": "Or watch the demo first"
+    "watch": "Or watch the demo first",
+    "email": {
+      "label": "Work email"
+    },
+    "company": {
+      "label": "Company (optional)"
+    },
+    "segment": {
+      "label": "You are",
+      "sh": "An AI-native software house",
+      "jp": "A job or agent platform",
+      "ot": "Something else"
+    },
+    "usecase": {
+      "label": "What would you delegate first? (optional)",
+      "hint": "A task you could describe in one sentence. {max} characters max."
+    },
+    "consent": "I agree that Hive stores my details to contact me about early access. See the <policy>privacy policy</policy>.",
+    "submit": "Join the waitlist",
+    "submitting": "Sending…",
+    "error": {
+      "summary": "Please fix the following:",
+      "generic": "We couldn't save that. Please try again in a moment.",
+      "email": "Enter a valid email address.",
+      "segment": "Choose the option that fits you best.",
+      "consent": "We need your consent to store your details."
+    },
+    "preview": {
+      "badge": "Preview",
+      "notice": "This form is a preview: it doesn't send or store anything yet, and the waitlist isn't open.",
+      "successTitle": "Thanks. This was a preview.",
+      "successBody": "Nothing was sent or stored. We'll announce when the waitlist opens.",
+      "reset": "Start over"
+    },
+    "noscript": "This form needs JavaScript to run, and it is only a preview for now."
   },
   "footer": {
     "signature": "Hive. Trust starts with a reason.",

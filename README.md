@@ -6,7 +6,7 @@ Repositório da landing page bilíngue (EN e PT-BR) da **Hive**, a camada de con
 
 ## Status
 
-**Fases 0, 1 e 2 concluídas** (scaffold, seções completas em EN e PT-BR e visuais de assinatura com movimento). **Fase 3 (lista de espera e player de demo) ainda não iniciada**; a lista de espera é só um espaço reservado.
+**Fases 0 a 3 concluídas** (scaffold, seções em EN e PT-BR, visuais de assinatura, formulário da lista de espera e player de demo). A lista de espera é **só front-end e não grava nada** (D2). **Fase 4 (SEO, OG, acessibilidade e performance) ainda não iniciada.**
 
 Decisões fechadas em 2026-10-15: **D1** manter a stack padrão; **D2** a lista de espera é só front-end, sem backend por ora (ver `docs/09-acceptance-and-open-decisions.md`).
 

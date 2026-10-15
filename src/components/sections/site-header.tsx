@@ -62,7 +62,12 @@ export async function SiteHeader() {
         </nav>
         <div className="ml-auto flex items-center gap-2">
           <div className="hidden lg:block">
-            <ButtonLink href="#join" variant="secondary" size="sm">
+            <ButtonLink
+              href="#join"
+              variant="secondary"
+              size="sm"
+              trackEvent={{ name: "cta_waitlist_click" }}
+            >
               {t("nav.cta")}
             </ButtonLink>
           </div>
@@ -70,7 +75,13 @@ export async function SiteHeader() {
           <MobileMenu label={t("nav.menu")}>
             <nav aria-label={t("nav.label")}>
               {links}
-              <ButtonLink href="#join" variant="secondary" size="sm" className="mt-3">
+              <ButtonLink
+                href="#join"
+                variant="secondary"
+                size="sm"
+                className="mt-3"
+                trackEvent={{ name: "cta_waitlist_click" }}
+              >
                 {t("nav.cta")}
               </ButtonLink>
             </nav>

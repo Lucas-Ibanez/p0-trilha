@@ -23,13 +23,21 @@ export async function Hero() {
           </h1>
           <p className="measure text-body text-secondary mt-6">{t("sub")}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink href="#demo">{t("ctaDemo")}</ButtonLink>
-            <ButtonLink href="#join" variant="secondary">
+            <ButtonLink href="#demo" trackEvent={{ name: "cta_demo_click" }}>
+              {t("ctaDemo")}
+            </ButtonLink>
+            <ButtonLink
+              href="#join"
+              variant="secondary"
+              trackEvent={{ name: "cta_waitlist_click" }}
+            >
               {t("ctaWaitlist")}
             </ButtonLink>
           </div>
           <p className="text-label mt-6">
-            <ExplorerLink href={released.txUrl}>{t("proofLink")}</ExplorerLink>
+            <ExplorerLink href={released.txUrl} explorerId={released.id}>
+              {t("proofLink")}
+            </ExplorerLink>
           </p>
         </div>
 
