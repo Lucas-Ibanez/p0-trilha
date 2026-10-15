@@ -7,7 +7,7 @@
 
 Os SVGs **não foram editados** (conteúdo, geometria e cores intactos); só foram movidos e renomeados. A classificação veio da leitura do SVG (viewBox, formas, `fill`) e de renderização sobre fundo branco e berinjela, não do nome original.
 
-> **Provisório.** Todos os SVGs trazem o comentário `PROVISÓRIO: rastreado da prancha 1 do PDF de identidade (05.10.2026). Não é o desenho mestre vetorial.` O desenho mestre ainda não existe (`TODO(brand)`, D10).
+> **Provisório, aprovado para uso por enquanto.** Todos os SVGs trazem o comentário `PROVISÓRIO: rastreado da prancha 1 do PDF de identidade (05.10.2026). Não é o desenho mestre vetorial.` O desenho mestre ainda não existe (`TODO(brand)`, D10); até ele chegar, estes arquivos são os usados na landing.
 
 ## Logos SVG
 
@@ -22,20 +22,20 @@ Os SVGs **não foram editados** (conteúdo, geometria e cores intactos); só for
 | `symbol/hive-symbol-branco.svg` | `hive-symbol-warm-white.svg` | symbol | warm-white | berinjela | Só a abelha em `#FAF7F5`. |
 | `symbol/hive-symbol.svg` | `hive-symbol-two-tone.svg` | symbol | two-tone | claro | O nome original (sem sufixo) não dizia a cor: asas âmbar, corpo berinjela. |
 
-## Em `_unsorted/` (ambíguos; não usar até decisão)
+## Em `_alt/` (alternativas; não usar como padrão)
 
-| Nome original | Nome atual | Motivo da dúvida |
+| Nome original | Nome atual | Observações |
 |---|---|---|
-| `logo/hive-wordmark-manrope600-berinjela.svg` | `_unsorted/hive-wordmark-manrope600-berinjela.svg` | Wordmark composto em Manrope 600 (contornos, sem `<text>`), com letras diferentes do wordmark rastreado (traço mais fino, "i" com pingo quadrado, viewBox 1000 × 395.5 em vez de 1000 × 404.5). O `docs/04-design-system.md` §5 proíbe "digitar" o wordmark em fonte; o `reference/preview-logo-provisorio.png` o rotula como "regra escrita". Cabe ao Leonardo dizer se é alternativa válida ou descarte. |
+| `logo/hive-wordmark-manrope600-berinjela.svg` | `_alt/hive-wordmark-aubergine-manrope600.svg` | Mantido como alternativa por decisão do responsável. Wordmark composto em Manrope 600 (contornos, sem `<text>`), com letras diferentes do wordmark rastreado (traço mais fino, "i" com pingo quadrado, viewBox 1000 × 395.5 em vez de 1000 × 404.5). O `docs/04-design-system.md` §5 proíbe "digitar" o wordmark em fonte; o `docs/sources/preview-logo-provisorio.png` o rotula como "regra escrita". O wordmark padrão continua sendo o rastreado (`hive-wordmark-aubergine.svg`). |
 
 ## Outros ativos de marca
 
 | Caminho | Conteúdo | Observações |
 |---|---|---|
-| `fonts/` | Manrope (variável) e IBM Plex Mono 400/500, WOFF2 `latin` + `latin-ext`, `fonts.css`, licenças OFL | Veio de uma pasta `fonts/` na raiz. O `README.md` dela ainda cita `brand/MANIFEST.md`, `DESIGN.md` e `worker/static/fonts/` (do repositório do MVP); esses caminhos não existem aqui. Na fase 0, decidir se as fontes são servidas de `public/brand/fonts/` ou copiadas para o pipeline de fontes do framework. |
+| `fonts/` | Manrope (variável) e IBM Plex Mono 400/500, WOFF2 `latin` + `latin-ext`, `fonts.css`, licenças OFL | Veio de uma pasta `fonts/` na raiz; decidido mantê-las aqui, servidas por `public/brand/fonts/`. O `README.md` dela ainda cita `brand/MANIFEST.md`, `DESIGN.md` e `worker/static/fonts/` (do repositório do MVP); esses caminhos não existem aqui. Na fase 0, se o framework escolhido pedir um pipeline de fontes próprio, copiar os arquivos daqui sem alterá-los. |
 | `app-icons/` | Vazia (`.gitkeep`) | App icon e apple-touch ainda não existem (berinjela + âmbar, sem a palavra "hive"). |
 | `mascot/` | Vazia (`.gitkeep`) | Mascote desligado na landing até haver arquivo aprovado (D12). |
-| `_other/` | Não criada | Não havia PDF, PNG ou outro arquivo de marca a mover para cá. O PDF e o PNG de referência ficaram em `reference/` (fora de `public/`; ver relatório). |
+| `_other/` | Não criada | Não havia PDF, PNG ou outro arquivo de marca a mover para cá. O PDF de identidade e o PNG de preview ficam em `docs/sources/`, fora de `public/`, para não serem publicados no site. |
 
 ## Variantes ainda ausentes
 

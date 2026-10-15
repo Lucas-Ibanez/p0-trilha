@@ -10,15 +10,14 @@ Repositório da landing page bilíngue (EN e PT-BR) da **Hive**, a camada de con
 |---|---|
 | `CLAUDE.md` | Ponto de entrada: regras e protocolo de trabalho |
 | `docs/` | Documentos 01 a 09 (brief, claims, conteúdo, design, visuais, engenharia, referências, fatos, aceite) |
-| `docs/sources/` | Fontes originais somente leitura (vazia por enquanto) |
+| `docs/sources/` | Fontes originais somente leitura: PDF de posicionamento e identidade (2026-10-05) e preview do logo provisório |
 | `data/` | `evidence.json` (fonte única de fatos) e `forbidden-terms.json` (termos proibidos) |
-| `public/brand/` | Logos SVG; nomes e usos em [`MANIFEST.md`](public/brand/MANIFEST.md) |
+| `public/brand/` | Logos SVG (provisórios, aprovados por ora); nomes e usos em [`MANIFEST.md`](public/brand/MANIFEST.md). `_alt/` guarda alternativas |
 | `public/brand/fonts/` | Manrope e IBM Plex Mono auto-hospedadas (licença OFL) |
 | `public/media/`, `public/og/` | Capturas/pôsteres e imagens OG (vazias por enquanto) |
 | `messages/` | Dicionários `en.json` e `pt-br.json` (a criar na fase 0) |
 | `scripts/` | Scripts de lint de claims, evidência e i18n (a criar na fase 0) |
 | `supabase/migrations/` | SQL proposto da lista de espera; não aplicar sem aprovação |
-| `reference/` | Material de referência da identidade (PDF e preview), fora da estrutura alvo |
 | `src/` | Ainda não criada |
 
 ## Status
