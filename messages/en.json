@@ -13,8 +13,22 @@
   "brand": {
     "logoAlt": "Hive"
   },
+  "common": {
+    "explorer": "Solana Explorer",
+    "copy": "Copy",
+    "copied": "Copied",
+    "copyValue": "Copy {name}"
+  },
   "nav": {
     "label": "Main",
+    "menu": "Sections",
+    "how": "How it works",
+    "demo": "Demo",
+    "proof": "Proof",
+    "hive": "The Hive",
+    "for": "Who it's for",
+    "faq": "FAQ",
+    "cta": "Join the waitlist",
     "langLabel": "Language",
     "lang": {
       "enName": "English",
@@ -27,7 +41,191 @@
   "hero": {
     "eyebrow": "A trust layer for work between agents",
     "title": "Trust starts with a reason.",
-    "sub": "Today, Hive verifies a specific delivery against criteria agreed before the work starts. The payment follows the verified result, not anyone's discretion."
+    "sub": "Today, Hive verifies a specific delivery against criteria agreed before the work starts. The payment follows the verified result, not anyone's discretion.",
+    "ctaDemo": "Watch the demo",
+    "ctaWaitlist": "Join the waitlist",
+    "proofLink": "See a real settlement on Solana Explorer",
+    "caption": "Illustration of a real flow: delegation, evidence, result.",
+    "fig": {
+      "delegates": "Delegates",
+      "executes": "Executes",
+      "committed": "Criteria committed before the work",
+      "result": "Result"
+    }
+  },
+  "decision": {
+    "title": "The delivery arrived. Can you accept it?",
+    "body": "When agents do delegated work, someone still has to decide whether the result meets what was agreed. Today that usually means a manual review, or the judgment of a platform in the middle — and neither is easy to check afterwards.",
+    "q": "Hive answers one question per delivery: do we have grounds to accept this, for this task?",
+    "table": {
+      "caption": "Acceptance today and with Hive",
+      "rowHeader": "Question",
+      "col1": "Today",
+      "col2": "With Hive",
+      "r1": {
+        "q": "When is acceptance defined?",
+        "a": "After the work is delivered.",
+        "b": "Before it starts, in the job's committed terms."
+      },
+      "r2": {
+        "q": "Who decides the payment?",
+        "a": "A reviewer, or the platform in the middle.",
+        "b": "The program, from the verified result."
+      },
+      "r3": {
+        "q": "What can you check later?",
+        "a": "A review comment or an internal record.",
+        "b": "The terms, the public journal and the transaction."
+      }
+    }
+  },
+  "how": {
+    "title": "Four steps, from agreement to result",
+    "badge": "Today",
+    "s1": {
+      "title": "Agree on the criteria",
+      "body": "The buyer fixes the acceptance rule, the executor, the amount and the deadline before any work starts. The funds move into a vault controlled by the program, not by either party."
+    },
+    "s2": {
+      "title": "Prove the evaluation",
+      "body": "The executor delivers the artifact and proves, on their own machine, that the agreed evaluator ran on it and produced a verdict."
+    },
+    "s3": {
+      "title": "Settle on the result",
+      "body": "A Solana program checks that the proof matches the job and the delivery, verifies it, and in the same transaction releases the payment or returns it. If anything does not match, nothing moves."
+    },
+    "s4": {
+      "title": "If nobody settles",
+      "body": "After the deadline, anyone can request the refund. No proof is needed: the condition is the deadline itself."
+    },
+    "step": "Step {n}",
+    "caption": "Illustration assembled from real devnet data, not a screenshot.",
+    "note": "A failed check is a valid result, not an error: the funds return to the buyer. The same flow runs from the command line or from the Hive interface.",
+    "fig": {
+      "spec": "Committed criteria",
+      "deadline": "Deadline range, in slots",
+      "funding": "Funding transaction",
+      "composite": "First proof",
+      "compositeValue": "{range} seconds",
+      "groth16": "Groth16 compression",
+      "groth16Value": "{range} seconds",
+      "instructions": "Instructions",
+      "verifier": "Proof verification"
+    }
+  },
+  "outcome": {
+    "state": "State in the program",
+    "verifierYes": "Verifier invoked, {cu} compute units",
+    "verifierNo": "Verifier not invoked: the condition is the deadline",
+    "instructions": "Instructions",
+    "tx": "Transaction"
+  },
+  "demo": {
+    "title": "See it run on devnet",
+    "body": "One continuous take through the Hive interface, with real transactions. Every cut and every speed-up is labeled on screen.",
+    "technical": "Technical demo",
+    "pitch": "Pitch",
+    "full": "Full take, uncut",
+    "play": "Play",
+    "soon": "Video coming soon",
+    "lang": "Video in English",
+    "cta": "Get notified when it's live"
+  },
+  "proof": {
+    "title": "Don't take our word. Open the transactions.",
+    "body": "Every outcome below is a real transaction on Solana devnet, sent through the Hive interface on {date}. Each link opens it on Solana Explorer.",
+    "claim": "Hive's Groth16 receipt is verified on devnet via CPI to the immutable Groth16 verifier of risc0-solana v3.0.0, in the same instruction that releases or refunds the job's Test USDC.",
+    "claimLink": "Open the settlement transaction",
+    "n1": "outcomes settled: released, refunded on a failed check, refunded on timeout",
+    "n2": "attempts rejected without moving funds",
+    "n3": "compute units used to verify the proof on Solana",
+    "n4": "bytes in the public journal of each receipt",
+    "journal": {
+      "title": "What a receipt publishes",
+      "caption": "Fields of the public journal of a real settlement.",
+      "barLabel": "The {bytes} bytes of the journal, split by field",
+      "startsAt": "Starts at byte {offset}",
+      "fullInRepo": "Full value available in the repository",
+      "noExample": "Value not shown in this example"
+    },
+    "outcomes": {
+      "title": "Three outcomes, three transactions"
+    },
+    "rejections": {
+      "title": "Four attempts that did not go through",
+      "by": "Stopped by",
+      "error": "Error"
+    }
+  },
+  "limits": {
+    "title": "What this proof does and doesn't show",
+    "shows": {
+      "title": "It shows",
+      "body": "A previously committed, deterministic evaluator ran on the artifact delivered in the job and produced the published verdict. The program moves the Test USDC only after checking the link between journal, job and delivery, and verifying the proof."
+    },
+    "notshows": {
+      "title": "It doesn't show",
+      "body": "The quality of a piece of software, that the evaluator is complete, or that the software has no vulnerabilities outside the tested model. The v1 rule is trivial (output = 2 × input) and only demonstrates the flow."
+    },
+    "repro": "Reproduced from a clean clone, not on a new machine. Commands are in the repository README."
+  },
+  "hive": {
+    "badge": "Vision",
+    "title": "From verified deliveries to contextual trust",
+    "bridge": "Today, Hive verifies specific interactions. Over time, those verified interactions can build contextual trust.",
+    "body": "Trust isn't a badge on an agent. It's a relation: A trusts B for a given task, under given conditions. The same agent can have relevant evidence for code review and none yet for deployment.",
+    "planned": {
+      "badge": "Planned",
+      "1": "Deterministic evaluators for real, bounded tasks, still on restricted artifacts.",
+      "2": "Pilots that compare zkVM evidence with simpler mechanisms, such as signed CI and human review, to learn how much evidence each kind of task needs."
+    }
+  },
+  "for": {
+    "title": "Built for teams that hand work to agents",
+    "a": {
+      "title": "AI-native software houses",
+      "body": "You deliver bounded tasks to several clients and want acceptance both sides can check, with less rework."
+    },
+    "b": {
+      "title": "Job and agent platforms",
+      "body": "You intermediate the work and want to automate the testable part of acceptance without becoming the judge of everything."
+    },
+    "fit": {
+      "title": "Best fit today",
+      "body": "Bounded tasks, acceptance criteria that can be automated, and distinct parties on each side. Not for creative or strategic work."
+    }
+  },
+  "faq": {
+    "title": "Questions",
+    "mainnet": {
+      "q": "Is this live on mainnet?",
+      "a": "No. Devnet and Test USDC only. Nothing here moves real money."
+    },
+    "decides": {
+      "q": "Who decides whether the executor gets paid?",
+      "a": "The program, from the verified result. The escrow and verifier programs are immutable (upgrade authority <code>none</code>), and no button in the interface decides the outcome."
+    },
+    "correct": {
+      "q": "Does a PASS mean the software is correct?",
+      "a": "No. It means the agreed evaluator ran on that artifact and produced that result. Today Hive checks one restricted artifact against a deterministic rule, not a whole codebase."
+    },
+    "ci": {
+      "q": "Isn't CI enough?",
+      "a": "Often, yes: when both sides trust the runner and the risk is low. Hive is for distinct parties whose payment depends on the result. We plan pilots to measure when stronger evidence is worth it."
+    },
+    "proof": {
+      "q": "Where is the proof generated, and how long does it take?",
+      "a": "Locally, on the executor's machine, then compressed to Groth16 in a local container with no network access. In our devnet runs: about {composite} seconds for the first proof and {groth16} seconds for compression."
+    },
+    "rails": {
+      "q": "Do I need crypto to use it?",
+      "a": "Today, settlement runs on Solana devnet with a test token. The acceptance logic is designed to be independent of the payment rail; other rails are planned, not built."
+    }
+  },
+  "join": {
+    "title": "Join the waitlist",
+    "body": "Tell us about your workflow. We'll write to you as early access opens.",
+    "watch": "Or watch the demo first"
   },
   "footer": {
     "signature": "Hive. Trust starts with a reason.",

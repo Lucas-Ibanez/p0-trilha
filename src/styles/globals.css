@@ -64,6 +64,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--header-offset);
   background: var(--surface-page);
   color: var(--text-primary);
 }

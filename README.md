@@ -6,7 +6,7 @@ Repositório da landing page bilíngue (EN e PT-BR) da **Hive**, a camada de con
 
 ## Status
 
-**Fase 0 concluída** (scaffold, tokens, fontes, i18n, `evidence.json` importável, scripts de verificação). **Fase 1 (seções estáticas) ainda não iniciada.**
+**Fases 0 e 1 concluídas** (scaffold e seções estáticas completas em EN e PT-BR). **Fase 2 (visuais de assinatura) ainda não iniciada.** A lista de espera é só um espaço reservado até a fase 3.
 
 Decisões fechadas em 2026-10-15: **D1** manter a stack padrão; **D2** a lista de espera é só front-end, sem backend por ora (ver `docs/09-acceptance-and-open-decisions.md`).
 
@@ -18,7 +18,7 @@ Requer Node 20.9 ou superior.
 npm install
 npm run dev          # http://localhost:3000 (redireciona para /en ou /pt-br)
 npm run build        # roda os checks e gera as rotas estáticas
-npm run check        # claims, i18n, evidência e tokens
+npm run check        # claims, i18n, conteúdo, evidência e tokens
 npm run lint && npm run typecheck
 cp .env.example .env.local   # opcional; todas as variáveis são públicas e podem ficar vazias
 ```
@@ -33,11 +33,11 @@ cp .env.example .env.local   # opcional; todas as variáveis são públicas e po
 | `data/` | `evidence.json` (fonte única de fatos) e `forbidden-terms.json` (termos proibidos) |
 | `messages/` | Dicionários `en.json` e `pt-br.json` (mesmas chaves) |
 | `src/app/[locale]/` | Layout e página por idioma |
-| `src/components/` | `sections/` (header, footer), `ui/`, `diagrams/` |
+| `src/components/` | `sections/` (uma por seção da página), `ui/` (botão, selo, cartões, cópia), `diagrams/` (fase 2) |
 | `src/i18n/` | Rotas, navegação e carregamento de mensagens (next-intl) |
 | `src/lib/` | `evidence` (único ponto de acesso aos fatos), `format`, `track` (no-op), `brand`, `theme-color` |
 | `src/styles/` | `tokens.css` (único lugar com valores de identidade) e `globals.css` |
-| `scripts/` | `check-claims`, `check-i18n`, `check-evidence`, `check-tokens` |
+| `scripts/` | `check-claims`, `check-i18n`, `check-content`, `check-evidence`, `check-tokens` |
 | `public/brand/` | Logos SVG (provisórios, aprovados por ora); nomes e usos em [`MANIFEST.md`](public/brand/MANIFEST.md). `_alt/` guarda alternativas; `fonts/` as fontes auto-hospedadas (OFL) |
 | `public/media/`, `public/og/` | Capturas/pôsteres e imagens OG (vazias por enquanto) |
 

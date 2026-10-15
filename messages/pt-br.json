@@ -13,8 +13,22 @@
   "brand": {
     "logoAlt": "Hive"
   },
+  "common": {
+    "explorer": "Solana Explorer",
+    "copy": "Copiar",
+    "copied": "Copiado",
+    "copyValue": "Copiar {name}"
+  },
   "nav": {
     "label": "Principal",
+    "menu": "Seções",
+    "how": "Como funciona",
+    "demo": "Demo",
+    "proof": "Provas",
+    "hive": "A Hive",
+    "for": "Para quem",
+    "faq": "FAQ",
+    "cta": "Entrar na lista de espera",
     "langLabel": "Idioma",
     "lang": {
       "enName": "Inglês",
@@ -27,7 +41,191 @@
   "hero": {
     "eyebrow": "Uma camada de confiança para o trabalho entre agentes",
     "title": "Confiança começa com um porquê.",
-    "sub": "Hoje, a Hive verifica uma entrega específica contra critérios combinados antes de o trabalho começar. O pagamento segue o resultado verificado, não a decisão discricionária de alguém."
+    "sub": "Hoje, a Hive verifica uma entrega específica contra critérios combinados antes de o trabalho começar. O pagamento segue o resultado verificado, não a decisão discricionária de alguém.",
+    "ctaDemo": "Assistir à demo",
+    "ctaWaitlist": "Entrar na lista de espera",
+    "proofLink": "Ver uma liquidação real no Solana Explorer",
+    "caption": "Ilustração de um fluxo real: delegação, evidência, resultado.",
+    "fig": {
+      "delegates": "Delega",
+      "executes": "Executa",
+      "committed": "Critérios comprometidos antes do trabalho",
+      "result": "Resultado"
+    }
+  },
+  "decision": {
+    "title": "A entrega chegou. Dá para aceitar?",
+    "body": "Quando agentes executam trabalho delegado, alguém ainda precisa decidir se o resultado cumpre o combinado. Hoje isso costuma ser revisão manual ou o julgamento de uma plataforma intermediária — e nenhum dos dois é fácil de conferir depois.",
+    "q": "A Hive responde a uma pergunta por entrega: temos fundamento para aceitar isto, nesta tarefa?",
+    "table": {
+      "caption": "O aceite hoje e com a Hive",
+      "rowHeader": "Pergunta",
+      "col1": "Hoje",
+      "col2": "Com a Hive",
+      "r1": {
+        "q": "Quando o aceite é definido?",
+        "a": "Depois da entrega.",
+        "b": "Antes de começar, nos termos comprometidos do job."
+      },
+      "r2": {
+        "q": "Quem decide o pagamento?",
+        "a": "Um revisor ou a plataforma intermediária.",
+        "b": "O programa, a partir do resultado verificado."
+      },
+      "r3": {
+        "q": "O que dá para conferir depois?",
+        "a": "Um comentário de revisão ou um registro interno.",
+        "b": "Os termos, o journal público e a transação."
+      }
+    }
+  },
+  "how": {
+    "title": "Quatro passos, do combinado ao resultado",
+    "badge": "Hoje",
+    "s1": {
+      "title": "Combine os critérios",
+      "body": "O comprador fixa a regra de aceite, o executor, o valor e o prazo antes de qualquer trabalho. Os fundos vão para um vault controlado pelo programa, não por nenhuma das partes."
+    },
+    "s2": {
+      "title": "Prove a avaliação",
+      "body": "O executor entrega o artefato e prova, na própria máquina, que o avaliador combinado rodou sobre ele e produziu um veredito."
+    },
+    "s3": {
+      "title": "Liquide pelo resultado",
+      "body": "Um programa na Solana confere se a prova corresponde ao job e à entrega, verifica a prova e, na mesma transação, libera o pagamento ou o devolve. Se algo não confere, nada se move."
+    },
+    "s4": {
+      "title": "Se ninguém liquida",
+      "body": "Depois do prazo, qualquer pessoa pode pedir o reembolso. Não precisa de prova: a condição é o próprio prazo."
+    },
+    "step": "Passo {n}",
+    "caption": "Ilustração montada com dados reais da devnet, não uma captura de tela.",
+    "note": "Um resultado \"não atendido\" é válido, não um erro: os fundos voltam ao comprador. O mesmo fluxo roda pela linha de comando ou pela interface da Hive.",
+    "fig": {
+      "spec": "Critérios comprometidos",
+      "deadline": "Intervalo de prazo, em slots",
+      "funding": "Transação de depósito",
+      "composite": "Primeira prova",
+      "compositeValue": "{range} segundos",
+      "groth16": "Compressão Groth16",
+      "groth16Value": "{range} segundos",
+      "instructions": "Instruções",
+      "verifier": "Verificação da prova"
+    }
+  },
+  "outcome": {
+    "state": "Estado no programa",
+    "verifierYes": "Verificador invocado, {cu} unidades de computação",
+    "verifierNo": "Verificador não invocado: a condição é o prazo",
+    "instructions": "Instruções",
+    "tx": "Transação"
+  },
+  "demo": {
+    "title": "Veja rodar na devnet",
+    "body": "Uma tomada contínua pela interface da Hive, com transações reais. Todo corte e toda aceleração são indicados na tela.",
+    "technical": "Demo técnica",
+    "pitch": "Pitch",
+    "full": "Tomada completa, sem cortes",
+    "play": "Reproduzir",
+    "soon": "Vídeo em breve",
+    "lang": "Vídeo em inglês",
+    "cta": "Avise-me quando estiver no ar"
+  },
+  "proof": {
+    "title": "Confira você mesmo: abra as transações.",
+    "body": "Cada desfecho abaixo é uma transação real na devnet da Solana, enviada pela interface da Hive em {date}. Cada link abre a transação no Solana Explorer.",
+    "claim": "A receipt Groth16 da Hive é verificada em devnet por CPI ao verificador Groth16 imutável de risc0-solana v3.0.0, na mesma instrução que libera ou devolve o Test USDC do job.",
+    "claimLink": "Abrir a transação de liquidação",
+    "n1": "desfechos liquidados: liberado, devolvido por critérios não atendidos, devolvido por prazo",
+    "n2": "tentativas rejeitadas sem mover fundos",
+    "n3": "unidades de computação para verificar a prova na Solana",
+    "n4": "bytes no journal público de cada receipt",
+    "journal": {
+      "title": "O que um receipt publica",
+      "caption": "Campos do journal público de uma liquidação real.",
+      "barLabel": "Os {bytes} bytes do journal, divididos por campo",
+      "startsAt": "Começa no byte {offset}",
+      "fullInRepo": "Valor completo disponível no repositório",
+      "noExample": "Valor não exibido neste exemplo"
+    },
+    "outcomes": {
+      "title": "Três desfechos, três transações"
+    },
+    "rejections": {
+      "title": "Quatro tentativas que não passaram",
+      "by": "Barrada por",
+      "error": "Erro"
+    }
+  },
+  "limits": {
+    "title": "O que a prova mostra e não mostra",
+    "shows": {
+      "title": "Mostra",
+      "body": "Um avaliador determinístico, comprometido antes, rodou sobre o artefato entregue no job e produziu o veredito publicado. O programa só move o Test USDC depois de conferir o vínculo entre journal, job e entrega e de verificar a prova."
+    },
+    "notshows": {
+      "title": "Não mostra",
+      "body": "Não mostra a qualidade de um software, nem que o avaliador é completo, nem que o software não tem vulnerabilidades fora do modelo testado. A regra v1 é trivial (saída = 2 × entrada) e serve apenas para demonstrar o fluxo."
+    },
+    "repro": "Reproduzido a partir de um clone limpo, não em uma máquina nova. Os comandos estão no README do repositório."
+  },
+  "hive": {
+    "badge": "Visão",
+    "title": "De entregas verificadas à confiança contextual",
+    "bridge": "Hoje, a Hive verifica interações específicas. Com o tempo, essas interações verificadas podem construir confiança contextual.",
+    "body": "Confiança não é um selo no agente. É uma relação: A confia em B para determinada tarefa, sob determinadas condições. O mesmo agente pode ter evidências relevantes para revisão de código e nenhuma ainda para deploy.",
+    "planned": {
+      "badge": "Planejado",
+      "1": "Avaliadores determinísticos para tarefas reais e delimitadas, ainda sobre artefatos restritos.",
+      "2": "Pilotos que comparam evidência zkVM com mecanismos mais simples, como CI assinado e revisão humana, para entender quanta evidência cada tipo de tarefa exige."
+    }
+  },
+  "for": {
+    "title": "Para times que entregam trabalho a agentes",
+    "a": {
+      "title": "Software houses AI-native",
+      "body": "Você entrega tarefas delimitadas a vários clientes e quer um aceite que os dois lados possam conferir, com menos retrabalho."
+    },
+    "b": {
+      "title": "Plataformas de jobs e agentes",
+      "body": "Você intermedeia o trabalho e quer automatizar a parte testável do aceite sem virar o juiz de tudo."
+    },
+    "fit": {
+      "title": "Melhor encaixe hoje",
+      "body": "Tarefas delimitadas, critérios de aceite que podem ser automatizados e partes distintas de cada lado. Não serve para trabalho criativo ou estratégico."
+    }
+  },
+  "faq": {
+    "title": "Perguntas",
+    "mainnet": {
+      "q": "Isso está na mainnet?",
+      "a": "Não. Apenas devnet e Test USDC. Nada aqui move dinheiro real."
+    },
+    "decides": {
+      "q": "Quem decide se o executor recebe?",
+      "a": "O programa, a partir do resultado verificado. Os programas de escrow e de verificação são imutáveis (<em>upgrade authority</em> <code>none</code>), e nenhum botão da interface decide o desfecho."
+    },
+    "correct": {
+      "q": "Um PASS significa que o software está correto?",
+      "a": "Não. Significa que o avaliador combinado rodou sobre aquele artefato e produziu aquele resultado. Hoje a Hive verifica um artefato restrito contra uma regra determinística, não uma base de código inteira."
+    },
+    "ci": {
+      "q": "CI não basta?",
+      "a": "Muitas vezes, sim: quando as duas partes confiam no runner e o risco é baixo. A Hive é para partes distintas cujo pagamento depende do resultado. Planejamos pilotos para medir quando evidência mais forte compensa."
+    },
+    "proof": {
+      "q": "Onde a prova é gerada e quanto tempo leva?",
+      "a": "Localmente, na máquina do executor, e depois comprimida em Groth16 num container local sem acesso à rede. Em nossas rodadas na devnet: cerca de {composite} segundos para a primeira prova e {groth16} segundos para a compressão."
+    },
+    "rails": {
+      "q": "Preciso de cripto para usar?",
+      "a": "Hoje, a liquidação roda na devnet da Solana com um token de teste. A lógica de aceite foi desenhada para ser independente do meio de pagamento; outros meios são planejados, não construídos."
+    }
+  },
+  "join": {
+    "title": "Entre na lista de espera",
+    "body": "Conte como é o seu fluxo de trabalho. Escrevemos para você quando o acesso antecipado abrir.",
+    "watch": "Ou assista primeiro à demo"
   },
   "footer": {
     "signature": "Hive. Confiança começa com um porquê.",

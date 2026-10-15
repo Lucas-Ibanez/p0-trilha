@@ -35,23 +35,32 @@ for (const locale of locales) {
 
 /* 2. Componentes: literais de string e texto JSX, com os dois conjuntos de padrões.
  *    Isenção por linha: comentário `claims-allow: <id-da-regra>` na própria linha. */
-const literal = /(["'`])((?:\\.|(?!\1)[^\\\n])*)\1|>([^<>{}\n]+)</gu;
+const stringLiteral = /(["'`])((?:\\.|(?!\1)[^\\\n])*)\1/gu;
+const jsxText = /(?<![=-])>([^<>{}]+)</gu; // pode atravessar linhas
+const lineOf = (source, offset) => source.slice(0, offset).split("\n").length;
+
 for (const file of walk("src", [".ts", ".tsx"])) {
   const path = rel(file);
-  const original = read(path).split("\n");
-  const code = stripComments(original.join("\n")).split("\n");
-  code.forEach((line, index) => {
-    for (const match of line.matchAll(literal)) {
-      const text = match[2] ?? match[3] ?? "";
-      for (const rule of compiled) {
-        if (original[index].includes(`claims-allow: ${rule.id}`)) continue;
-        for (const { source, re } of rule.all) {
-          if (re.test(text))
-            push(rule, `${path}:${index + 1}: [${rule.id}] /${source}/ em "${text}"`);
-        }
+  const raw = read(path);
+  const original = raw.split("\n");
+  const code = stripComments(raw);
+
+  const candidates = [
+    ...[...code.matchAll(stringLiteral)].map((m) => ({ text: m[2], line: lineOf(code, m.index) })),
+    ...[...code.matchAll(jsxText)].map((m) => ({
+      text: m[1].replace(/\s+/g, " ").trim(),
+      line: lineOf(code, m.index),
+    })),
+  ];
+
+  for (const { text, line } of candidates) {
+    for (const rule of compiled) {
+      if (original[line - 1]?.includes(`claims-allow: ${rule.id}`)) continue;
+      for (const { source, re } of rule.all) {
+        if (re.test(text)) push(rule, `${path}:${line}: [${rule.id}] /${source}/ em "${text}"`);
       }
     }
-  });
+  }
 }
 
 report(`check:claims (${rules.length} regras)`, errors, warnings);

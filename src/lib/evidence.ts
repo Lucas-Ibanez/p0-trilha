@@ -28,6 +28,26 @@ export function getConstants() {
   return evidence.constants;
 }
 
+/** Texto da medição de prova no idioma da rota (o dado traz EN e PT-BR). */
+export function getProvingNote(locale: Locale): string {
+  return evidence.constants.provingNote[locale];
+}
+
+/** Os quatro números da seção Provas (docs/08 §4.1), sempre derivados dos dados. */
+export function getHeadlineNumbers() {
+  return {
+    settledOutcomes: evidence.outcomes.length,
+    rejectedAttempts: evidence.rejections.length,
+    verifierComputeUnits: evidence.constants.verifierComputeUnits,
+    journalBytes: evidence.constants.journalBytes,
+  };
+}
+
+/** Data da rodada final na interface (ISO `YYYY-MM-DD`). */
+export function getRunDate(): string {
+  return evidence.constants.runOn;
+}
+
 export function getPrograms() {
   const { escrow, groth16Verifier, testUsdcMint } = evidence.programs;
   return {
@@ -76,11 +96,44 @@ export function getRejectionNote(locale: Locale): string {
   return evidence.rejectionNote[locale];
 }
 
+const JOURNAL_TYPE_BYTES: Record<string, number> = { u8: 1, u32: 4, bytes32: 32 };
+
+/** Campos do journal com tamanho em bytes (a soma é 165; ver scripts/check-evidence.mjs). */
 export function getJournalFields() {
   return evidence.journalFields.map((field) => ({
     ...field,
+    bytes: JOURNAL_TYPE_BYTES[field.type] ?? 0,
     gloss: field.gloss as Localized,
   }));
+}
+
+const JOURNAL_EXAMPLE_KEY: Record<string, keyof typeof evidence.journalExamplePass | null> = {
+  schema_version: null,
+  job_id: "jobId",
+  spec_hash: "specHash",
+  harness_hash: "harnessHash",
+  artifact_hash: "artifactHash",
+  image_id: "imageId",
+  verdict: "verdict",
+};
+
+/**
+ * Cartões do journal: campo + valor de exemplo exibido. `display` é null quando o exemplo não traz
+ * o valor (hoje, `schema_version`); `full` só existe quando o dado completo está em evidence.json.
+ */
+export function getJournalCards() {
+  const example = evidence.journalExamplePass;
+  return getJournalFields().map((field) => {
+    const key = JOURNAL_EXAMPLE_KEY[field.name] ?? null;
+    const value = key ? example[key] : null;
+    const isHash = value !== null && typeof value === "object";
+    return {
+      ...field,
+      isVerdict: field.name === "verdict",
+      display: isHash ? value.display : typeof value === "string" ? value : null,
+      full: isHash ? value.full : null,
+    };
+  });
 }
 
 /** Valores exibidos do journal de exemplo. `full` é null quando o valor completo não foi obtido. */

@@ -66,11 +66,18 @@
   --space-24: 96px;
   --space-32: 128px;
   --section-y: 72px;
-  --gutter: 24px;
+  --header-offset: 104px; /* cabeçalho fixo: faixa de ambiente + navegação */
+  --gutter: 16px;
 
   /* largura */
   --container: 1200px;
   --measure: 68ch;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --gutter: 24px;
+  }
 }
 
 @media (min-width: 768px) {

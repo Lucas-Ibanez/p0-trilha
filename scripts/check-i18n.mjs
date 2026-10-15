@@ -40,23 +40,26 @@ for (const key of baseKeys) {
   }
 }
 
-/* Heurística: texto literal visível em JSX (nós de texto e atributos de acessibilidade). */
-const textNode = />\s*([^<>{}\n]*\p{L}[^<>{}\n]*?)\s*</gu;
-const a11yAttr = /\b(alt|aria-label|title|placeholder)\s*=\s*"([^"{}]*\p{L}[^"{}]*)"/gu;
+/* Heurística: texto literal visível em JSX (nós de texto, inclusive em várias linhas, e
+ * atributos de acessibilidade). Descarta o que parece código (genéricos, expressões). */
+const textNode = /(?<![=\-])>([^<>{}]*?\p{L}[^<>{}]*?)</gu;
+const a11yAttr = /(alt|aria-label|title|placeholder)\s*=\s*"([^"{}]*\p{L}[^"{}]*)"/gu;
+const lineOf = (source, offset) => source.slice(0, offset).split("\n").length;
 for (const file of walk("src", [".tsx"])) {
   const path = rel(file);
-  const lines = stripComments(read(path)).split("\n");
-  lines.forEach((line, index) => {
-    for (const match of line.matchAll(textNode)) {
-      const text = match[1].trim();
-      /* ignora genéricos de TypeScript e expressões: qualquer pista de código descarta. */
-      if (/[=;(){}]|=>|\bextends\b/.test(text)) continue;
-      errors.push(`${path}:${index + 1}: texto literal "${text}" (use o dicionário)`);
-    }
-    for (const match of line.matchAll(a11yAttr)) {
-      errors.push(`${path}:${index + 1}: ${match[1]}="${match[2]}" literal (use o dicionário)`);
-    }
-  });
+  const source = stripComments(read(path));
+  for (const match of source.matchAll(textNode)) {
+    const text = match[1].replace(/\s+/g, " ").trim();
+    if (!text || /[=;()]|=>|extends|return/.test(text)) continue;
+    errors.push(
+      `${path}:${lineOf(source, match.index)}: texto literal "${text}" (use o dicionário)`,
+    );
+  }
+  for (const match of source.matchAll(a11yAttr)) {
+    errors.push(
+      `${path}:${lineOf(source, match.index)}: ${match[1]}="${match[2]}" literal (use o dicionário)`,
+    );
+  }
 }
 
 report(`check:i18n (${baseKeys.size} chaves x ${locales.length} idiomas)`, errors);

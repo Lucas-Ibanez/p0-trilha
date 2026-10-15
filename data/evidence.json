@@ -42,7 +42,10 @@
       "composite": "7–9",
       "groth16Compression": "90–180"
     },
-    "provingNote": "Medido em WSL com 7,6 GiB de RAM; prover exige Docker x86.",
+    "provingNote": {
+      "en": "Measured on WSL with 7.6 GiB of RAM; proving requires x86 Docker.",
+      "pt-br": "Medido em WSL com 7,6 GiB de RAM; prover exige Docker x86."
+    },
     "runOn": "2026-10-07",
     "newTransactionsInRun": 10,
     "fullCycleDuration": "11 min 16 s"

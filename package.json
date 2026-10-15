@@ -15,9 +15,10 @@
     "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check": "npm run check:claims && npm run check:i18n && npm run check:evidence && npm run check:tokens",
+    "check": "npm run check:claims && npm run check:i18n && npm run check:content && npm run check:evidence && npm run check:tokens",
     "check:claims": "node scripts/check-claims.mjs",
     "check:i18n": "node scripts/check-i18n.mjs",
+    "check:content": "node scripts/check-content.mjs",
     "check:evidence": "node scripts/check-evidence.mjs",
     "check:tokens": "node scripts/check-tokens.mjs"
   },
