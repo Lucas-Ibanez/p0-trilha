@@ -47,7 +47,7 @@ Precedência: **claims > conteúdo > fatos > design > engenharia**. Se algo conf
 4. **A célula (hexágono) nunca muda por causa do resultado.** O resultado vai em um rótulo. Célula verde ou vermelha vira selo de aprovação, que a marca proíbe.
 5. **Sem dado simulado apresentado como real.** Ilustração é rotulada como ilustração. Vídeo que não existe aparece como "em breve", nunca como player fingindo.
 6. **Os limites da prova são uma seção nomeada e visível**, nunca rodapé cinza de baixo contraste.
-7. **Sem segredos no front-end.** Chaves do backend da lista de espera só no servidor.
+7. **Sem segredos no front-end.** Chaves do backend da lista de espera só no servidor. (Por D2 não há backend por ora; a lista de espera é prévia e não pode afirmar que gravou o cadastro.)
 8. **Não instalar dependência pesada sem necessidade clara** e sem registrá-la no relatório.
 9. **Não decidir sozinho** o que está em `docs/09-acceptance-and-open-decisions.md` (seção "Decisões em aberto"). Pergunte.
 
@@ -66,7 +66,7 @@ Precedência: **claims > conteúdo > fatos > design > engenharia**. Se algo conf
 | 0 | Scaffold, tokens, fontes auto-hospedadas, i18n `/en` e `/pt-br`, `evidence.json` importável, **script de lint de claims** | Páginas vazias em 2 idiomas; lint roda; tokens sem valores soltos |
 | 1 | Seções estáticas completas nos dois idiomas, mobile-first | Sem texto fora do dicionário; checklist de claims limpo |
 | 2 | Visuais de assinatura (`05-…`) | Funcionam sem JS animado (estado final estático) e com `prefers-reduced-motion` |
-| 3 | Lista de espera + player de demo | Envio real validado; estado "demo em breve" correto |
+| 3 | Lista de espera (**só front-end, sem backend: D2**) + player de demo | Formulário validado no cliente, todos os estados e aviso de prévia; estado "demo em breve" correto |
 | 4 | SEO/OG, a11y, performance, polimento | Metas de `09-…` atingidas e medidas |
 | 5 | Revisão adversarial de claims e de design | Relatório sem pendências críticas |
 

@@ -11,7 +11,7 @@
 3. Todas as strings em **dicionários** com chaves idênticas nos dois idiomas.
 4. Valores de identidade apenas em **tokens CSS**.
 5. **Página renderizada no servidor/estática** (conteúdo legível sem JS); JS só para interação.
-6. Lista de espera com **backend seguro** (segredos só no servidor).
+6. Lista de espera com **backend seguro** (segredos só no servidor). **Suspenso por D2 (2026-10-15):** por ora é só front-end e não grava nada; ao existir backend, este requisito volta a valer.
 7. Performance e acessibilidade conforme `09-…`.
 8. Sem scripts de terceiros além dos aprovados (D8).
 
@@ -22,14 +22,34 @@
 | Framework | **Next.js (App Router) + TypeScript** | Vercel nativo, rotas por idioma, route handlers para a lista de espera, SSG por padrão |
 | Estilo | **Tailwind CSS v4** com tokens em CSS variables (`@theme` apontando para `tokens.css`) | Velocidade sem valores soltos |
 | i18n | **next-intl** (`/en`, `/pt-br`, middleware de detecção com fallback EN) | Padrão maduro com App Router |
-| Validação | **zod** | Mesma validação no cliente e no servidor |
-| Banco da lista | **Supabase (Postgres)**, acesso **apenas pelo servidor** | O responsável já usa Supabase; ver §5 e D2 |
+| Validação | **zod** | Mesma validação no cliente e no servidor (instalar na fase 3, com o formulário) |
+| Banco da lista | ~~Supabase (Postgres)~~ **Nenhum por ora (D2)** | Lista de espera só front-end; Supabase fica como desenho de referência em §5 |
 | Fontes | `next/font/local` (Manrope variável, IBM Plex Mono) | Auto-hospedagem, sem CDN |
 | Movimento | CSS/SVG; `motion` só se justificar | Orçamento de JS |
 | Testes | Playwright (smoke e a11y com axe), Vitest (unidade) | |
 | Qualidade | ESLint, Prettier, `tsc --noEmit`, scripts de claims/evidência | |
 
 Alternativa aceitável: Astro com i18n nativo e ilhas, se o responsável preferir menos JS. Os requisitos de §1.1 são os mesmos.
+
+### 1.3 Stack instalada na fase 0 (D1 decidido em 2026-10-15)
+
+Versões fixas (`--save-exact`). Não instaladas ainda, por falta de necessidade: **zod** (fase 3, formulário), **Playwright** e **Vitest** (testes, a partir da fase 1), `motion` (só se justificar).
+
+| Pacote | Versão | Nota |
+|---|---|---|
+| next | 16.4.1 | App Router, Turbopack. No Next 16 o antigo `middleware.ts` chama-se `proxy.ts` |
+| react, react-dom | 19.3.1 | |
+| next-intl | 4.14.9 | Rotas `/en` e `/pt-br`, cookie `hive_lang` |
+| tailwindcss, @tailwindcss/postcss | 4.3.3 | Paleta, tamanhos e breakpoints padrão apagados em `globals.css`; só papéis de `tokens.css` |
+| typescript | 6.0.3 | **Não usar o 7.x**: `typescript-eslint` ainda não o suporta (exige `<6.1`) |
+| eslint, eslint-config-next | 10.12.0, 16.4.1 | |
+| prettier | 3.9.10 | Ignora `docs/`, `CLAUDE.md`, `README.md`, `data/` e `public/brand/` |
+
+Ressalvas conhecidas:
+
+- `npm audit` acusa 5 vulnerabilidades **altas, só em ferramenta de lint (dev)**, na cadeia `eslint-config-next` → `braces` (ReDoS). `npm audit --omit=dev` dá 0. Não afetam o site publicado; reavaliar ao atualizar o `eslint-config-next`.
+- Fontes: `next/font/local` com **apenas o subconjunto `latin`** (cobre EN e PT-BR). Os arquivos `latin-ext` continuam em `public/brand/fonts/` sem uso. O glifo `₃` (usado em rótulos como `P₃`) não está no `latin`: se a fase 1 exibir esses rótulos, validar a fonte de reserva ou incluir `latin-ext`.
+- O cookie `hive_lang` é gravado pelo seletor de idioma ao clicar (a escolha manual), não pela detecção.
 
 ## 2. Estrutura do repositório (sugestão)
 
@@ -52,11 +72,12 @@ Alternativa aceitável: Astro com i18n nativo e ilhas, se o responsável preferi
 │  └─ check-i18n.mjs           # mesmas chaves em en e pt-br; sem valores vazios
 ├─ src/
 │  ├─ app/[locale]/(layout|page).tsx
-│  ├─ app/api/waitlist/route.ts
+│  ├─ i18n/{routing,navigation,request}.ts   # next-intl
+│  ├─ proxy.ts                 # detecção de idioma (Next 16: antigo middleware)
 │  ├─ components/{ui,sections,diagrams}/
-│  ├─ lib/{i18n,evidence,waitlist,track,format}.ts
+│  ├─ lib/{evidence,waitlist,track,format,brand,theme-color}.ts   # waitlist: fase 3, só front-end (D2)
 │  └─ styles/{tokens.css,globals.css}
-└─ supabase/migrations/        # SQL proposto; NÃO aplicar em produção sem aprovação
+(supabase/migrations/ não existe: backend suspenso por D2)
 ```
 
 ## 3. i18n (requisito)
@@ -83,6 +104,8 @@ Alternativa aceitável: Astro com i18n nativo e ilhas, se o responsável preferi
 - Valores **truncados** são mostrados como truncados; **não** completar de memória.
 
 ## 5. Lista de espera
+
+> **D2 (2026-10-15): sem backend por ora.** Implementar só o front-end (formulário, validação no cliente, estados, acessibilidade) com uma função de envio isolada em `src/lib/waitlist.ts` que **não envia nada**; trocar só essa função quando houver backend. O formulário mostra um aviso visível de que é uma prévia e o cadastro ainda não é gravado; a interface nunca afirma que algo foi salvo nem promete contato. As subseções 5.2 a 5.5 descrevem o backend **suspenso** e servem de referência futura; 5.1 vale para o front-end.
 
 ### 5.1 Requisitos funcionais
 
@@ -138,10 +161,9 @@ revoke all on public.waitlist_signups from anon, authenticated;
 
 ### 5.6 Variáveis de ambiente (`.env.example`; **nunca** commitar valores)
 
+Por D2, só estas valem agora (as de Supabase e `WAITLIST_IP_SALT` saíram do `.env.example` e voltam com o backend):
+
 ```
-SUPABASE_URL=
-SUPABASE_SERVICE_ROLE_KEY=      # somente servidor; nunca exposta ao cliente
-WAITLIST_IP_SALT=
 NEXT_PUBLIC_SITE_URL=
 NEXT_PUBLIC_DEMO_TECHNICAL_URL=   # vazio = estado "em breve"
 NEXT_PUBLIC_DEMO_PITCH_URL=

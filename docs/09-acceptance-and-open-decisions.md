@@ -50,8 +50,7 @@ A landing só está pronta quando **todos** os itens abaixo passam, com **comand
 
 ### 1.6 Lista de espera e demo
 
-- [ ] Envio real validado em `/en` e `/pt-br` (ambiente de teste), com registro correto de `locale` e `consent_version`.
-- [ ] Duplicata devolve **a mesma** tela de sucesso. Honeypot e rate limit funcionam.
+- [ ] Formulário validado no cliente em `/en` e `/pt-br`, com todos os estados (ocioso, enviando, sucesso, erro de campo, erro geral) e o aviso de prévia (D2: sem envio real). *Quando houver backend: envio real validado, com registro de `locale` e `consent_version`, duplicata com a mesma tela de sucesso, honeypot e rate limit funcionando.*
 - [ ] Nenhum segredo no bundle do cliente (inspecionar o build) nem em logs.
 - [ ] Sem URL de vídeo → estado "em breve", sem player falso. Com URL → *click-to-load*.
 - [ ] Eventos de analytics (se houver provedor) sem dados pessoais.
@@ -98,7 +97,9 @@ Cada item traz a **recomendação padrão** para destravar o trabalho. Se o resp
 | ID | Decisão | Recomendação padrão | Dono sugerido |
 |---|---|---|---|
 | **D1** | Stack | Next.js (App Router) + TS + Tailwind v4 + next-intl | Lucas |
+| | ↳ **DECIDIDO em 2026-10-15** | Manter a stack padrão. Versões instaladas e ressalvas em `06-engineering.md` §1.3. | Lucas |
 | **D2** | Backend da lista de espera e quem recebe os cadastros | Supabase (acesso só pelo servidor, RLS sem políticas), exportação manual no início | Lucas |
+| | ↳ **DECIDIDO em 2026-10-15** | **Sem backend por ora.** A lista de espera é só front-end e não grava nada. Fica suspenso: Supabase, `POST /api/waitlist`, rate limit, honeypot e migrations (o desenho de `06-engineering.md` §5 permanece como referência para quando houver backend). **Condição de honestidade:** enquanto não houver backend, a interface não pode afirmar que o cadastro foi gravado nem prometer contato; o formulário traz aviso visível de que é uma prévia. A página não vai a produção com o formulário nesse modo sem nova decisão do responsável. | Lucas |
 | **D3** | Idioma padrão e detecção; slug do PT | EN como padrão; detectar `Accept-Language`; rota `/pt-br` | Leonardo |
 | **D4** | Usar o slogan **sem** o prefixo "Hive." no H1 do hero | Sim (o logo aparece ao lado); redação completa no rodapé e no `<title>` | Leonardo |
 | **D5** | Hierarquia de CTAs (âmbar no hero) | Hero: **Assistir à demo** âmbar, lista de espera em contorno; seção final: lista de espera âmbar | Leonardo + Henrique |
