@@ -66,7 +66,7 @@
   --space-24: 96px;
   --space-32: 128px;
   --section-y: 72px;
-  --header-offset: 104px; /* cabeçalho fixo: faixa de ambiente + navegação */
+  --header-offset: 100px; /* cabeçalho fixo: faixa de ambiente + navegação */
   --gutter: 16px;
 
   /* largura */
