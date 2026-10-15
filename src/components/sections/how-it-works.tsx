@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { ExplorerLink } from "@/components/ui/explorer-link";
 import { FigureCard, FigureRow, Mono } from "@/components/ui/figure-card";
 import { Section, SectionTitle } from "@/components/ui/section";
+import { Tabs, type TabItem } from "@/components/ui/tabs";
 import type { Locale } from "@/i18n/routing";
 import {
   getConstants,
@@ -86,6 +87,30 @@ export async function HowItWorks() {
     ),
   };
 
+  const items: TabItem[] = steps.map((step, index) => ({
+    id: step,
+    label: (
+      <span className="flex items-center gap-3">
+        <span className="font-mono text-caption" aria-hidden="true">
+          {index + 1}
+        </span>
+        <span>{t(`${step}.title`)}</span>
+      </span>
+    ),
+    fallbackTitle: <h3 className="text-h3 font-semibold">{t(`${step}.title`)}</h3>,
+    panel: (
+      <div className="grid items-start gap-6">
+        <div>
+          <p className="text-caption text-secondary font-semibold">
+            {t("stepOf", { n: index + 1, total: steps.length })}
+          </p>
+          <p className="measure mt-2">{t(`${step}.body`)}</p>
+        </div>
+        <FigureCard caption={t("caption")}>{figures[step]}</FigureCard>
+      </div>
+    ),
+  }));
+
   return (
     <Section id="how" labelledBy="how-title">
       <div className="mb-4">
@@ -93,20 +118,13 @@ export async function HowItWorks() {
       </div>
       <SectionTitle id="how-title">{t("title")}</SectionTitle>
 
-      <ol className="mt-12 space-y-12 md:space-y-16">
-        {steps.map((step, index) => (
-          <li key={step} className="grid items-start gap-6 md:grid-cols-2 md:gap-12">
-            <div>
-              <p className="text-caption text-secondary font-semibold">
-                {t("step", { n: index + 1 })}
-              </p>
-              <h3 className="text-h3 mt-2 font-semibold">{t(`${step}.title`)}</h3>
-              <p className="measure mt-3">{t(`${step}.body`)}</p>
-            </div>
-            <FigureCard caption={t("caption")}>{figures[step]}</FigureCard>
-          </li>
-        ))}
-      </ol>
+      <Tabs
+        items={items}
+        ariaLabel={t("stepsLabel")}
+        orientation="vertical"
+        variant="steps"
+        className="mt-12 data-[enhanced=true]:md:grid data-[enhanced=true]:md:grid-cols-[minmax(0,18rem)_minmax(0,1fr)] data-[enhanced=true]:md:items-start data-[enhanced=true]:md:gap-12"
+      />
 
       <p className="measure text-body mt-12 font-semibold">{t("note")}</p>
     </Section>

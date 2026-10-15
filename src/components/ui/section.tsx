@@ -15,7 +15,9 @@ export function Section({ id, labelledBy, surface = "light", children }: Props) 
       data-surface={surface === "aubergine" ? "aubergine" : undefined}
       className="bg-page text-primary"
     >
-      <div className="container-page py-[var(--section-y)]">{children}</div>
+      <div data-reveal className="container-page py-[var(--section-y)]">
+        {children}
+      </div>
     </section>
   );
 }

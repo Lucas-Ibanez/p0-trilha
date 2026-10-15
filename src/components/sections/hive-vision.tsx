@@ -1,9 +1,10 @@
 import { getTranslations } from "next-intl/server";
+import { HiveNetwork } from "@/components/diagrams/hive-network";
 import { Badge } from "@/components/ui/badge";
 import { Section, SectionTitle } from "@/components/ui/section";
 
 /* Seção inteira de classe Visão, exceto a frase-ponte aprovada (docs/02 §2).
- * O diagrama da colmeia (docs/05 §5) entra na fase 2; sem ele, não há legenda de ilustração. */
+ * A colmeia (docs/05 §5) leva legenda de ilustração e os itens Planejado ficam em bloco separado. */
 export async function HiveVision() {
   const t = await getTranslations("hive");
 
@@ -15,6 +16,8 @@ export async function HiveVision() {
       <SectionTitle id="hive-title">{t("title")}</SectionTitle>
       <p className="measure text-h3 mt-8 font-semibold">{t("bridge")}</p>
       <p className="measure text-body text-secondary mt-6">{t("body")}</p>
+
+      <HiveNetwork />
 
       <div className="rounded-card border-soft mt-12 border p-6 md:p-8">
         <Badge>{t("planned.badge")}</Badge>

@@ -1,8 +1,10 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { CopyButton } from "@/components/ui/copy-button";
+import { JournalCards } from "@/components/ui/journal-cards";
 import { ExplorerLink } from "@/components/ui/explorer-link";
 import { Mono } from "@/components/ui/figure-card";
 import { Section, SectionTitle } from "@/components/ui/section";
+import { Tabs, type TabItem } from "@/components/ui/tabs";
 import type { Locale } from "@/i18n/routing";
 import {
   getHeadlineNumbers,
@@ -34,6 +36,44 @@ export async function Proof() {
     { key: "n4", value: numbers.journalBytes },
   ] as const;
 
+  const outcomeItems: TabItem[] = outcomes.map((outcome) => ({
+    id: outcome.id,
+    label: outcome.headline[locale],
+    fallbackTitle: <h4 className="text-h4 font-semibold">{outcome.headline[locale]}</h4>,
+    panel: (
+      <div className="rounded-card border-soft bg-card border p-5 md:p-6">
+        <p className="text-h4 font-semibold">{outcome.result[locale]}</p>
+        <dl className="mt-4 grid gap-4 md:grid-cols-3">
+          <div>
+            <dt className="text-caption text-secondary">{tOutcome("state")}</dt>
+            <dd>
+              <Mono>{outcome.state}</Mono>
+            </dd>
+          </div>
+          <div>
+            <dt className="text-caption text-secondary">{tOutcome("instructions")}</dt>
+            <dd>
+              <Mono>{outcome.instructions.join(" → ")}</Mono>
+            </dd>
+          </div>
+          <div>
+            <dt className="text-caption text-secondary">{tOutcome("tx")}</dt>
+            <dd>
+              <p className="mb-1">
+                {outcome.verifierInvoked
+                  ? tOutcome("verifierYes", {
+                      cu: formatNumber(outcome.verifierComputeUnits ?? 0, locale),
+                    })
+                  : tOutcome("verifierNo")}
+              </p>
+              <ExplorerLink href={outcome.txUrl} />
+            </dd>
+          </div>
+        </dl>
+      </div>
+    ),
+  }));
+
   return (
     <Section id="proof" labelledBy="proof-title">
       <SectionTitle id="proof-title">{t("title")}</SectionTitle>
@@ -54,99 +94,34 @@ export async function Proof() {
         <h3 className="text-h3 font-semibold">{t("journal.title")}</h3>
         <p className="text-secondary mt-2">{t("journal.caption")}</p>
 
-        {/* Largura proporcional de cada campo no journal; o comprimento nunca indica confiança. */}
-        <div
-          role="img"
-          aria-label={t("journal.barLabel", { bytes: numbers.journalBytes })}
-          className="mt-6 flex h-2 gap-0.5"
-        >
-          {cards.map((card) => (
-            <span
-              key={card.name}
-              aria-hidden="true"
-              className="bg-primary rounded-pill"
-              style={{ flexGrow: card.bytes, flexBasis: 0 }}
-            />
-          ))}
-        </div>
-
-        {/* relative: sem isso, o span sr-only (absoluto) dos botões de cópia escapa do clip e alarga a página. */}
-        <ul className="relative -mx-[var(--gutter)] mt-6 flex scroll-px-[var(--gutter)] snap-x snap-mandatory gap-4 overflow-x-auto px-[var(--gutter)] pb-2 md:static md:mx-0 md:grid md:grid-cols-2 md:overflow-visible md:px-0 lg:grid-cols-4">
-          {cards.map((card) => (
-            <li
-              key={card.name}
-              className="rounded-card border-soft bg-card flex min-w-[15rem] shrink-0 snap-start flex-col gap-2 border p-4 md:min-w-0"
-            >
-              <p className="font-mono text-caption text-secondary">
-                {t("journal.startsAt", { offset: card.offset })}
-              </p>
-              <p className="font-mono text-label font-medium">{card.name}</p>
-              {card.isVerdict ? (
-                <p className="font-semibold">
-                  {released.headline[locale]} · {card.display}
-                </p>
-              ) : card.display ? (
-                <div className="flex flex-wrap items-center gap-2">
-                  <Mono>{card.display}</Mono>
-                  {card.full ? (
-                    <CopyButton
-                      value={card.full}
-                      label={tCommon("copy")}
-                      copiedLabel={tCommon("copied")}
-                      ariaLabel={tCommon("copyValue", { name: card.name })}
-                    />
-                  ) : null}
-                </div>
-              ) : (
-                <p className="text-caption text-secondary">{t("journal.noExample")}</p>
-              )}
-              {card.display && !card.isVerdict && !card.full ? (
-                <p className="text-caption text-secondary">{t("journal.fullInRepo")}</p>
-              ) : null}
-              <p className="text-caption text-secondary mt-auto">{card.gloss[locale]}</p>
-            </li>
-          ))}
-        </ul>
+        <JournalCards
+          cards={cards.map((card) => ({
+            name: card.name,
+            startsAt: t("journal.startsAt", { offset: card.offset }),
+            bytes: card.bytes,
+            display: card.isVerdict ? null : card.display,
+            full: card.full,
+            verdictLabel: card.isVerdict ? `${released.headline[locale]} · ${card.display}` : null,
+            gloss: card.gloss[locale],
+          }))}
+          barLabel={t("journal.barLabel", { bytes: numbers.journalBytes })}
+          noExample={t("journal.noExample")}
+          fullInRepo={t("journal.fullInRepo")}
+          copyLabel={tCommon("copy")}
+          copiedLabel={tCommon("copied")}
+          copyAriaTemplate={tCommon("copyValue", { name: "{name}" })}
+        />
       </div>
 
       <div className="mt-16">
         <h3 className="text-h3 font-semibold">{t("outcomes.title")}</h3>
-        {/* Fase 2: estas três colunas viram abas (docs/05 §4); aqui ficam todas visíveis. */}
-        <ul className="mt-6 grid gap-4 lg:grid-cols-3">
-          {outcomes.map((outcome) => (
-            <li key={outcome.id} className="rounded-card border-soft bg-card border p-5">
-              <h4 className="text-h4 font-semibold">{outcome.headline[locale]}</h4>
-              <p className="mt-2">{outcome.result[locale]}</p>
-              <dl className="mt-4 space-y-3">
-                <div>
-                  <dt className="text-caption text-secondary">{tOutcome("state")}</dt>
-                  <dd>
-                    <Mono>{outcome.state}</Mono>
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-caption text-secondary">{tOutcome("instructions")}</dt>
-                  <dd>
-                    <Mono>{outcome.instructions.join(" → ")}</Mono>
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-caption text-secondary">{tOutcome("tx")}</dt>
-                  <dd>
-                    <p className="mb-1">
-                      {outcome.verifierInvoked
-                        ? tOutcome("verifierYes", {
-                            cu: formatNumber(outcome.verifierComputeUnits ?? 0, locale),
-                          })
-                        : tOutcome("verifierNo")}
-                    </p>
-                    <ExplorerLink href={outcome.txUrl} />
-                  </dd>
-                </div>
-              </dl>
-            </li>
-          ))}
-        </ul>
+        <Tabs
+          items={outcomeItems}
+          ariaLabel={t("outcomes.tabsLabel")}
+          variant="segmented"
+          className="mt-6"
+          panelsClassName="mt-4"
+        />
 
         {/* Frase 1 (docs/02 §3): junto da verificação on-chain e do link de uma liquidação real. */}
         <p className="measure border-primary text-body mt-8 border-l-4 pl-4 font-semibold">

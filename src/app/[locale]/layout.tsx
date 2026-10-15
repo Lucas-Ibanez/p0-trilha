@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { RevealObserver } from "@/components/ui/reveal-observer";
 import { SiteFooter } from "@/components/sections/site-footer";
 import { SiteHeader } from "@/components/sections/site-header";
 import { htmlLang, isLocale, routing } from "@/i18n/routing";
@@ -74,6 +75,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           <SiteHeader />
           {children}
           <SiteFooter />
+          <RevealObserver />
         </NextIntlClientProvider>
       </body>
     </html>

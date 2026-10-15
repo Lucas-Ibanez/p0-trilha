@@ -95,3 +95,113 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* O ponto de evento só existe durante a animação: no estado estático ele fica oculto. */
+.dd-dot {
+  opacity: 0;
+}
+
+/* ── Movimento (docs/05 §6) ─────────────────────────────────────────────────────────────────
+ * Tudo vive em prefers-reduced-motion: no-preference. Fora dele (ou sem CSS/JS) o estado base já é
+ * o frame final, legível. Durações de UI 200–400 ms, ease-out; nada de bounce. */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes dd-draw {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes dd-rise {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes dd-travel {
+    0% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(178px);
+    }
+  }
+  @keyframes tab-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Diagrama de delegação: ~6 s, uma vez (sem loop). Cada .dd-* espera o seu instante. */
+  .dd-line,
+  .dd-line-head {
+    stroke-dasharray: 1;
+    animation: dd-draw 0.6s ease-out 0.6s both;
+  }
+  .dd-line-head {
+    stroke-dasharray: none;
+    animation: dd-rise 0.2s ease-out 1.1s both;
+  }
+  .dd-task {
+    animation: dd-rise 0.3s ease-out 0.6s both;
+  }
+  .dd-spec {
+    animation: dd-rise 0.3s ease-out 1.4s both;
+  }
+  .dd-dot {
+    animation: dd-travel 1.2s ease-in-out 2.4s forwards;
+  }
+  .dd-card {
+    animation: dd-rise 0.3s ease-out 4s both;
+  }
+  .dd-field {
+    animation: dd-rise 0.25s ease-out calc(4.1s + var(--i, 0) * 60ms) both;
+  }
+  .dd-result {
+    animation: dd-rise 0.3s ease-out 6s both;
+  }
+
+  /* Troca de aba: cross-fade curto. */
+  [role="tabpanel"]:not([hidden]) {
+    animation: tab-in 0.2s ease-out;
+  }
+
+  /* Revelação ao rolar: armada por RevealObserver só para o que está abaixo da dobra. */
+  [data-reveal][data-armed]:not([data-revealed]) {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  [data-reveal][data-armed] {
+    transition:
+      opacity 0.24s ease-out,
+      transform 0.24s ease-out;
+  }
+
+  /* Colmeia da visão: as conexões se desenham uma vez (≤ 1,2 s) ao entrar na viewport. */
+  [data-draw][data-armed]:not([data-revealed]) .hn-link {
+    stroke-dashoffset: 1;
+  }
+  [data-draw][data-armed] .hn-link {
+    stroke-dasharray: 1;
+    transition: stroke-dashoffset 1.1s ease-out;
+  }
+  [data-draw][data-armed]:not([data-revealed]) .hn-fade {
+    opacity: 0;
+  }
+  [data-draw][data-armed] .hn-fade {
+    transition: opacity 0.4s ease-out 0.9s;
+  }
+}

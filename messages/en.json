@@ -50,7 +50,10 @@
       "delegates": "Delegates",
       "executes": "Executes",
       "committed": "Criteria committed before the work",
-      "result": "Result"
+      "result": "Result",
+      "task": "Task: output = 2 × input",
+      "evidence": "Public journal",
+      "states": "Outcome shown in the illustration"
     }
   },
   "decision": {
@@ -98,7 +101,6 @@
       "title": "If nobody settles",
       "body": "After the deadline, anyone can request the refund. No proof is needed: the condition is the deadline itself."
     },
-    "step": "Step {n}",
     "caption": "Illustration assembled from real devnet data, not a screenshot.",
     "note": "A failed check is a valid result, not an error: the funds return to the buyer. The same flow runs from the command line or from the Hive interface.",
     "fig": {
@@ -111,7 +113,9 @@
       "groth16Value": "{range} seconds",
       "instructions": "Instructions",
       "verifier": "Proof verification"
-    }
+    },
+    "stepOf": "Step {n} of {total}",
+    "stepsLabel": "Steps"
   },
   "outcome": {
     "state": "State in the program",
@@ -149,7 +153,8 @@
       "noExample": "Value not shown in this example"
     },
     "outcomes": {
-      "title": "Three outcomes, three transactions"
+      "title": "Three outcomes, three transactions",
+      "tabsLabel": "Outcomes"
     },
     "rejections": {
       "title": "Four attempts that did not go through",
@@ -178,7 +183,22 @@
       "badge": "Planned",
       "1": "Deterministic evaluators for real, bounded tasks, still on restricted artifacts.",
       "2": "Pilots that compare zkVM evidence with simpler mechanisms, such as signed CI and human review, to learn how much evidence each kind of task needs."
-    }
+    },
+    "fig": {
+      "agent": "Agent {letter}",
+      "ctx": {
+        "review": "Code review",
+        "deploy": "Deployment",
+        "data": "Data transform"
+      },
+      "alt": "Illustration of the vision: five identical cells, each one an agent, linked by arrows that show who delegates to whom. Each arrow names its context. The Code review arrow has evidence for that context; the Deployment arrow has none yet.",
+      "altCompact": "Illustration of the vision: three identical cells, each one an agent. One arrow, Code review, has evidence for that context; the other, Deployment, has none yet."
+    },
+    "legend": {
+      "evidence": "Evidence for this context",
+      "none": "No evidence yet"
+    },
+    "caption": "Illustration of the vision. Not a feature available today."
   },
   "for": {
     "title": "Built for teams that hand work to agents",

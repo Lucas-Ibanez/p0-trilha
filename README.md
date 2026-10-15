@@ -6,7 +6,7 @@ Repositório da landing page bilíngue (EN e PT-BR) da **Hive**, a camada de con
 
 ## Status
 
-**Fases 0 e 1 concluídas** (scaffold e seções estáticas completas em EN e PT-BR). **Fase 2 (visuais de assinatura) ainda não iniciada.** A lista de espera é só um espaço reservado até a fase 3.
+**Fases 0, 1 e 2 concluídas** (scaffold, seções completas em EN e PT-BR e visuais de assinatura com movimento). **Fase 3 (lista de espera e player de demo) ainda não iniciada**; a lista de espera é só um espaço reservado.
 
 Decisões fechadas em 2026-10-15: **D1** manter a stack padrão; **D2** a lista de espera é só front-end, sem backend por ora (ver `docs/09-acceptance-and-open-decisions.md`).
 
@@ -33,7 +33,7 @@ cp .env.example .env.local   # opcional; todas as variáveis são públicas e po
 | `data/` | `evidence.json` (fonte única de fatos) e `forbidden-terms.json` (termos proibidos) |
 | `messages/` | Dicionários `en.json` e `pt-br.json` (mesmas chaves) |
 | `src/app/[locale]/` | Layout e página por idioma |
-| `src/components/` | `sections/` (uma por seção da página), `ui/` (botão, selo, cartões, cópia), `diagrams/` (fase 2) |
+| `src/components/` | `sections/` (uma por seção da página), `ui/` (botão, selo, cartões, cópia), `diagrams/` (diagrama de delegação e colmeia) |
 | `src/i18n/` | Rotas, navegação e carregamento de mensagens (next-intl) |
 | `src/lib/` | `evidence` (único ponto de acesso aos fatos), `format`, `track` (no-op), `brand`, `theme-color` |
 | `src/styles/` | `tokens.css` (único lugar com valores de identidade) e `globals.css` |

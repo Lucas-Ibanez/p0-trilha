@@ -50,7 +50,10 @@
       "delegates": "Delega",
       "executes": "Executa",
       "committed": "Critérios comprometidos antes do trabalho",
-      "result": "Resultado"
+      "result": "Resultado",
+      "task": "Tarefa: saída = 2 × entrada",
+      "evidence": "Journal público",
+      "states": "Desfecho exibido na ilustração"
     }
   },
   "decision": {
@@ -98,7 +101,6 @@
       "title": "Se ninguém liquida",
       "body": "Depois do prazo, qualquer pessoa pode pedir o reembolso. Não precisa de prova: a condição é o próprio prazo."
     },
-    "step": "Passo {n}",
     "caption": "Ilustração montada com dados reais da devnet, não uma captura de tela.",
     "note": "Um resultado \"não atendido\" é válido, não um erro: os fundos voltam ao comprador. O mesmo fluxo roda pela linha de comando ou pela interface da Hive.",
     "fig": {
@@ -111,7 +113,9 @@
       "groth16Value": "{range} segundos",
       "instructions": "Instruções",
       "verifier": "Verificação da prova"
-    }
+    },
+    "stepOf": "Passo {n} de {total}",
+    "stepsLabel": "Passos"
   },
   "outcome": {
     "state": "Estado no programa",
@@ -149,7 +153,8 @@
       "noExample": "Valor não exibido neste exemplo"
     },
     "outcomes": {
-      "title": "Três desfechos, três transações"
+      "title": "Três desfechos, três transações",
+      "tabsLabel": "Desfechos"
     },
     "rejections": {
       "title": "Quatro tentativas que não passaram",
@@ -178,7 +183,22 @@
       "badge": "Planejado",
       "1": "Avaliadores determinísticos para tarefas reais e delimitadas, ainda sobre artefatos restritos.",
       "2": "Pilotos que comparam evidência zkVM com mecanismos mais simples, como CI assinado e revisão humana, para entender quanta evidência cada tipo de tarefa exige."
-    }
+    },
+    "fig": {
+      "agent": "Agente {letter}",
+      "ctx": {
+        "review": "Revisão de código",
+        "deploy": "Deploy",
+        "data": "Transformação de dados"
+      },
+      "alt": "Ilustração da visão: cinco células idênticas, cada uma um agente, ligadas por setas que mostram quem delega a quem. Cada seta nomeia o seu contexto. A seta de Revisão de código tem evidência para esse contexto; a de Deploy ainda não tem nenhuma.",
+      "altCompact": "Ilustração da visão: três células idênticas, cada uma um agente. Uma seta, Revisão de código, tem evidência para esse contexto; a outra, Deploy, ainda não tem nenhuma."
+    },
+    "legend": {
+      "evidence": "Evidência para este contexto",
+      "none": "Ainda sem evidência"
+    },
+    "caption": "Ilustração da visão. Não é uma funcionalidade disponível hoje."
   },
   "for": {
     "title": "Para times que entregam trabalho a agentes",
